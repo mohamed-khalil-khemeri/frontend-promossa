@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
 import Login from "./components/Login";
+import Admin from "./components/Admin";
 import Register from "./components/Register";
+import Sidebar from "./components/Sidebar";
 // import NavBar from "./components/Navbar";
 // import Sidebar from './components/Sidebar';
 // import Testimonials from './components/Testimonials';
@@ -16,6 +18,8 @@ import { getDishes } from "./actions/a_dishes";
 
 
 import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
+import Categorie from './components/Categorie';
+import Catalogue from "./components/Catalogue"
 
 
 function App(props) {
@@ -24,15 +28,31 @@ function App(props) {
   //  props.getDishes,[]
   // );
 
+  const Adminizer = () => {
+    return (<>
+      
+      <div>
+      
+        <Switch>
+        <Route exact path="/admin"  component={Catalogue} />
+        <Route exact path="/Categorie"  component={Categorie} />
+        <Redirect to="/" />
+        </Switch>
+
+      </div>
+      <Sidebar />
+    </>)
+  }
+
 
   return (
     <>
       <Router>
         <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/feedback" component={Login} />
-          <Redirect to="/" />
+          <Route exact path="/"  component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact  path="/login" component={Login} />
+          <Route   component={Adminizer} />
         </Switch>
 
       </Router>

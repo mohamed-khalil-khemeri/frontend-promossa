@@ -71,6 +71,10 @@
   font-weight: bold;
   justify-content: center;
 }
+
+.regContainer button:hover {
+  background-color: #1f80e9;
+}
 /*/////*/
 
 @media only screen and (max-width: 600px) {

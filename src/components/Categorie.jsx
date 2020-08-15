@@ -4,12 +4,11 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
-function Admin(props) {
+function Categorie(props) {
   return (
     <>
-      Admin dashboard
+Categorie
       <div className="">
-        
       </div>
     </>
   );
@@ -21,4 +20,4 @@ export default connect((state) => {
     carted: state.r_cart,
     user: state.r_users,
   };
-}, {})(Admin);
+}, {})(Categorie);

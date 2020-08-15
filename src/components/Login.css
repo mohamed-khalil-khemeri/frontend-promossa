@@ -58,6 +58,10 @@
   justify-content: center;
 }
 
+.logContainer button:hover {
+  background-color: #1f80e9;
+}
+
 @media only screen and (max-width: 600px) {
   .logContainer form {
     width: 250px;
