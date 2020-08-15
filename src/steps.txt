@@ -1,0 +1,121 @@
+
+initiate github repo
+
+clone it
+
+npx create-react-app resto app
+
+npm i redux react-redux
+
+create store in index.js  && connect redux to react with Provider
+
+
+
+/***/
+Il y'a deux partie pour devlopper la plateforme de restauration une partie pour les clients et l'autee pour l administrateur dont
+
+l'utilisateur peut :
+
+Consulter les services +
+
+Creer un compte pour passer une commande +
+
+Consulter les commandes 
+
+Supprimer ou modifié une commande
+
+Et l'administrateur peut ;
+
+consulter les commandes passés par les clients
+
+Accepter , Refuser les commandes
+
+ajouter , supprimer , editer les services
+
+​
+
+Bonus :
+
+Le client peut donner son avis sur le services
+
+
+//////////////////
+Manipuler la base de données SQL
+Livrables
+un fichier texte
+Contexte du projet
+creer le diagramme d' entité pour présenter des données données 
+puis le shéma de base de données et ercriver des réquetes selon l'énoncé
+
+Modalités pédagogiques
+4 Heures
+
+
+BIN ID: 5ee27b7e655d87580c484cea
+[
+  {
+    "userInfo": {
+      "userId": "0",
+      "userName": "khalil"
+    },
+    "orderInfo": {
+      "orderId": "0",
+      "order_send_date": "06/06/2006 17:25:36",
+      "order_response": "to_deliver",
+      "order_response_date": "06/06/2006 17:26:36"
+    },
+    "orderProducts": [
+      {
+        "title": "couscous",
+        "price": "25",
+        "quantity": "2"
+      },
+      {
+        "title": "couscous",
+        "price": "25",
+        "quantity": "2"
+      },
+      {
+        "title": "couscous",
+        "price": "25",
+        "quantity": "2"
+      }
+    ]
+  },
+  {
+    "orderinfo": [
+      {
+        "id": 2,
+        "title": "سلاطة  مشوية",
+        "img": "https://www.cuisinetunisienne.tn/wp-content/uploads/2019/03/Recette-Salade-Mechouia-1080x810.jpg",
+        "price": 10,
+        "quantity": 1
+      },
+      {
+        "id": 1,
+        "title": "طاجين",
+        "img": "https://www.simpleetgourmand.fr/wp-content/uploads/tajine-tunisien-thon_01.jpg",
+        "price": 30,
+        "quantity": 1
+      }
+    ],
+    "delivery_status": "pending",
+    "userinfo": {
+      "name": "Mohamed",
+      "email": "kmkhalilo@gmail.com",
+      "password": "12345678",
+      "tel": "27 145 229",
+      "adress": "Fouchana centre 2",
+      "role": "user",
+      "cmdes_list": []
+    }
+  }
+]
+
+
+
+/***********************************************/
+إن قلتُ شكراً فشكري لن يوفيكم، حقاً سعيتم فكان السّعي مشكوراً، إن جفّ حبري عن التّعبير يكتبكم قلبٌ به صفاء الحبّ تعبيراً.
+
+
+رسالة شكر

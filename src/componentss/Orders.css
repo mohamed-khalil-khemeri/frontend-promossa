@@ -1,0 +1,209 @@
+.list-container {
+  direction: rtl;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+
+.list-table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  margin: 0em;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #888;
+}
+
+#list-table td:nth-child(3) {
+  max-width: 500px;
+}
+
+#list-table td,
+#list-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#list-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#list-table tr:hover {
+  background-color: #ddd;
+}
+
+#list-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(74, 97, 173);
+  color: white;
+}
+
+#list-table input {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-size: 1.5em;
+}
+
+/*****************************/
+
+.cancel-submit {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#cancel {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: black;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#cancel:hover {
+  background-color: #ac7c14;
+  border-color: #ac7c14;
+}
+
+#submit,
+.deliver {
+  background-color: #007bff;
+  border-color: #007bff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: white;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 550;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#submit:hover,
+.deliver:hover {
+  background-color: #25098a;
+  border-color: #25098a;
+}
+
+#delete,
+.deny {
+  background-color: #c82333;
+  border-color: #c82333;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: white;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#delete:hover,
+.deny:hover {
+  background-color: #9c0d1b;
+  border-color: #9c0d1b;
+}
+
+.cancel-submit {
+  margin: 10px;
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.order-modal {
+  direction: rtl;
+  position: fixed;
+  top: 0;
+  right: 0px;
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+.order-modal-inner {
+  width: 800px;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+}
+
+.order-table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  margin: 0em;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+}
+.order-table td,
+.order-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.order-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.order-table tr:hover {
+  background-color: #ddd;
+}
+.order-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  background-color: rgb(37, 95, 143);
+  color: white;
+}
+
+.order-table div {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+
+.modal-order {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+.order-invoice {
+  padding: 5px;
+}
+.order-user {
+  padding: 5px;
+}

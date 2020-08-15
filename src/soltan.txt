@@ -1,0 +1,5 @@
+//create json server
+npm install -g json-server
+
+// launch json server
+json-server --watch db.json -p 3001
