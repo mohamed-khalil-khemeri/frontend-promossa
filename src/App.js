@@ -29,19 +29,33 @@ function App(props) {
   // );
 
   const Adminizer = () => {
-    return (<>
-      
+    return (
+    <>
       <div>
-      
         <Switch>
         <Route exact path="/admin"  component={Catalogue} />
         <Route exact path="/Categorie"  component={Categorie} />
-        <Redirect to="/" />
+        <Route exact path="/*"  component={Clientizer} />
+        {/* <Redirect to="/" /> */}
         </Switch>
-
       </div>
       <Sidebar />
-    </>)
+    </>
+    )
+  }
+  const Clientizer = () => {
+    return (
+    <>
+      <div>
+        <Switch>
+        <Route exact path="/users"  component={Register} />
+        <Route exact path="/feedback"  component={Register} />
+        <Redirect to="/" />
+        </Switch>
+      </div>
+      <Sidebar />
+    </>
+    )
   }
 
 
