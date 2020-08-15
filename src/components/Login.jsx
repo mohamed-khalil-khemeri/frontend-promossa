@@ -7,14 +7,8 @@ import logo from "../bou9.webp";
 
 import { connect } from "react-redux";
 
-function Dishes(props) {
-  useEffect(() => {
-    props.getDishes();
-  }, []);
+function Login(props) {
 
-  const [filter_key, set_filter_key] = useState("active");
-
-  let menu = [...props.dishesList];
   return (
     <>
       <div className="logContainer">
@@ -68,4 +62,4 @@ export default connect(
     };
   },
   { getDishes, addToCart, removeFromCart }
-)(Dishes);
+)(Login);

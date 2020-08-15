@@ -1,17 +1,13 @@
 .regContainer {
   height: 100vh;
-  background: radial-gradient(
-    circle at 30% 107%,
-    #fdf497 0%,
-    #fdf497 5%,
-    #fd5949 45%,
-    #d6249f 60%,
-    #285aeb 90%
-  );
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+}
+
+.regContainer form {
+  width: 360px;
 }
 .mylogo {
   display: flex;
@@ -28,20 +24,22 @@
   width: 60px;
 }
 .regContainer input {
-  margin: 5px;
+  box-sizing: border-box;
+  padding: 25px 16px;
+  margin-top: 5px;
   border: 1px solid #dddfe2;
   height: 22px;
   line-height: 16px;
   vertical-align: middle;
   border-radius: 6px;
-  padding: 14px 16px;
-  width: 330px;
+  width: 100%;
   font-size: 17px;
   outline-style: none;
 }
 .myregselect {
-  margin: 5px;
-  width: 360px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  width: 100%;
   font-size: 17px;
   outline-style: none;
   border-radius: 6px;
@@ -52,6 +50,7 @@
 }
 
 .regContainer button {
+  box-sizing: border-box;
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: #1877f2;
@@ -60,7 +59,7 @@
   font-size: 20px;
   line-height: 48px;
   padding: 0 16px;
-  width: 361px;
+  width: 100%;
 
   cursor: pointer;
   display: inline-block;
@@ -75,25 +74,13 @@
 /*/////*/
 
 @media only screen and (max-width: 600px) {
-  .regContainer input {
+  .regContainer form {
     width: 250px;
-  }
-  .myregselect {
-    width: 285px;
-  }
-  .regContainer button {
-    width: 279px;
   }
 }
 
 @media only screen and (max-width: 300px) {
-  .regContainer input {
+  .regContainer form {
     width: 200px;
-  }
-  .myregselect {
-    width: 235px;
-  }
-  .regContainer button {
-    width: 229px;
   }
 }

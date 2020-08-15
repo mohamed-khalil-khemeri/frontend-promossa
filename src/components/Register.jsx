@@ -7,7 +7,7 @@ import logo from "../bou9.webp";
 
 import { connect } from "react-redux";
 
-function Dishes(props) {
+function Register(props) {
   useEffect(() => {
     props.getDishes();
   }, []);
@@ -100,4 +100,4 @@ export default connect(
     };
   },
   { getDishes, addToCart, removeFromCart }
-)(Dishes);
+)(Register);
