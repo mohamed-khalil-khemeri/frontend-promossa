@@ -1,7 +1,7 @@
 .sidebar-container {
   width: 250px;
   padding: 20px;
-  height: 600px;
+  height: 85vh;
   border: 1px solid black;
 }
 .normal-sidebar {

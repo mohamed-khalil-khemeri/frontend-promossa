@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from "react";
-import "./Categorie.css";
+import "./Article.css";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
-function Categorie(props) {
+function Article(props) {
   return (
     <>
-Categorie
+Article
       <div className="categorieContainer">
       <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
               type="txt"
               className=""
-              name="catname"
-              id="catname"
-              placeholder="nom du categorie."
+              name="articlename"
+              id="articlename"
+              placeholder="nom du l'article."
               autofocus="1"
             />
           </div>
 
           <div>
-            <input
-              type="txt"
-              className=""
-              name="parentname"
-              id="parentname"
-              placeholder="nom du categorie parent, 0 si pas de parent"
-              
-            />
-          </div>
+          <select className="myregselect" name="dosage" id="dosage" required>
+            <option value="">Dosage:</option>
+            <option value="gramme">Gramme</option>
+            <option value="litre">Litre</option>
+            <option value="piece">piece</option>
+          </select>
+        </div>
           <div>
             <input
               type="txt"
@@ -38,6 +36,16 @@ Categorie
               name="image"
               id="image"
               placeholder="lien du l'image."
+              
+            />
+          </div>
+          <div>
+            <input
+              type="txt"
+              className=""
+              name="categorie"
+              id="categorie"
+              placeholder="categorie."
               
             />
           </div>
@@ -60,4 +68,4 @@ export default connect((state) => {
     carted: state.r_cart,
     user: state.r_users,
   };
-}, {})(Categorie);
+}, {})(Article);

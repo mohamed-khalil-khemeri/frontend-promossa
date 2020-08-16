@@ -14,7 +14,7 @@ import Sidebar from "./components/Sidebar";
 // import Orders from './components/Orders';
 // import Users from './components/Users';
 // import Feedback from './components/Feedback';
-import { getDishes } from "./actions/a_dishes";
+//import { getDishes } from "./actions/a_dishes";
 
 
 import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
@@ -28,45 +28,46 @@ function App(props) {
   //  props.getDishes,[]
   // );
 
-  const Adminizer = () => {
-    return (
-    <>
-      <div>
-        <Switch>
-        <Route exact path="/admin"  component={Catalogue} />
-        <Route exact path="/Categorie"  component={Categorie} />
-        <Route exact path="/*"  component={Clientizer} />
-        {/* <Redirect to="/" /> */}
-        </Switch>
-      </div>
-      <Sidebar />
-    </>
-    )
-  }
-  const Clientizer = () => {
-    return (
-    <>
-      <div>
-        <Switch>
-        <Route exact path="/users"  component={Register} />
-        <Route exact path="/feedback"  component={Register} />
-        <Redirect to="/" />
-        </Switch>
-      </div>
-      <Sidebar />
-    </>
-    )
-  }
+  // const Adminizer = () => {
+  //   return (
+  //     <>
+  //       <div>
+  //         <Switch>
+  //           <Route exact path="/admin" component={Catalogue} />
+  //           <Route exact path="/Categorie" component={Categorie} />
+  //           <Redirect to="/" />
+  //           {/* <Route   component={Clientizer} /> */}
+  //           {/* <Route  path="/*"  render={()=> <Redirect to="Clientizer" />} /> */}
+  //         </Switch>
+  //       </div>
+  //       <Sidebar />
+  //     </>
+  //   )
+  // }
+  // const Clientizer = () => {
+  //   return (
+  //   <>
+  //     <div>
+  //       <Switch>
+  //       <Route exact path="/Categorie"  component={Categorie} />
+  //       <Route exact path="/feedback"  component={Register} />
+  //       <Redirect to="/" />
+  //       </Switch>
+  //     </div>
+  //     {/* <Sidebar /> */}
+  //   </>
+  //   )
+  // }
 
 
   return (
     <>
       <Router>
         <Switch>
-          <Route exact path="/"  component={Login} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact  path="/login" component={Login} />
-          <Route   component={Adminizer} />
+          <Route exact path="/login" component={Login} />
+          <Route component={Admin} />
         </Switch>
 
       </Router>
@@ -175,5 +176,5 @@ export default connect(
       user: state.r_users
     }
   }),
-  { getDishes })
+  {  })
   (App);

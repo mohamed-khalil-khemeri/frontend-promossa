@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
-import { getDishes } from "../actions/a_dishes";
-import { addToCart, removeFromCart } from "../actions/a_cart";
+//import { getDishes } from "../actions/a_dishes";
+//import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 import logo from "../bou9.webp";
 
@@ -26,6 +26,7 @@ function Login(props) {
               placeholder="Adresse e-mail ou numéro de tél."
               autofocus="1"
               aria-label="Adresse e-mail ou numéro de tél."
+              required
             />
           </div>
 
@@ -37,6 +38,7 @@ function Login(props) {
               id="pass"
               placeholder="Mot de passe"
               aria-label="Mot de passe"
+              required
             />
           </div>
           <div>
@@ -61,5 +63,5 @@ export default connect(
       user: state.r_users,
     };
   },
-  { getDishes, addToCart, removeFromCart }
+  {  }
 )(Login);

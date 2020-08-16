@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Register.css";
-import { getDishes } from "../actions/a_dishes";
-import { addToCart, removeFromCart } from "../actions/a_cart";
+//import { getDishes } from "../actions/a_dishes";
+//import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 import logo from "../bou9.webp";
 
@@ -99,5 +99,5 @@ export default connect(
       user: state.r_users,
     };
   },
-  { getDishes, addToCart, removeFromCart }
+  {  }
 )(Register);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Categorie.css";
+import "./Catarefill.css";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Sidebar from "./Sidebar";
@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar";
 function Categorie(props) {
   return (
     <>
-Categorie
+Cata refill
       <div className="categorieContainer">
       <form onSubmit={(e) => e.preventDefault()}>
           <div>
@@ -18,6 +18,7 @@ Categorie
               id="catname"
               placeholder="nom du categorie."
               autofocus="1"
+              required
             />
           </div>
 
@@ -28,7 +29,37 @@ Categorie
               name="parentname"
               id="parentname"
               placeholder="nom du categorie parent, 0 si pas de parent"
-              
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="txt"
+              className=""
+              name="parentname"
+              id="parentname"
+              placeholder="nom du categorie parent, 0 si pas de parent"
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="txt"
+              className=""
+              name="parentname"
+              id="parentname"
+              placeholder="nom du categorie parent, 0 si pas de parent"
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="txt"
+              className=""
+              name="parentname"
+              id="parentname"
+              placeholder="nom du categorie parent, 0 si pas de parent"
+              required
             />
           </div>
           <div>

@@ -1,9 +1,29 @@
 {
-  "posts": [
+  "magasin": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "nom": "aziza",
+      "logo": "https://upload.wikimedia.org/wikipedia/ar/b/bd/Logo_Aziza.jpg",
+      "id": 1
+    },
+    {
+      "nom": "Monoprix",
+      "logo": "https://logos-download.com/wp-content/uploads/2016/05/Monoprix_logo_red_background.png",
+      "id": 2
+    },
+    {
+      "nom": "carrefour",
+      "logo": "https://www.carrefourtunisie.com/assets/img/main-logo-carrefour.svg",
+      "id": 3
+    },
+    {
+      "nom": "MG",
+      "logo": "https://www.keejob.com/media/recruiter/recruiter_3666/logo-3666-20160329-140517.jpg",
+      "id": 4
+    },
+    {
+      "nom": "Géant",
+      "logo": "https://www.geant.tn/img/geant-logo-1493219678.jpg",
+      "id": 5
     }
   ],
   "comments": [
