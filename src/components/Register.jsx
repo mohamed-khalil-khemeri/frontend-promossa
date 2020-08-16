@@ -8,13 +8,13 @@ import logo from "../bou9.webp";
 import { connect } from "react-redux";
 
 function Register(props) {
-  useEffect(() => {
-    props.getDishes();
-  }, []);
+  // useEffect(() => {
+  //   props.getDishes();
+  // }, []);
 
-  const [filter_key, set_filter_key] = useState("active");
+  // const [filter_key, set_filter_key] = useState("active");
 
-  let menu = [...props.dishesList];
+  // let menu = [...props.dishesList];
   return (
     <>
       <div className="regContainer">

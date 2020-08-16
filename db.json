@@ -26,11 +26,18 @@
       "id": 5
     }
   ],
-  "comments": [
+  "categorie": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "nom": "produits alimentaire",
+      "parent": "0",
+      "logo": "https://zadigroup.ly/wp-content/uploads/2019/05/food-backet.png"
+    },
+    {
+      "nom": "produits de nettoyage",
+      "parent": "0",
+      "logo": "https://www.palinfo.com/Uploads/Models/Media/Images/2018/2/15/16701941.JPG",
+      "id": 2
     }
   ],
   "profile": {

@@ -40,7 +40,7 @@ function Magasin(props) {
           </div>
           <div>
             <button
-              onClick={() => props.addMagasin({ nom: magname, logo: logo })}
+              onClick={() => {if((magname !== "")&&(logo !== "")) { props.addMagasin({ nom: magname, logo: logo })}}}
               className=""
               name="Inserer"
               type="submit"
