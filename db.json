@@ -24,6 +24,11 @@
       "nom": "Géant",
       "logo": "https://www.geant.tn/img/geant-logo-1493219678.jpg",
       "id": 5
+    },
+    {
+      "nom": "magasin najwa",
+      "logo": "https://logodix.com/logo/2122514.png",
+      "id": 6
     }
   ],
   "categorie": [
@@ -38,9 +43,26 @@
       "parent": "0",
       "logo": "https://www.palinfo.com/Uploads/Models/Media/Images/2018/2/15/16701941.JPG",
       "id": 2
+    },
+    {
+      "nom": "Eau",
+      "parent": "produits alimentaire",
+      "logo": "https://www.boldsky.com/img/2013/02/02-1359823213-water.jpg",
+      "id": 3
+    },
+    {
+      "nom": "jus",
+      "parent": "produits alimentaire",
+      "logo": "https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/tag_photos/extralarge/11345/tag-jus-de-fruits-2253430_1920.jpg",
+      "id": 4
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "article": [
+    {
+      "nom": "eau Jannet 2L",
+      "logo": "https://www.savanna.tn/img/m/855.jpg",
+      "dosage": "litre",
+      "cat": "Eau"
+    }
+  ]
 }
