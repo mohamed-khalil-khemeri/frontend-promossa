@@ -68,10 +68,17 @@
   "catalogue": [
     {
       "nom": "sa77a lik",
-      "magasin": 1,
+      "magasin": "1",
       "debut": "2020-08-12",
       "fin": "2020-08-18",
       "id": 1
+    },
+    {
+      "nom": "il9raya jet w billi 3andna 7let",
+      "magasin": "4",
+      "debut": "2020-08-07",
+      "fin": "2020-09-02",
+      "id": 2
     }
   ]
 }

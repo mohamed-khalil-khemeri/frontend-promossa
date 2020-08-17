@@ -87,7 +87,7 @@ function Categorie(props) {
             <th>logo</th>
             <th>nom</th>
             <th>parent</th>
-            <th>lien du logo</th>
+            {/* <th>lien du logo</th> */}
           </tr>
           {props.catList ? (
             props.catList.map((e) => (
@@ -98,7 +98,7 @@ function Categorie(props) {
                 ></td>
                 <td>{e.nom}</td>
                 <td>{e.parent}</td>
-                <td>{e.logo}</td>
+                {/* <td>{e.logo}</td> */}
               </tr>
             ))
           ) : (

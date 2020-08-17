@@ -1,94 +1,202 @@
 import React, { useEffect, useState } from "react";
-import "./Catarefill.css";
+import "./Login.css";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { getMagasin } from "../actions/a_magasin";
+import { addCatalogue, getCatalogue } from "../actions/a_catalogue";
 
-function Categorie(props) {
+function Catarefill(props) {
+  useEffect(() => {
+    props.getCatalogue();
+    props.getMagasin();
+  }, []);
+  const [magname, setmagname] = useState("");
+  const [cataname, setcataname] = useState("");
+  const [debut, setdebut] = useState("");
+  const [fin, setfin] = useState("");
+
+  const period = (x, y) => {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    const a = new Date(x);
+    const b = new Date(y);
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY) + 1;
+  };
+
+  const period_timout = (x) => {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    const a = new Date(x);
+    a.setHours(23);
+    a.setMinutes(59);
+    a.setSeconds(59);
+    const b = new Date();
+    // const b = new Date("August 16, 2020 23:59:59");
+    b.setHours(23);
+    b.setMinutes(59);
+    b.setSeconds(59);
+
+    if (a - b < 0) {
+      return "expired";
+    }
+
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    let p = Math.floor((utc2 - utc1) / _MS_PER_DAY);
+
+    if (p <= 0) {
+      return Math.abs(p) + 1;
+    } else if (p % 1 !== 0) {
+      return p + 1;
+    } else {
+      return p;
+    }
+  };
+
   return (
     <>
-Cata refill
+      catalogue
       <div className="categorieContainer">
-      <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <select
+              onChange={(e) => setmagname(e.target.value)}
+              className="myregselect"
+              name="dosage"
+              id="dosage"
+              required
+            >
+              <option value="">select Magasin:</option>
+              {props.magList ? (
+                props.magList.map((e) => (
+                  <option key={e.id} value={e.id}>
+                    {e.nom}
+                  </option>
+                ))
+              ) : (
+                <div>hi</div>
+              )}
+            </select>
+          </div>
           <div>
             <input
+              onChange={(e) => setcataname(e.target.value)}
               type="txt"
               className=""
               name="catname"
               id="catname"
-              placeholder="nom du categorie."
-              autofocus="1"
-              required
-            />
-          </div>
-
-          <div>
-            <input
-              type="txt"
-              className=""
-              name="parentname"
-              id="parentname"
-              placeholder="nom du categorie parent, 0 si pas de parent"
+              placeholder="nom du catalogue."
               required
             />
           </div>
           <div>
             <input
-              type="txt"
+              onChange={(e) => setdebut(e.target.value)}
+              type="date"
               className=""
-              name="parentname"
-              id="parentname"
-              placeholder="nom du categorie parent, 0 si pas de parent"
+              name="date1"
+              id="birthday"
+              placeholder="Date de debut"
+              aria-label="Date de naissance"
               required
             />
           </div>
           <div>
             <input
-              type="txt"
+              onChange={(e) => setfin(e.target.value)}
+              type="date"
               className=""
-              name="parentname"
-              id="parentname"
-              placeholder="nom du categorie parent, 0 si pas de parent"
+              name="date2"
+              id="birthday"
+              placeholder="Date de fin"
+              aria-label="Date de naissance"
               required
             />
           </div>
           <div>
-            <input
-              type="txt"
+            <button
+              onClick={() => {
+                if (
+                  magname !== "" &&
+                  cataname !== "" &&
+                  debut !== "" &&
+                  fin !== ""
+                ) {
+                  props.addCatalogue({
+                    nom: cataname,
+                    magasin: magname,
+                    debut: debut,
+                    fin: fin,
+                  });
+                }
+              }}
               className=""
-              name="parentname"
-              id="parentname"
-              placeholder="nom du categorie parent, 0 si pas de parent"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="txt"
-              className=""
-              name="image"
-              id="image"
-              placeholder="lien du l'image."
-              
-            />
-          </div>
-          <div>
-            <button className="" name="Inserer" type="submit">
+              name="Inserer"
+              type="submit"
+            >
               Inserer
             </button>
           </div>
         </form>
-        
 
+        <table className="order-table">
+          <tr>
+            <th>logo</th>
+            <th>magasin</th>
+            <th>nom</th>
+            <th>debut</th>
+            <th>fin</th>
+            <th>periode</th>
+            <th>jours jusqu'à la fin de la promo</th>
+          </tr>
+          {props.cataList ? (
+            props.cataList.map((e) => (
+              <tr key={e.id}>
+                <td
+                  className="carted-img"
+                  style={{
+                    backgroundImage: `url( ${
+                      props.magList
+                        ? props.magList.filter((el) => el.id === e.magasin*1)[0]
+                          ? props.magList.filter((el) => el.id === e.magasin*1)[0]
+                              .logo
+                          : null
+                        : null
+                    } )`,
+                  }}
+                ></td>
+                <td>
+                  {props.magList
+                    ? props.magList.filter((el) => el.id === e.magasin*1)[0]
+                      ? props.magList.filter((el) => el.id === e.magasin*1)[0].nom
+                      : null
+                    : null}
+                </td>
+                <td>{e.nom}</td>
+                <td>{e.debut}</td>
+                <td>{e.fin}</td>
+                <td>{period(e.debut, e.fin)} jours</td>
+                <td>{period_timout(e.fin)}</td>
+              </tr>
+            ))
+          ) : (
+            <div>hi</div>
+          )}
+        </table>
       </div>
     </>
   );
 }
 
-export default connect((state) => {
-  return {
-    dishesList: state.r_dishes,
-    carted: state.r_cart,
-    user: state.r_users,
-  };
-}, {})(Categorie);
+export default connect(
+  (state) => {
+    return {
+      magList: state.r_magasin,
+      cataList: state.r_catalogue,
+    };
+  },
+  { getMagasin, addCatalogue, getCatalogue }
+)(Catarefill);

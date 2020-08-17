@@ -15,14 +15,7 @@ function Catalogue(props) {
   const [cataname, setcataname] = useState("");
   const [debut, setdebut] = useState("");
   const [fin, setfin] = useState("");
-  console.log(
-    "magggggg : ",
-    props.magList
-      ? props.magList.filter((el) => el.id === 2)[0]
-        ? props.magList.filter((el) => el.id === 2)[0].logo
-        : null
-      : null
-  );
+
   const period = (x, y) => {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
     const a = new Date(x);
@@ -157,21 +150,18 @@ function Catalogue(props) {
             <th>debut</th>
             <th>fin</th>
             <th>periode</th>
-            <th>period_timout</th>
+            <th>jours jusqu'à la fin de la promo</th>
           </tr>
           {props.cataList ? (
             props.cataList.map((e) => (
               <tr key={e.id}>
-                {console.log("mag  : ", props.magList)}
-                {/* <td>{props.magList ?(props.magList.filter(el=>el.id === e.magasin))[0].logo : null}</td> */}
-                {/* <td>{props.magList ?(props.magList.filter(el=>el.id === e.magasin))[0].nom : null}</td> */}
                 <td
                   className="carted-img"
                   style={{
                     backgroundImage: `url( ${
                       props.magList
-                        ? props.magList.filter((el) => el.id === e.magasin)[0]
-                          ? props.magList.filter((el) => el.id === e.magasin)[0]
+                        ? props.magList.filter((el) => el.id === e.magasin*1)[0]
+                          ? props.magList.filter((el) => el.id === e.magasin*1)[0]
                               .logo
                           : null
                         : null
@@ -180,8 +170,8 @@ function Catalogue(props) {
                 ></td>
                 <td>
                   {props.magList
-                    ? props.magList.filter((el) => el.id === e.magasin)[0]
-                      ? props.magList.filter((el) => el.id === e.magasin)[0].nom
+                    ? props.magList.filter((el) => el.id === e.magasin*1)[0]
+                      ? props.magList.filter((el) => el.id === e.magasin*1)[0].nom
                       : null
                     : null}
                 </td>
@@ -210,4 +200,3 @@ export default connect(
   },
   { getMagasin, addCatalogue, getCatalogue }
 )(Catalogue);
-// getCatalogue
