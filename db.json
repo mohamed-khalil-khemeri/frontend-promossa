@@ -64,5 +64,14 @@
       "dosage": "litre",
       "cat": "Eau"
     }
+  ],
+  "catalogue": [
+    {
+      "nom": "sa77a lik",
+      "magasin": 1,
+      "debut": "2020-08-12",
+      "fin": "2020-08-18",
+      "id": 1
+    }
   ]
 }
