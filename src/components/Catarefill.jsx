@@ -15,6 +15,12 @@ function Catarefill(props) {
     props.getArticle();
   }, []);
 
+  let promoTypes = [
+    { id: 1, type: "SIMPLE_PERCENTAGE", parametre: ["pourcentage"] },
+    { id: 2, type: "EXTRA_QUANTITY", parametre: ["extra"] },
+    { id: 3, type: "BUY_X_GET_Y_FREE", parametre: ["buy_x", "y_free"] },
+  ];
+
   let { cataid } = useParams();
   const [parent, setparent] = useState("");
   const [catname, setcatname] = useState("");
@@ -34,51 +40,55 @@ function Catarefill(props) {
       <div className="categorieContainer">
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
-          <input
-          onChange={e=>setcatname(e.target.value)}
-            list="catalists"
-            name="catalist"
-            id="catalist"
-            className="myregselect"
-            placeholder="select categorie"
-          />
+            <input
+              onChange={(e) => setcatname(e.target.value)}
+              list="catalists"
+              name="catalist"
+              id="catalist"
+              className="myregselect"
+              placeholder="select categorie"
+              required
+            />
 
-          <datalist id="catalists">
-            {props.catList ? (
-              props.catList.map((e) => (
-                <option key={e.id} value={e.nom}>
-                  {e.nom}
-                </option>
-              ))
-            ) : (
-              <div>hi</div>
-            )}
-          </datalist>
+            <datalist id="catalists">
+              {props.catList ? (
+                props.catList.map((e) => (
+                  <option key={e.id} value={e.nom}>
+                    {e.nom}
+                  </option>
+                ))
+              ) : (
+                <div>hi</div>
+              )}
+            </datalist>
           </div>
 
-           <div>
-          <input
-            onChange={e=>setarticle(e.target.value)}
-            onChange={e=>setarticleid(e.target.key)}
-            list="articleLists"
-            name="articleList"
-            id="articleList"
-            className="myregselect"
-            placeholder="select article"
-          />
+          <div>
+            <input
+              onChange={(e) => {setarticle(e.target.value)}}
+              type="text"
+              list="articleLists"
+              name="articleList"
+              id="articleList"
+              className="myregselect"
+              placeholder="select article"
+              required
+            />
 
-          <datalist id="articleLists">
-            {props.articleList ? (
-              props.articleList.map((e) => {if (e.cat === catname){ return(
-                <option key={e.id} value={e.nom}>
-                  {e.nom}
-                </option>
-              )}})
-            ) : (
-              <div>hi</div>
-            )}
-          </datalist>
-          </div> 
+            <datalist id="articleLists">
+              {props.articleList ? (
+                props.articleList.map((e) => {
+                  if (e.cat === catname) {
+                    return (
+                      <option key={e.id}  value={e.nom} />
+                    );
+                  }
+                })
+              ) : (
+                <div>hi</div>
+              )}
+            </datalist>
+          </div>
           {/* <div>
             <select
               onChange={(e) => setparent(e.target.value)}
@@ -100,63 +110,54 @@ function Catarefill(props) {
             </select>
           </div> */}
           <div>
-          <input
-            onChange={(e) => setpromotype(e.target.value)}
-            list="promotypes"
-            name="promotype"
-            id="promotype"
-            className="myregselect"
-            placeholder="select promo type"
-          />
+            <input
+              onChange={(e) => setpromotype(e.target.value)}
+              list="promotypes"
+              name="promotype"
+              id="promotype"
+              className="myregselect"
+              placeholder="select promo type"
+              required
+            />
 
-          <datalist id="promotypes">
-          <option  value="pourcentage simple" />
-            {/* {props.articleList ? (
-              props.articleList.map((e) => {if (e.cat === catname){ return(
-                <option key={e.id} value={e.nom}>
-                  {e.nom}
-                </option>
-              )}})
-            ) : (
-              <div>hi</div>
-            )} */}
-          </datalist>
-          </div> 
+            <datalist id="promotypes">
+              {promoTypes.map((e) => 
+                <option key={e.id} value={e.type} />
+              )}
+            </datalist>
+          </div>
           <div>
-          <input
+            <input
               onChange={(e) => setpercentage(e.target.value)}
               type="number"
               className=""
               name="articlename"
               id="articlename"
               placeholder="pourcentage du reduction."
-              
               required
             />
           </div>
 
           <div>
-          <input
+            <input
               onChange={(e) => setancientprice(e.target.value)}
               type="number"
               className=""
               name="articlename"
               id="articlename"
               placeholder="ancient prix."
-              
               required
             />
           </div>
 
           <div>
-          <input
+            <input
               onChange={(e) => setnewprice(e.target.value)}
               type="number"
               className=""
               name="articlename"
               id="articlename"
               placeholder="nouveau prix."
-              
               required
             />
           </div>
@@ -192,20 +193,20 @@ function Catarefill(props) {
             <th>logo</th>
             <th>nom</th>
             <th>categorie</th>
-            
           </tr>
           {props.articleList ? (
-            props.articleList.filter(e=>e.id === articleid).map((e) => (
-              <tr key={e.id}>
-                <td
-                  className="carted-img"
-                  style={{ backgroundImage: `url( ${e.logo} )` }}
-                ></td>
-                <td>{e.nom}</td>
-                <td>{e.cat}</td>
-                
-              </tr>
-            ))
+            props.articleList
+              .filter((e) => e.nom == article)
+              .map((e) => (
+                <tr key={e.id}>
+                  <td
+                    className="carted-img"
+                    style={{ backgroundImage: `url( ${e.logo} )` }}
+                  ></td>
+                  <td>{e.nom}</td>
+                  <td>{e.cat}</td>
+                </tr>
+              ))
           ) : (
             <div>hi</div>
           )}
