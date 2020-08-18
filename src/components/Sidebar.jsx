@@ -14,12 +14,12 @@ function Sidebar(props) {
   return (
     <div className="sidebar-container">
            <NavLink exact to="/admin" className="normal-sidebar" activeClassName="active-sidebar" >ADMIN</NavLink>
-           <NavLink exact to="/catarefill" className="normal-sidebar" activeClassName="active-sidebar" >Ajout articles dans Catalogue</NavLink>
+           <NavLink exact to="/catarefill/:12" className="normal-sidebar" activeClassName="active-sidebar" >Ajout articles dans Catalogue</NavLink>
            <NavLink exact to="/catalogue" className="normal-sidebar" activeClassName="active-sidebar" >Creation Catalogue</NavLink>
            <NavLink exact to="/categorie" className="normal-sidebar" activeClassName="active-sidebar" >Ajout Catégorie</NavLink>
            <NavLink exact to="/article" className="normal-sidebar" activeClassName="active-sidebar" >Ajout Article</NavLink>
            <NavLink exact to="/magasin" className="normal-sidebar" activeClassName="active-sidebar" >Ajout Magasin</NavLink>
-           <NavLink exact to="/feedback" className="normal-sidebar" activeClassName="active-sidebar" >الرسائل الواردة</NavLink>
+           <NavLink exact to="/feedback" className="normal-sidebar" activeClassName="active-sidebar" >to admin test</NavLink>
            {/* <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >testimonials</NavLink>
            <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink> */}
          </div>

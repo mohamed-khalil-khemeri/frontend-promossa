@@ -1,6 +1,6 @@
 import * as types from '../actions/types';
 
-const r_orders = (state = [], action) => {
+const r_magasin = (state = [], action) => {
 
     if (action.type === types.GET_MAGASIN) { 
         return action.payload
@@ -10,4 +10,4 @@ const r_orders = (state = [], action) => {
     }
 }
 
-export default r_orders;
+export default r_magasin;

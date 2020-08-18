@@ -27,12 +27,25 @@ function Admin(props) {
                 path="/admin"
                 render={() => (
                   <div className="app-container">
+                    <div>
+                    <div>
                     <img
                       src="https://i.pinimg.com/originals/59/66/fd/5966fd497b2297270c66959439f33311.gif"
                       alt="hi admin"
                       width="500"
                       height="333"
                     />
+                    </div>
+                   
+                    <div>
+                    <img
+                      src="https://i2.wp.com/freepngimages.com/wp-content/uploads/2016/11/Welcome-multicolour-text.png?fit=944%2C363"
+                      alt="hi admin"
+                      width="500"
+                      height="333"
+                    />
+                    </div>
+                  </div>
                   </div>
                 )}
               />
@@ -40,7 +53,8 @@ function Admin(props) {
               <Route exact path="/categorie" component={Categorie} />
               <Route exact path="/magasin" component={Magasin} />
               <Route exact path="/article" component={Article} />
-              <Route exact path="/catarefill" component={Catarefill} />
+              <Route exact path="/catarefill/:cataid" component={Catarefill} />
+              {/* <Route path="/add/:add"  component={() => <Editor />} /> */}
               <Redirect to="/admin" />
             </Switch>
           </div>

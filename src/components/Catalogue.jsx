@@ -151,6 +151,7 @@ function Catalogue(props) {
             <th>fin</th>
             <th>periode</th>
             <th>jours jusqu'à la fin de la promo</th>
+            <th>ajout promos</th>
           </tr>
           {props.cataList ? (
             props.cataList.map((e) => (
@@ -180,6 +181,7 @@ function Catalogue(props) {
                 <td>{e.fin}</td>
                 <td>{period(e.debut, e.fin)} jours</td>
                 <td>{period_timout(e.fin)}</td>
+                <td><NavLink exact to={{ pathname: `/catarefill/${e.id}` }} className="normal-sidebar" activeClassName="active-sidebar" >ajout promo</NavLink></td>
               </tr>
             ))
           ) : (

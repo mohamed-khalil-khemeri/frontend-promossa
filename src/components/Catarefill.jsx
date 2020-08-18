@@ -1,78 +1,96 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { getMagasin } from "../actions/a_magasin";
 import { addCatalogue, getCatalogue } from "../actions/a_catalogue";
+import { getCategorie } from "../actions/a_categorie";
+import { getArticle } from "../actions/a_article";
 
 function Catarefill(props) {
   useEffect(() => {
     props.getCatalogue();
-    props.getMagasin();
+    props.getCategorie();
+    props.getArticle();
   }, []);
-  const [magname, setmagname] = useState("");
+
+  let { cataid } = useParams();
+  const [parent, setparent] = useState("");
+  const [catname, setcatname] = useState("");
+  const [percentage, setpercentage] = useState("");
+  const [ancientprice, setancientprice] = useState("");
+  const [newprice, setnewprice] = useState("");
+  const [article, setarticle] = useState("");
+  const [articleid, setarticleid] = useState("");
+  const [promotype, setpromotype] = useState("");
   const [cataname, setcataname] = useState("");
   const [debut, setdebut] = useState("");
   const [fin, setfin] = useState("");
 
-  const period = (x, y) => {
-    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-    const a = new Date(x);
-    const b = new Date(y);
-    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-    return Math.floor((utc2 - utc1) / _MS_PER_DAY) + 1;
-  };
-
-  const period_timout = (x) => {
-    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-    const a = new Date(x);
-    a.setHours(23);
-    a.setMinutes(59);
-    a.setSeconds(59);
-    const b = new Date();
-    // const b = new Date("August 16, 2020 23:59:59");
-    b.setHours(23);
-    b.setMinutes(59);
-    b.setSeconds(59);
-
-    if (a - b < 0) {
-      return "expired";
-    }
-
-    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-    let p = Math.floor((utc2 - utc1) / _MS_PER_DAY);
-
-    if (p <= 0) {
-      return Math.abs(p) + 1;
-    } else if (p % 1 !== 0) {
-      return p + 1;
-    } else {
-      return p;
-    }
-  };
-
   return (
     <>
-      catalogue
+      Insertion articles
       <div className="categorieContainer">
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
+          <input
+          onChange={e=>setcatname(e.target.value)}
+            list="catalists"
+            name="catalist"
+            id="catalist"
+            className="myregselect"
+            placeholder="select categorie"
+          />
+
+          <datalist id="catalists">
+            {props.catList ? (
+              props.catList.map((e) => (
+                <option key={e.id} value={e.nom}>
+                  {e.nom}
+                </option>
+              ))
+            ) : (
+              <div>hi</div>
+            )}
+          </datalist>
+          </div>
+
+           <div>
+          <input
+            onChange={e=>setarticle(e.target.value)}
+            onChange={e=>setarticleid(e.target.key)}
+            list="articleLists"
+            name="articleList"
+            id="articleList"
+            className="myregselect"
+            placeholder="select article"
+          />
+
+          <datalist id="articleLists">
+            {props.articleList ? (
+              props.articleList.map((e) => {if (e.cat === catname){ return(
+                <option key={e.id} value={e.nom}>
+                  {e.nom}
+                </option>
+              )}})
+            ) : (
+              <div>hi</div>
+            )}
+          </datalist>
+          </div> 
+          {/* <div>
             <select
-              onChange={(e) => setmagname(e.target.value)}
+              onChange={(e) => setparent(e.target.value)}
               className="myregselect"
               name="dosage"
               id="dosage"
               required
             >
-              <option value="">select Magasin:</option>
-              {props.magList ? (
-                props.magList.map((e) => (
-                  <option key={e.id} value={e.id}>
+              <option value="">select Categorie:</option>
+              {props.catList ? (
+                props.catList.map((e) => (
+                  <option key={e.id} value={e.nom}>
                     {e.nom}
                   </option>
                 ))
@@ -80,54 +98,81 @@ function Catarefill(props) {
                 <div>hi</div>
               )}
             </select>
-          </div>
+          </div> */}
           <div>
-            <input
-              onChange={(e) => setcataname(e.target.value)}
-              type="txt"
+          <input
+            onChange={(e) => setpromotype(e.target.value)}
+            list="promotypes"
+            name="promotype"
+            id="promotype"
+            className="myregselect"
+            placeholder="select promo type"
+          />
+
+          <datalist id="promotypes">
+          <option  value="pourcentage simple" />
+            {/* {props.articleList ? (
+              props.articleList.map((e) => {if (e.cat === catname){ return(
+                <option key={e.id} value={e.nom}>
+                  {e.nom}
+                </option>
+              )}})
+            ) : (
+              <div>hi</div>
+            )} */}
+          </datalist>
+          </div> 
+          <div>
+          <input
+              onChange={(e) => setpercentage(e.target.value)}
+              type="number"
               className=""
-              name="catname"
-              id="catname"
-              placeholder="nom du catalogue."
+              name="articlename"
+              id="articlename"
+              placeholder="pourcentage du reduction."
+              
               required
             />
           </div>
+
           <div>
-            <input
-              onChange={(e) => setdebut(e.target.value)}
-              type="date"
+          <input
+              onChange={(e) => setancientprice(e.target.value)}
+              type="number"
               className=""
-              name="date1"
-              id="birthday"
-              placeholder="Date de debut"
-              aria-label="Date de naissance"
+              name="articlename"
+              id="articlename"
+              placeholder="ancient prix."
+              
               required
             />
           </div>
+
           <div>
-            <input
-              onChange={(e) => setfin(e.target.value)}
-              type="date"
+          <input
+              onChange={(e) => setnewprice(e.target.value)}
+              type="number"
               className=""
-              name="date2"
-              id="birthday"
-              placeholder="Date de fin"
-              aria-label="Date de naissance"
+              name="articlename"
+              id="articlename"
+              placeholder="nouveau prix."
+              
               required
             />
           </div>
+
           <div>
             <button
               onClick={() => {
                 if (
-                  magname !== "" &&
+                  parent !== "" &&
                   cataname !== "" &&
                   debut !== "" &&
                   fin !== ""
                 ) {
                   props.addCatalogue({
                     nom: cataname,
-                    magasin: magname,
+                    magasin: parent,
                     debut: debut,
                     fin: fin,
                   });
@@ -142,44 +187,23 @@ function Catarefill(props) {
           </div>
         </form>
 
-        <table className="order-table">
+        <table key="id" className="order-table">
           <tr>
             <th>logo</th>
-            <th>magasin</th>
             <th>nom</th>
-            <th>debut</th>
-            <th>fin</th>
-            <th>periode</th>
-            <th>jours jusqu'à la fin de la promo</th>
+            <th>categorie</th>
+            
           </tr>
-          {props.cataList ? (
-            props.cataList.map((e) => (
+          {props.articleList ? (
+            props.articleList.filter(e=>e.id === articleid).map((e) => (
               <tr key={e.id}>
                 <td
                   className="carted-img"
-                  style={{
-                    backgroundImage: `url( ${
-                      props.magList
-                        ? props.magList.filter((el) => el.id === e.magasin*1)[0]
-                          ? props.magList.filter((el) => el.id === e.magasin*1)[0]
-                              .logo
-                          : null
-                        : null
-                    } )`,
-                  }}
+                  style={{ backgroundImage: `url( ${e.logo} )` }}
                 ></td>
-                <td>
-                  {props.magList
-                    ? props.magList.filter((el) => el.id === e.magasin*1)[0]
-                      ? props.magList.filter((el) => el.id === e.magasin*1)[0].nom
-                      : null
-                    : null}
-                </td>
                 <td>{e.nom}</td>
-                <td>{e.debut}</td>
-                <td>{e.fin}</td>
-                <td>{period(e.debut, e.fin)} jours</td>
-                <td>{period_timout(e.fin)}</td>
+                <td>{e.cat}</td>
+                
               </tr>
             ))
           ) : (
@@ -194,9 +218,10 @@ function Catarefill(props) {
 export default connect(
   (state) => {
     return {
-      magList: state.r_magasin,
+      catList: state.r_categorie,
+      articleList: state.r_article,
       cataList: state.r_catalogue,
     };
   },
-  { getMagasin, addCatalogue, getCatalogue }
+  { getCategorie, addCatalogue, getCatalogue, getArticle }
 )(Catarefill);

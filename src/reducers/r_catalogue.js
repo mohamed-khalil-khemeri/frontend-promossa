@@ -1,6 +1,6 @@
 import * as types from '../actions/types';
 
-const r_categorie = (state = [], action) => {
+const r_catalogue = (state = [], action) => {
 
     if (action.type === types.GET_CATALOGUE) { 
         return action.payload
@@ -10,4 +10,4 @@ const r_categorie = (state = [], action) => {
     }
 }
 
-export default r_categorie;
+export default r_catalogue;
