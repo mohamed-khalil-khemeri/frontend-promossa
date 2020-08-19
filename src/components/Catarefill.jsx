@@ -25,6 +25,23 @@ function Catarefill(props) {
   const [buy_x, setbuy_x] = useState("");
   const [y_free, sety_free] = useState("");
 
+  const get_promo = () => {
+    switch (promotype) {
+      case "SIMPLE_PERCENTAGE":
+        return { type: "SIMPLE_PERCENTAGE", pourcentage: pourcentage };
+        break;
+      case "EXTRA_QUANTITY":
+        return { type: "EXTRA_QUANTITY", extra: extra };
+        break;
+      case "BUY_X_GET_Y_FREE":
+        return { type: "BUY_X_GET_Y_FREE", buy_x: buy_x, y_free: y_free };
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const handleChange = (x, y) => {
     switch (y) {
       case "pourcentage":
@@ -56,6 +73,9 @@ function Catarefill(props) {
       case "BUY_X_GET_Y_FREE":
         return buy_x !== "" && y_free !== "";
         break;
+
+      default:
+        break;
     }
   };
 
@@ -72,6 +92,18 @@ function Catarefill(props) {
   const [cataname, setcataname] = useState("");
   const [debut, setdebut] = useState("");
   const [fin, setfin] = useState("");
+
+  const get_article = () => {
+    if (props.articleList && article.arId) {
+      return props.articleList.filter((e) => e.id == article.arId)[0];
+    }
+  };
+
+  const get_catalogue = () => {
+    if (props.cataList && cataid) {
+      return props.cataList.filter((e) => e.id == cataid)[0];
+    }
+  };
 
   return (
     <>
@@ -105,7 +137,9 @@ function Catarefill(props) {
           <div>
             <select
               onChange={(e) => {
-                {setarticle(JSON.parse(e.target.value).nom);console.log("key article",JSON.parse(e.target.value).arId);};
+                {
+                  setarticle(JSON.parse(e.target.value));
+                }
               }}
               className="myregselect"
               name="dosage"
@@ -115,7 +149,17 @@ function Catarefill(props) {
               {props.articleList ? (
                 props.articleList.map((e) => {
                   if (e.cat === catname) {
-                    return <option key={e.id}  value={ JSON.stringify({arId : `${e.id}`, nom : `${e.nom}`}) }>{e.nom}</option> ;
+                    return (
+                      <option
+                        key={e.id}
+                        value={JSON.stringify({
+                          arId: `${e.id}`,
+                          nom: `${e.nom}`,
+                        })}
+                      >
+                        {e.nom}
+                      </option>
+                    );
                   }
                 })
               ) : (
@@ -226,10 +270,11 @@ function Catarefill(props) {
                   newprice !== ""
                 ) {
                   props.addArticleToCatalogue({
+                    catalogue : get_catalogue(),
                     cataid: cataid,
-                    // article : {
-                    //   id : 
-                    // }
+                    article: get_article(),
+                    promo: get_promo(),
+                    pricing: { ancientprice: ancientprice, newprice: newprice },
                   });
                 }
               }}
@@ -250,7 +295,7 @@ function Catarefill(props) {
           </tr>
           {props.articleList ? (
             props.articleList
-              .filter((e) => e.nom == article)
+              .filter((e) => e.id == article.arId)
               .map((e) => (
                 <tr key={e.id}>
                   <td

@@ -37,8 +37,9 @@ export function addCatalogue(payload) {
 
 /***********************  addArticleToCatalogue  *********************************** */
 export function addArticleToCatalogue(payload) {
-    console.log("addArticleToCatalogue   called ! ");
-    // return ((dispatch) => Axios.put("http://localhost:3001/catalogue", payload, {
+    console.log("addArticleToCatalogue   called ! ",payload);
+    
+    // return ((dispatch) => Axios.put("http://localhost:3001/catalogue"+payload.cataid, payload, {
     //     headers: {
     //         "Content-Type": "application/json"
     //     }
