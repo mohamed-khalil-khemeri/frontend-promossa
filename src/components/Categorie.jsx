@@ -16,7 +16,7 @@ function Categorie(props) {
     <>
       Categorie
       <div className="categorieContainer">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form >
           <div>
             <input
               onChange={(e) => setcatname(e.target.value)}

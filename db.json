@@ -29,6 +29,11 @@
       "nom": "magasin najwa",
       "logo": "https://logodix.com/logo/2122514.png",
       "id": 6
+    },
+    {
+      "nom": "dhay3at",
+      "logo": "https://i.ytimg.com/vi/mWZcoz6M-3E/hqdefault.jpg",
+      "id": 7
     }
   ],
   "categorie": [
@@ -156,6 +161,44 @@
           "pricing": {
             "ancientprice": "0",
             "newprice": "9650"
+          }
+        },
+        {
+          "article": {
+            "nom": "Harissa du Cap Bon Neblia",
+            "logo": "http://alimentation.founa.com/sites/default/files/styles/500x433_detail/public/images_products/11001426.jpg",
+            "dosage": "gramme",
+            "cat": "Hrissa",
+            "volume": "380",
+            "id": 2
+          },
+          "promo": {
+            "type": "BUY_X_GET_Y_FREE",
+            "buy_x": "1",
+            "y_free": "1"
+          },
+          "pricing": {
+            "ancientprice": "0",
+            "newprice": "2520"
+          }
+        },
+        {
+          "article": {
+            "nom": "eau Jannet 2L",
+            "logo": "https://www.savanna.tn/img/m/855.jpg",
+            "dosage": "litre",
+            "cat": "Eau",
+            "volume": "2",
+            "id": 1
+          },
+          "promo": {
+            "type": "BUY_X_GET_Y_FREE",
+            "buy_x": "5",
+            "y_free": "1"
+          },
+          "pricing": {
+            "ancientprice": "0",
+            "newprice": "2750"
           }
         }
       ],

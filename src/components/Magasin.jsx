@@ -14,7 +14,8 @@ function Magasin(props) {
     <>
       Magasin
       <div className="categorieContainer">
-        <form onSubmit={(e) => e.preventDefault()}>
+      {/* onSubmit={(e) => e.preventDefault()} */}
+        <form >
           <div>
             <input
               type="txt"
@@ -53,7 +54,7 @@ function Magasin(props) {
           <tr>
             <th>logo</th>
             <th>nom</th>
-            <th>lien du logo</th>
+            
           </tr>
           {props.magList ? (
             props.magList.map((e) => (
@@ -63,7 +64,7 @@ function Magasin(props) {
                   style={{ backgroundImage: `url( ${e.logo} )` }}
                   ></td>
                   <td>{e.nom}</td>
-                  <td>{e.logo}</td>
+                  
               </tr>
             ))
           ) : (

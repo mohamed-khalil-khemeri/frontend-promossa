@@ -21,7 +21,7 @@ function Article(props) {
     <>
       Article
       <div className="categorieContainer">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form >
           <div>
             <input
               onChange={(e) => setarticlename(e.target.value)}
