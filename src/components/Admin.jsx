@@ -14,6 +14,7 @@ import Sidebar from "./Sidebar";
 import Magasin from "./Magasin";
 import Article from "./Article";
 import Catarefill from "./Catarefill";
+import CatalogueList from "./CatalogueList";
 
 function Admin(props) {
   return (
@@ -53,6 +54,7 @@ function Admin(props) {
               <Route exact path="/categorie" component={Categorie} />
               <Route exact path="/magasin" component={Magasin} />
               <Route exact path="/article" component={Article} />
+              <Route exact path="/catalogueList/:cataid" component={CatalogueList} />
               <Route exact path="/catarefill/:cataid" component={Catarefill} />
               {/* <Route path="/add/:add"  component={() => <Editor />} /> */}
               <Redirect to="/admin" />

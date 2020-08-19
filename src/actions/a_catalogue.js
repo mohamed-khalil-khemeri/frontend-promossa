@@ -2,7 +2,7 @@ import * as types from './types';
 import Axios from 'axios';
 
 
-/***********************  getCategorie  *********************************** */
+/***********************  getCatalogue  *********************************** */
 export const getCatalogue2 = (payload) => {
     console.log("GET_CATALOGUE called ", payload);
     
@@ -23,7 +23,7 @@ export function getCatalogue() {
         dispatch(getCatalogue2(res.data));
     }))
 }
-/***********************  addCategorie  *********************************** */
+/***********************  addCatalogue  *********************************** */
 export function addCatalogue(payload) {
     
     return ((dispatch) => Axios.post("http://localhost:3001/catalogue", payload, {

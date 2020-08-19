@@ -61,6 +61,18 @@
       "parent": "produits alimentaire",
       "logo": "https://www.gastronomiac.com/wp/wp-content/uploads/2016/10/harissa-en-boite.jpg",
       "id": 5
+    },
+    {
+      "nom": "Lessive",
+      "parent": "produits de nettoyage",
+      "logo": "https://lh3.googleusercontent.com/proxy/9RpZJYfvhfpvsWKHh54NUg4f9foyLPUrTsfNSTJUARBLioOcJqMfCl_dO5BkKsUHiz5ByXXGuEWpqoZbNgUiJsiAzmCCC3M_8JhUgJJbAmcmYg",
+      "id": 6
+    },
+    {
+      "nom": "Lessive main",
+      "parent": "Lessive",
+      "logo": "https://static.cms.yp.ca/ecms/media/2/24032762_xxl-1428005335-600x360.jpg",
+      "id": 7
     }
   ],
   "article": [
@@ -79,23 +91,25 @@
       "cat": "Hrissa",
       "volume": "380",
       "id": 2
+    },
+    {
+      "nom": "Nectar de Poire Oh! 1L",
+      "logo": "http://alimentation.founa.com/sites/default/files/styles/500x433_detail/public/images_products/971.jpg",
+      "dosage": "litre",
+      "cat": "jus",
+      "volume": "1",
+      "id": 3
+    },
+    {
+      "nom": "Lessive main en poudre Nadhif",
+      "logo": "http://entretien.founa.com/sites/default/files/styles/500x433_detail/public/images_products/14004931.jpg?itok=cr-uXs-o",
+      "dosage": "gramme",
+      "cat": "Lessive main",
+      "volume": "2000",
+      "id": 4
     }
   ],
   "catalogue": [
-    {
-      "nom": "foods",
-      "magasin": {
-        "nom": "Géant",
-        "logo": "https://www.geant.tn/img/geant-logo-1493219678.jpg",
-        "id": "5"
-      },
-      "period": {
-        "debut": "2020-07-29",
-        "fin": "2020-08-29"
-      },
-      "promoList": [],
-      "id": 7
-    },
     {
       "nom": "sa77a lik",
       "magasin": {
@@ -107,7 +121,44 @@
         "debut": "2020-08-18",
         "fin": "2020-08-21"
       },
-      "promoList": [],
+      "promoList": [
+        {
+          "article": {
+            "nom": "Nectar de Poire Oh! 1L",
+            "logo": "http://alimentation.founa.com/sites/default/files/styles/500x433_detail/public/images_products/971.jpg",
+            "dosage": "litre",
+            "cat": "jus",
+            "volume": "1",
+            "id": 3
+          },
+          "promo": {
+            "type": "SIMPLE_PERCENTAGE",
+            "pourcentage": "20"
+          },
+          "pricing": {
+            "ancientprice": "3250",
+            "newprice": "2850"
+          }
+        },
+        {
+          "article": {
+            "nom": "Lessive main en poudre Nadhif",
+            "logo": "http://entretien.founa.com/sites/default/files/styles/500x433_detail/public/images_products/14004931.jpg?itok=cr-uXs-o",
+            "dosage": "gramme",
+            "cat": "Lessive main",
+            "volume": "2000",
+            "id": 4
+          },
+          "promo": {
+            "type": "EXTRA_QUANTITY",
+            "extra": "500"
+          },
+          "pricing": {
+            "ancientprice": "0",
+            "newprice": "9650"
+          }
+        }
+      ],
       "id": 8
     }
   ]

@@ -14,7 +14,7 @@ function Sidebar(props) {
   return (
     <div className="sidebar-container">
            <NavLink exact to="/admin" className="normal-sidebar" activeClassName="active-sidebar" >ADMIN</NavLink>
-           <NavLink exact to="/catarefill/12" className="normal-sidebar" activeClassName="active-sidebar" >Ajout articles dans Catalogue</NavLink>
+           {/* <NavLink exact to="/catarefill/12" className="normal-sidebar" activeClassName="active-sidebar" >Ajout articles dans Catalogue</NavLink> */}
            <NavLink exact to="/catalogue" className="normal-sidebar" activeClassName="active-sidebar" >Creation Catalogue</NavLink>
            <NavLink exact to="/categorie" className="normal-sidebar" activeClassName="active-sidebar" >Ajout Catégorie</NavLink>
            <NavLink exact to="/article" className="normal-sidebar" activeClassName="active-sidebar" >Ajout Article</NavLink>
