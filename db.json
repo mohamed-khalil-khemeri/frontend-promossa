@@ -68,25 +68,32 @@
   ],
   "catalogue": [
     {
+      "nom": "foods",
+      "magasin": {
+        "nom": "Géant",
+        "logo": "https://www.geant.tn/img/geant-logo-1493219678.jpg",
+        "id": "5"
+      },
+      "period": {
+        "debut": "2020-07-29",
+        "fin": "2020-08-29"
+      },
+      "promoList": [],
+      "id": 7
+    },
+    {
       "nom": "sa77a lik",
-      "magasin": "1",
-      "debut": "2020-08-12",
-      "fin": "2020-08-18",
-      "id": 1
-    },
-    {
-      "nom": "il9raya jet w billi 3andna 7let",
-      "magasin": "4",
-      "debut": "2020-08-07",
-      "fin": "2020-09-02",
-      "id": 2
-    },
-    {
-      "nom": "Eau",
-      "magasin": "6",
-      "debut": "2020-08-19",
-      "fin": "2020-08-22",
-      "id": 3
+      "magasin": {
+        "nom": "aziza",
+        "logo": "https://upload.wikimedia.org/wikipedia/ar/b/bd/Logo_Aziza.jpg",
+        "id": "1"
+      },
+      "period": {
+        "debut": "2020-08-18",
+        "fin": "2020-08-21"
+      },
+      "promoList": [],
+      "id": 8
     }
   ]
 }

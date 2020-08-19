@@ -127,9 +127,19 @@ function Catalogue(props) {
                 ) {
                   props.addCatalogue({
                     nom: cataname,
-                    magasin: magname,
-                    debut: debut,
-                    fin: fin,
+                    magasin : {
+                    nom : `${props.magList
+                      ? props.magList.filter((el) => el.id === magname*1)[0]
+                        ? props.magList.filter((el) => el.id === magname*1)[0].nom
+                        : null
+                      : null}`,
+                    logo: `${props.magList
+                    ? props.magList.filter((el) => el.id === magname*1)[0]
+                      ? props.magList.filter((el) => el.id === magname*1)[0].logo : null : null}`,
+                    id: magname},
+                    period : {debut: debut,
+                    fin: fin},
+                    promoList : []
                   });
                 }
               }}
@@ -161,8 +171,8 @@ function Catalogue(props) {
                   style={{
                     backgroundImage: `url( ${
                       props.magList
-                        ? props.magList.filter((el) => el.id === e.magasin*1)[0]
-                          ? props.magList.filter((el) => el.id === e.magasin*1)[0]
+                        ? props.magList.filter((el) => el.id === e.magasin.id*1)[0]
+                          ? props.magList.filter((el) => el.id === e.magasin.id*1)[0]
                               .logo
                           : null
                         : null
@@ -171,16 +181,16 @@ function Catalogue(props) {
                 ></td>
                 <td>
                   {props.magList
-                    ? props.magList.filter((el) => el.id === e.magasin*1)[0]
-                      ? props.magList.filter((el) => el.id === e.magasin*1)[0].nom
+                    ? props.magList.filter((el) => el.id === e.magasin.id*1)[0]
+                      ? props.magList.filter((el) => el.id === e.magasin.id*1)[0].nom
                       : null
                     : null}
                 </td>
                 <td>{e.nom}</td>
-                <td>{e.debut}</td>
-                <td>{e.fin}</td>
-                <td>{period(e.debut, e.fin)} jours</td>
-                <td>{period_timout(e.fin)}</td>
+                <td>{e.period.debut}</td>
+                <td>{e.period.fin}</td>
+                <td>{period(e.period.debut, e.period.fin)} jours</td>
+                <td>{period_timout(e.period.fin)}</td>
                 <td><NavLink exact to={{ pathname: `/catarefill/${e.id}` }} className="normal-sidebar" activeClassName="active-sidebar" >ajout promo</NavLink></td>
               </tr>
             ))

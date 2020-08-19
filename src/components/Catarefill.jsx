@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { getMagasin } from "../actions/a_magasin";
-import { addCatalogue, getCatalogue } from "../actions/a_catalogue";
+import { addArticleToCatalogue, getCatalogue } from "../actions/a_catalogue";
 import { getCategorie } from "../actions/a_categorie";
 import { getArticle } from "../actions/a_article";
 
@@ -16,12 +16,51 @@ function Catarefill(props) {
   }, []);
 
   let promoTypes = [
-    { id: 1, type: "SIMPLE_PERCENTAGE", parametre: ["pourcentage"] },
-    { id: 2, type: "EXTRA_QUANTITY", parametre: ["extra"] },
-    { id: 3, type: "BUY_X_GET_Y_FREE", parametre: ["buy_x", "y_free"] },
+    { id: 1, type: "SIMPLE_PERCENTAGE", parameter: ["pourcentage"] },
+    { id: 2, type: "EXTRA_QUANTITY", parameter: ["extra"] },
+    { id: 3, type: "BUY_X_GET_Y_FREE", parameter: ["buy_x", "y_free"] },
   ];
+  const [pourcentage, setpourcentage] = useState("");
+  const [extra, setextra] = useState("");
+  const [buy_x, setbuy_x] = useState("");
+  const [y_free, sety_free] = useState("");
+
+  const handleChange = (x, y) => {
+    switch (y) {
+      case "pourcentage":
+        return setpourcentage(x), console.log("state : ", pourcentage);
+        break;
+      case "extra":
+        return setextra(x);
+        break;
+      case "buy_x":
+        return setbuy_x(x);
+        break;
+      case "y_free":
+        return sety_free(x);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const handleExistence = (x) => {
+    switch (x) {
+      case "SIMPLE_PERCENTAGE":
+        return pourcentage !== "";
+        break;
+      case "EXTRA_QUANTITY":
+        return extra !== "";
+        break;
+      case "BUY_X_GET_Y_FREE":
+        return buy_x !== "" && y_free !== "";
+        break;
+    }
+  };
 
   let { cataid } = useParams();
+  // console.log("id catalogue : ",cataid);
   const [parent, setparent] = useState("");
   const [catname, setcatname] = useState("");
   const [percentage, setpercentage] = useState("");
@@ -38,7 +77,7 @@ function Catarefill(props) {
     <>
       Insertion articles
       <div className="categorieContainer">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form autocomplete="off" onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
               onChange={(e) => setcatname(e.target.value)}
@@ -64,8 +103,32 @@ function Catarefill(props) {
           </div>
 
           <div>
+            <select
+              onChange={(e) => {
+                {setarticle(JSON.parse(e.target.value).nom);console.log("key article",JSON.parse(e.target.value).arId);};
+              }}
+              className="myregselect"
+              name="dosage"
+              required
+            >
+              <option value="">select Magasin:</option>
+              {props.articleList ? (
+                props.articleList.map((e) => {
+                  if (e.cat === catname) {
+                    return <option key={e.id}  value={ JSON.stringify({arId : `${e.id}`, nom : `${e.nom}`}) }>{e.nom}</option> ;
+                  }
+                })
+              ) : (
+                <div>hi</div>
+              )}
+            </select>
+          </div>
+
+          {/* <div>
             <input
-              onChange={(e) => {setarticle(e.target.value)}}
+              onChange={(e) => {
+                setarticle(e.target.value);
+              }}
               type="text"
               list="articleLists"
               name="articleList"
@@ -79,39 +142,20 @@ function Catarefill(props) {
               {props.articleList ? (
                 props.articleList.map((e) => {
                   if (e.cat === catname) {
-                    return (
-                      <option key={e.id}  value={e.nom} />
-                    );
+                    return <option key={e.id} value={e.nom} />;
                   }
                 })
               ) : (
                 <div>hi</div>
               )}
             </datalist>
-          </div>
-          {/* <div>
-            <select
-              onChange={(e) => setparent(e.target.value)}
-              className="myregselect"
-              name="dosage"
-              id="dosage"
-              required
-            >
-              <option value="">select Categorie:</option>
-              {props.catList ? (
-                props.catList.map((e) => (
-                  <option key={e.id} value={e.nom}>
-                    {e.nom}
-                  </option>
-                ))
-              ) : (
-                <div>hi</div>
-              )}
-            </select>
           </div> */}
+
           <div>
             <input
-              onChange={(e) => setpromotype(e.target.value)}
+              onChange={(e) => {
+                setpromotype(e.target.value);
+              }}
               list="promotypes"
               name="promotype"
               id="promotype"
@@ -121,21 +165,29 @@ function Catarefill(props) {
             />
 
             <datalist id="promotypes">
-              {promoTypes.map((e) => 
+              {promoTypes.map((e) => (
                 <option key={e.id} value={e.type} />
-              )}
+              ))}
             </datalist>
           </div>
           <div>
-            <input
-              onChange={(e) => setpercentage(e.target.value)}
-              type="number"
-              className=""
-              name="articlename"
-              id="articlename"
-              placeholder="pourcentage du reduction."
-              required
-            />
+            {promoTypes.filter((q) => q.type === promotype)[0]
+              ? promoTypes
+                  .filter((q) => q.type === promotype)[0]
+                  .parameter.map((k) => (
+                    <input
+                      onChange={(e) => {
+                        handleChange(e.target.value, k);
+                      }}
+                      type="number"
+                      className=""
+                      name={k}
+                      id={k}
+                      placeholder={k}
+                      required
+                    />
+                  ))
+              : null}
           </div>
 
           <div>
@@ -166,16 +218,18 @@ function Catarefill(props) {
             <button
               onClick={() => {
                 if (
-                  parent !== "" &&
-                  cataname !== "" &&
-                  debut !== "" &&
-                  fin !== ""
+                  catname !== "" &&
+                  article !== "" &&
+                  promotype !== "" &&
+                  handleExistence(promotype) &&
+                  ancientprice !== "" &&
+                  newprice !== ""
                 ) {
-                  props.addCatalogue({
-                    nom: cataname,
-                    magasin: parent,
-                    debut: debut,
-                    fin: fin,
+                  props.addArticleToCatalogue({
+                    cataid: cataid,
+                    // article : {
+                    //   id : 
+                    // }
                   });
                 }
               }}
@@ -224,5 +278,5 @@ export default connect(
       cataList: state.r_catalogue,
     };
   },
-  { getCategorie, addCatalogue, getCatalogue, getArticle }
+  { getCategorie, addArticleToCatalogue, getCatalogue, getArticle }
 )(Catarefill);
