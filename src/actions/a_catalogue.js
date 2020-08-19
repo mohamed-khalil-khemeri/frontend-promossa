@@ -38,13 +38,16 @@ export function addCatalogue(payload) {
 /***********************  addArticleToCatalogue  *********************************** */
 export function addArticleToCatalogue(payload) {
     console.log("addArticleToCatalogue   called ! ",payload);
-    
-    // return ((dispatch) => Axios.put("http://localhost:3001/catalogue"+payload.cataid, payload, {
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     }
-    // }).then(res => {
-    //     dispatch(getCatalogue());
-    // }))
+
+    let updated_catalogue = {...payload.catalogue};
+    updated_catalogue.promoList = [...updated_catalogue.promoList,{"article" : {...payload.article},"promo" : {...payload.promo}, "pricing" : {...payload.pricing}}]
+
+    return ((dispatch) => Axios.put("http://localhost:3001/catalogue/"+payload.cataid, updated_catalogue, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => {
+        dispatch(getCatalogue());
+    }))
 }
 

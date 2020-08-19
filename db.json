@@ -55,15 +55,30 @@
       "parent": "produits alimentaire",
       "logo": "https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/tag_photos/extralarge/11345/tag-jus-de-fruits-2253430_1920.jpg",
       "id": 4
+    },
+    {
+      "nom": "Hrissa",
+      "parent": "produits alimentaire",
+      "logo": "https://www.gastronomiac.com/wp/wp-content/uploads/2016/10/harissa-en-boite.jpg",
+      "id": 5
     }
   ],
   "article": [
     {
-      "id": 1,
       "nom": "eau Jannet 2L",
       "logo": "https://www.savanna.tn/img/m/855.jpg",
       "dosage": "litre",
-      "cat": "Eau"
+      "cat": "Eau",
+      "volume": "2",
+      "id": 1
+    },
+    {
+      "nom": "Harissa du Cap Bon Neblia",
+      "logo": "http://alimentation.founa.com/sites/default/files/styles/500x433_detail/public/images_products/11001426.jpg",
+      "dosage": "gramme",
+      "cat": "Hrissa",
+      "volume": "380",
+      "id": 2
     }
   ],
   "catalogue": [

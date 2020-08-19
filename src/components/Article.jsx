@@ -16,6 +16,7 @@ function Article(props) {
   const [logo, setlogo] = useState("");
   const [dosage, setdosage] = useState("");
   const [cat, setcat] = useState("");
+  const [volume, setVolume] = useState("");
   return (
     <>
       Article
@@ -47,6 +48,17 @@ function Article(props) {
               <option value="litre">Litre</option>
               <option value="piece">piece</option>
             </select>
+          </div>
+          <div>
+            <input
+              onChange={(e) => setVolume(e.target.value)}
+              type="number"
+              className=""
+              name="volume"
+              id="volume"
+              placeholder="volume ou poid."
+              required
+            />
           </div>
           <div>
             <input
@@ -82,12 +94,13 @@ function Article(props) {
           <div>
             <button
               onClick={() => {
-                if (articlename !== "" && logo !== "" && dosage !=="" && cat !== "") {
+                if (articlename !== "" && logo !== "" && dosage !=="" && volume !== "" && cat !== "") {
                   props.addArticle({
                     nom: articlename,
                     logo: logo,
                     dosage: dosage,
-                    cat:cat
+                    cat:cat,
+                    volume : volume
                   });
                 }
               }}
@@ -104,8 +117,9 @@ function Article(props) {
           <tr>
             <th>logo</th>
             <th>nom</th>
+            <th>volume</th>
             <th>categorie</th>
-            <th>lien du logo</th>
+            
           </tr>
           {props.articleList ? (
             props.articleList.map((e) => (
@@ -115,8 +129,9 @@ function Article(props) {
                   style={{ backgroundImage: `url( ${e.logo} )` }}
                 ></td>
                 <td>{e.nom}</td>
+                <td>{e.volume}</td>
                 <td>{e.cat}</td>
-                <td>{e.logo}</td>
+                
               </tr>
             ))
           ) : (
