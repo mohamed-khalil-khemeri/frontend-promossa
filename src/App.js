@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Admin from "./components/Admin";
 import Register from "./components/Register";
 import Sidebar from "./components/Sidebar";
+import Client from "./components/Client";
 // import NavBar from "./components/Navbar";
 // import Sidebar from './components/Sidebar';
 // import Testimonials from './components/Testimonials';
@@ -21,50 +22,84 @@ import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react
 import Categorie from './components/Categorie';
 import Catalogue from "./components/Catalogue"
 
+import { getCategorie } from "./actions/a_categorie";
+import { getCatalogue } from "./actions/a_catalogue";
+import { set_active_article_list } from "./actions/a_active_article_list";
+
 
 function App(props) {
 
-  // useEffect(
-  //  props.getDishes,[]
-  // );
+  useEffect(() => {
+    props.getCategorie();
+    props.getCatalogue();
+  }, []);
 
-  // const Adminizer = () => {
-  //   return (
-  //     <>
-  //       <div>
-  //         <Switch>
-  //           <Route exact path="/admin" component={Catalogue} />
-  //           <Route exact path="/Categorie" component={Categorie} />
-  //           <Redirect to="/" />
-  //           {/* <Route   component={Clientizer} /> */}
-  //           {/* <Route  path="/*"  render={()=> <Redirect to="Clientizer" />} /> */}
-  //         </Switch>
-  //       </div>
-  //       <Sidebar />
-  //     </>
-  //   )
-  // }
-  // const Clientizer = () => {
-  //   return (
-  //   <>
-  //     <div>
-  //       <Switch>
-  //       <Route exact path="/Categorie"  component={Categorie} />
-  //       <Route exact path="/feedback"  component={Register} />
-  //       <Redirect to="/" />
-  //       </Switch>
-  //     </div>
-  //     {/* <Sidebar /> */}
-  //   </>
-  //   )
-  // }
+  const period_timout = (x) => {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    const a = new Date(x);
+    a.setHours(23);
+    a.setMinutes(59);
+    a.setSeconds(59);
+    const b = new Date();
+    // const b = new Date("August 16, 2020 23:59:59");
+    b.setHours(23);
+    b.setMinutes(59);
+    b.setSeconds(59);
+
+    if (a - b < 0) {
+      return "expired";
+    }
+
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    let p = Math.floor((utc2 - utc1) / _MS_PER_DAY);
+
+    if (p <= 0) {
+      return Math.abs(p) + 1;
+    } else if (p % 1 !== 0) {
+      return p + 1;
+    } else {
+      return p;
+    }
+  };
+
+  const active_catalogues=()=>{
+    return props.cataList.filter(e=> period_timout(e.period.fin) !== "expired")
+  }
+
+  const active_article_list=()=>{
+    let Vactive_catalogues = active_catalogues();
+    let active_article_list = [];
+    Vactive_catalogues.forEach(e => {
+      active_article_list = [...active_article_list,...e.promoList];
+    });
+    return active_article_list;
+    
+
+  }
+
+  props.set_active_article_list(active_article_list())
 
 
   return (
     <>
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" render={() => (
+            <div className="app-container">
+              <div>
+              <NavLink exact to="/admin" className="normal-sidebar" activeClassName="active-sidebar" >ADMIN</NavLink>
+              <NavLink exact to="/login" className="normal-sidebar" activeClassName="active-sidebar" >Login</NavLink>
+              <NavLink exact to="/shop/0" className="normal-sidebar" activeClassName="active-sidebar" >Client Front !</NavLink>
+
+              </div>
+            </div>
+          )} />
+
+
+
+          <Route exact path="/shop/:categorieId" component={Client} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route component={Admin} />
@@ -173,8 +208,8 @@ function App(props) {
 export default connect(
   (state => {
     return {
-      user: state.r_users
+      cataList: state.r_catalogue,
     }
   }),
-  {  })
+  {getCategorie, getCatalogue, set_active_article_list})
   (App);

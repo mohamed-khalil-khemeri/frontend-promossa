@@ -45,7 +45,7 @@ function Catarefill(props) {
   const handleChange = (x, y) => {
     switch (y) {
       case "pourcentage":
-        return setpourcentage(x), console.log("state : ", pourcentage);
+        return setpourcentage(x);
         break;
       case "extra":
         return setextra(x);
@@ -109,7 +109,7 @@ function Catarefill(props) {
     <>
       Insertion articles
       <div className="categorieContainer">
-        <form autocomplete="off" >
+        <form autocomplete="off">
           <div>
             <input
               onChange={(e) => setcatname(e.target.value)}
@@ -270,7 +270,7 @@ function Catarefill(props) {
                   newprice !== ""
                 ) {
                   props.addArticleToCatalogue({
-                    catalogue : get_catalogue(),
+                    catalogue: get_catalogue(),
                     cataid: cataid,
                     article: get_article(),
                     promo: get_promo(),
@@ -292,6 +292,7 @@ function Catarefill(props) {
             <th>logo</th>
             <th>nom</th>
             <th>categorie</th>
+            <th>quantite</th>
           </tr>
           {props.articleList ? (
             props.articleList
@@ -304,6 +305,9 @@ function Catarefill(props) {
                   ></td>
                   <td>{e.nom}</td>
                   <td>{e.cat}</td>
+                  <td>
+                    {e.volume} {e.dosage}
+                  </td>
                 </tr>
               ))
           ) : (
