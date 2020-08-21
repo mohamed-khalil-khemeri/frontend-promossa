@@ -13,8 +13,15 @@ function Register(props) {
   // }, []);
 
   // const [filter_key, set_filter_key] = useState("active");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [birthday, setbirthday] = useState("");
+  const [adress, setadress] = useState("");
+
   const [gov, setgov] = useState("");
   const [deleg, setdeleg] = useState("");
+
+  const [genre, setgenre] = useState("");
   // let menu = [...props.dishesList];
 
   let gouvernorat = [
@@ -402,6 +409,9 @@ function Register(props) {
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
+              onChange={(e) => {
+                setemail(e.target.value);
+              }}
               type="email"
               className=""
               name="email"
@@ -415,6 +425,9 @@ function Register(props) {
 
           <div>
             <input
+              onChange={(e) => {
+                setpassword(e.target.value);
+              }}
               type="password"
               className=""
               name="pass"
@@ -426,6 +439,9 @@ function Register(props) {
           </div>
           <div>
             <input
+              onChange={(e) => {
+                setbirthday(e.target.value);
+              }}
               type="date"
               className=""
               name="birthday"
@@ -437,6 +453,9 @@ function Register(props) {
           </div>
           <div>
             <input
+              onChange={(e) => {
+                setadress(e.target.value);
+              }}
               type="text"
               className=""
               name="adress"
@@ -479,7 +498,13 @@ function Register(props) {
             </select>
           </div>
           <div>
-            <select className="myregselect" name="gender" id="gender" required>
+            <select
+              onChange={(e) => setgenre(e.target.value)}
+              className="myregselect"
+              name="gender"
+              id="gender"
+              required
+            >
               <option value="">Quel est votre genre:</option>
               <option value="Homme">Homme</option>
               <option value="Femme">Femme</option>
@@ -487,7 +512,30 @@ function Register(props) {
           </div>
           <div>
             {/* onClick={(e)=>e.preventDefault()} */}
-            <button className="" name="login" type="submit">
+            <button
+              onClick={() => {
+                if (
+                  email !== "" &&
+                  password !== "" &&
+                  birthday !== "" &&
+                  adress !== "" &&
+                  gov !== "" &&
+                  deleg !== "" &&
+                  genre !== ""
+                ) {
+                  props.coca_cola({
+                    email: email,
+                    password: password,
+                    birthday: birthday,
+                    adress: {street : adress, gov : gov, deleg : deleg },
+                    genre: genre,
+                  });
+                }
+              }}
+              className=""
+              name="login"
+              type="submit"
+            >
               S’inscrire
             </button>
           </div>

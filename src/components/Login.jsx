@@ -8,7 +8,8 @@ import logo from "../bou9.webp";
 import { connect } from "react-redux";
 
 function Login(props) {
-
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   return (
     <>
       <div className="logContainer">
@@ -19,6 +20,7 @@ function Login(props) {
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
+              onChange={(e) => setemail(e.target.value)}
               type="email"
               className=""
               name="email"
@@ -32,6 +34,7 @@ function Login(props) {
 
           <div>
             <input
+              onChange={(e) => setpassword(e.target.value)}
               type="password"
               className=""
               name="pass"
@@ -42,7 +45,19 @@ function Login(props) {
             />
           </div>
           <div>
-            <button className="" name="login" type="submit">
+            <button
+            onClick={() => {
+              if (
+                email !== "" &&
+                password !== ""
+              ) {
+                props.coca_cola({
+                  email: email,
+                  password: password
+                });
+              }
+            }}
+             className="" name="login" type="submit">
               Connexion
             </button>
           </div>
@@ -55,13 +70,10 @@ function Login(props) {
   );
 }
 
-export default connect(
-  (state) => {
-    return {
-      dishesList: state.r_dishes,
-      carted: state.r_cart,
-      user: state.r_users,
-    };
-  },
-  {  }
-)(Login);
+export default connect((state) => {
+  return {
+    dishesList: state.r_dishes,
+    carted: state.r_cart,
+    user: state.r_users,
+  };
+}, {})(Login);
