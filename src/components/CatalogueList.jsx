@@ -29,7 +29,7 @@ function CatalogueList(props) {
         <tr>
           <th>logo</th>
           <th>nom</th>
-          <th>vol/poid</th>
+          <th>Quantity</th>
           <th>promo type</th>
           <th>parameters</th>
           <th>ancient price</th>
@@ -45,7 +45,7 @@ function CatalogueList(props) {
                 }}
               ></td>
               <td>{e.article.nom}</td>
-              <td>{e.article.volume}</td>
+              <td>{e.article.quantite}</td>
               <td>{e.promo.type}</td>
               <td>{JSON.stringify(e.promo)}</td>
               <td>{e.pricing.ancientprice}</td>

@@ -8,6 +8,10 @@ import {createStore,applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import main_r from './reducers/main_r';
 import thunk from 'redux-thunk';
+import Axios from 'axios';
+
+
+Axios.defaults.baseURL = 'http://localhost:3001';
 
 const store = createStore(main_r,  applyMiddleware(thunk))
 

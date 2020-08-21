@@ -51,31 +51,31 @@
     },
     {
       "nom": "Eau",
-      "parent": "produits alimentaire",
+      "parent": "1",
       "logo": "https://www.boldsky.com/img/2013/02/02-1359823213-water.jpg",
       "id": 3
     },
     {
       "nom": "jus",
-      "parent": "produits alimentaire",
+      "parent": "1",
       "logo": "https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/tag_photos/extralarge/11345/tag-jus-de-fruits-2253430_1920.jpg",
       "id": 4
     },
     {
       "nom": "Hrissa",
-      "parent": "produits alimentaire",
+      "parent": "1",
       "logo": "https://www.gastronomiac.com/wp/wp-content/uploads/2016/10/harissa-en-boite.jpg",
       "id": 5
     },
     {
       "nom": "Lessive",
-      "parent": "produits de nettoyage",
+      "parent": "2",
       "logo": "https://www.escaleverte.ca/wp-content/uploads/detergent-1024x730.jpg",
       "id": 6
     },
     {
       "nom": "Lessive main",
-      "parent": "Lessive",
+      "parent": "6",
       "logo": "https://static.cms.yp.ca/ecms/media/2/24032762_xxl-1428005335-600x360.jpg",
       "id": 7
     }
@@ -85,7 +85,7 @@
       "nom": "eau Jannet 2L",
       "logo": "https://www.savanna.tn/img/m/855.jpg",
       "dosage": "litre",
-      "cat": "Eau",
+      "cat": "3",
       "volume": "2",
       "id": 1
     },
@@ -112,6 +112,46 @@
       "cat": "Lessive main",
       "volume": "2000",
       "id": 4
+    },
+    {
+      "nom": "eau Mira 2L",
+      "logo": "https://tn.jumia.is/unsafe/fit-in/300x300/product/28/7362/1.jpg",
+      "dosage": "litre",
+      "cat": "3",
+      "volume": "2",
+      "id": 8
+    },
+    {
+      "nom": "eau sabrine",
+      "logo": "https://www.attaronline.tn/835-thickbox_default/eau-minerale-sabrine-15l.jpg",
+      "dosage": "litre",
+      "cat": "3",
+      "volume": "1",
+      "id": 9
+    },
+    {
+      "nom": "saboon",
+      "logo": "https://cdn.shopify.com/s/files/1/0002/0647/1219/products/DeadSea_grande.png?v=1588394365",
+      "dosage": "piece",
+      "cat": "6",
+      "volume": "1",
+      "id": 10
+    },
+    {
+      "nom": "pain",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Baguettes_-_stonesoup.jpg/1200px-Baguettes_-_stonesoup.jpg",
+      "dosage": "piece",
+      "cat": "1",
+      "quantite": "1",
+      "id": 11
+    },
+    {
+      "nom": "Harissa 70g  LE PHARE DU CAPBON",
+      "logo": "https://images-na.ssl-images-amazon.com/images/I/51lsA8Hu7gL._AC_.jpg",
+      "dosage": "gramme",
+      "cat": "5",
+      "quantite": "70",
+      "id": 12
     }
   ],
   "catalogue": [
@@ -187,7 +227,7 @@
             "nom": "eau Jannet 2L",
             "logo": "https://www.savanna.tn/img/m/855.jpg",
             "dosage": "litre",
-            "cat": "Eau",
+            "cat": "3",
             "volume": "2",
             "id": 1
           },
@@ -200,9 +240,146 @@
             "ancientprice": "0",
             "newprice": "2750"
           }
+        },
+        {
+          "article": {
+            "nom": "eau Mira 2L",
+            "logo": "https://tn.jumia.is/unsafe/fit-in/300x300/product/28/7362/1.jpg",
+            "dosage": "litre",
+            "cat": "3",
+            "volume": "2",
+            "id": 8
+          },
+          "promo": {
+            "type": "SIMPLE_PERCENTAGE",
+            "pourcentage": "20"
+          },
+          "pricing": {
+            "ancientprice": "2350",
+            "newprice": "2000"
+          }
+        },
+        {
+          "article": {
+            "nom": "eau sabrine",
+            "logo": "https://www.attaronline.tn/835-thickbox_default/eau-minerale-sabrine-15l.jpg",
+            "dosage": "litre",
+            "cat": "3",
+            "volume": "1",
+            "id": 9
+          },
+          "promo": {
+            "type": "BUY_X_GET_Y_FREE",
+            "buy_x": "1",
+            "y_free": "1"
+          },
+          "pricing": {
+            "ancientprice": "560",
+            "newprice": "480"
+          }
+        },
+        {
+          "article": {
+            "nom": "saboon",
+            "logo": "https://cdn.shopify.com/s/files/1/0002/0647/1219/products/DeadSea_grande.png?v=1588394365",
+            "dosage": "piece",
+            "cat": "7",
+            "volume": "1",
+            "id": 10
+          },
+          "promo": {
+            "type": "SIMPLE_PERCENTAGE",
+            "pourcentage": "20"
+          },
+          "pricing": {
+            "ancientprice": "680",
+            "newprice": "370"
+          }
+        },
+        {
+          "article": {
+            "nom": "saboon",
+            "logo": "https://cdn.shopify.com/s/files/1/0002/0647/1219/products/DeadSea_grande.png?v=1588394365",
+            "dosage": "piece",
+            "cat": "6",
+            "volume": "1",
+            "id": 10
+          },
+          "promo": {
+            "type": "SIMPLE_PERCENTAGE",
+            "pourcentage": "25"
+          },
+          "pricing": {
+            "ancientprice": "1000",
+            "newprice": "750"
+          }
+        },
+        {
+          "article": {
+            "nom": "saboon",
+            "logo": "https://cdn.shopify.com/s/files/1/0002/0647/1219/products/DeadSea_grande.png?v=1588394365",
+            "dosage": "piece",
+            "cat": "7",
+            "volume": "1",
+            "id": 10
+          },
+          "promo": {
+            "type": "SIMPLE_PERCENTAGE",
+            "pourcentage": "30"
+          },
+          "pricing": {
+            "ancientprice": "1000",
+            "newprice": "700"
+          }
+        },
+        {
+          "article": {
+            "nom": "Harissa 70g  LE PHARE DU CAPBON",
+            "logo": "https://images-na.ssl-images-amazon.com/images/I/51lsA8Hu7gL._AC_.jpg",
+            "dosage": "gramme",
+            "cat": "5",
+            "quantite": "70",
+            "id": 12
+          },
+          "promo": {
+            "type": "SIMPLE_PERCENTAGE",
+            "pourcentage": "20"
+          },
+          "pricing": {
+            "ancientprice": "1000",
+            "newprice": "800"
+          }
         }
       ],
       "id": 8
+    },
+    {
+      "nom": "il9raya jet w billi 3andna 7let",
+      "magasin": {
+        "nom": "Monoprix",
+        "logo": "https://logos-download.com/wp-content/uploads/2016/05/Monoprix_logo_red_background.png",
+        "id": "2"
+      },
+      "period": {
+        "debut": "2020-08-12",
+        "fin": "2020-08-22"
+      },
+      "promoList": [],
+      "id": 9
+    },
+    {
+      "nom": "foods",
+      "magasin": {
+        "nom": "MG",
+        "logo": "https://www.keejob.com/media/recruiter/recruiter_3666/logo-3666-20160329-140517.jpg",
+        "id": "4"
+      },
+      "period": {
+        "debut": "2020-08-17",
+        "fin": "2020-08-20"
+      },
+      "promoList": [],
+      "id": 10
     }
   ]
 }

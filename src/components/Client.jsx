@@ -57,7 +57,7 @@ function Client(props) {
         .filter((e) => e.parent === categorieId)//categorie by parent
         .map((e) => (
           <div key={e.id} className="card">
-              <NavLink exact to={"/shop/"+e.nom}  >
+              <NavLink exact to={"/shop/"+e.id}  >
             <div
               className="image"
               style={{ backgroundImage: `url( ${e.logo} )` }}
@@ -66,12 +66,12 @@ function Client(props) {
               <h4>{e.nom}</h4>
               <h4>{` ${e.parent} دينار`}</h4>
             </div>
-            {cartAddBtn(e)}
+            
           </div>
         ))}
         
       {active_article_list
-        .filter((e) => e.article.cat === categorieId)//article by parent
+        .filter((e) => e.article.cat == categorieId)//article by parent
         .map((e) => (
           <div key={e.id} className="card">
             <div

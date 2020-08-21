@@ -82,7 +82,7 @@ function Article(props) {
               <option value="">select Categorie:</option>
               {props.catList ? (
                 props.catList.map((e) => (
-                  <option key={e.id} value={e.nom}>
+                  <option key={e.id} value={e.id}>
                     {e.nom}
                   </option>
                 ))
@@ -100,7 +100,7 @@ function Article(props) {
                     logo: logo,
                     dosage: dosage,
                     cat:cat,
-                    volume : volume
+                    quantite : volume
                   });
                 }
               }}
@@ -129,7 +129,7 @@ function Article(props) {
                   style={{ backgroundImage: `url( ${e.logo} )` }}
                 ></td>
                 <td>{e.nom}</td>
-                <td>{e.volume}</td>
+                <td>{e.quantite}</td>
                 <td>{e.cat}</td>
                 
               </tr>

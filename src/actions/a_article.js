@@ -15,7 +15,7 @@ export const getArticle2 = (payload) => {
 
 export function getArticle() {
 
-    return ((dispatch) => Axios.get("http://localhost:3001/article", {
+    return ((dispatch) => Axios.get("/article", {
         headers: {
             "Content-Type": "application/json"
         }
@@ -26,7 +26,7 @@ export function getArticle() {
 /***********************  addCategorie  *********************************** */
 export function addArticle(payload) {
     
-    return ((dispatch) => Axios.post("http://localhost:3001/article", payload, {
+    return ((dispatch) => Axios.post("/article", payload, {
         headers: {
             "Content-Type": "application/json"
         }

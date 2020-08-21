@@ -36,31 +36,21 @@ function App(props) {
 
   const period_timout = (x) => {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-    const a = new Date(x);
-    a.setHours(23);
-    a.setMinutes(59);
-    a.setSeconds(59);
-    const b = new Date();
-    // const b = new Date("August 16, 2020 23:59:59");
-    b.setHours(23);
-    b.setMinutes(59);
-    b.setSeconds(59);
 
-    if (a - b < 0) {
-      return "expired";
-    }
+    
+    const a = new Date();
+    const b = new Date(x);
 
     const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
     const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
-    let p = Math.floor((utc2 - utc1) / _MS_PER_DAY);
-
-    if (p <= 0) {
-      return Math.abs(p) + 1;
-    } else if (p % 1 !== 0) {
+    let p = ((utc2 - utc1) / _MS_PER_DAY);
+    if (p < 0) {
+      return "expired";
+    } else if (p == 0) {
       return p + 1;
     } else {
-      return p;
+      return p + 1;
     }
   };
 

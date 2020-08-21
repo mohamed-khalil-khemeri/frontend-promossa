@@ -94,8 +94,8 @@ function Catarefill(props) {
   const [fin, setfin] = useState("");
 
   const get_article = () => {
-    if (props.articleList && article.arId) {
-      return props.articleList.filter((e) => e.id == article.arId)[0];
+    if (props.articleList && article) {
+      return props.articleList.filter((e) => e.id == article)[0];
     }
   };
 
@@ -111,41 +111,46 @@ function Catarefill(props) {
       <div className="categorieContainer">
         <form autocomplete="off">
           <div>
-            <input
-              onChange={(e) => setcatname(e.target.value)}
-              list="catalists"
+            <select
+              onChange={(e) => {setcatname(JSON.parse(e.target.value).arId)}}
               name="catalist"
               id="catalist"
               className="myregselect"
               placeholder="select categorie"
               required
-            />
-
-            <datalist id="catalists">
+            >
+              <option value="">select categorie :</option>
+            
               {props.catList ? (
                 props.catList.map((e) => (
-                  <option key={e.id} value={e.nom}>
+                  <option
+                    key={e.id}
+                    value={JSON.stringify({
+                      arId: `${e.id}`,
+                      nom: `${e.nom}`,
+                    })}
+                  >
                     {e.nom}
                   </option>
                 ))
               ) : (
                 <div>hi</div>
               )}
-            </datalist>
+            </select>
           </div>
 
           <div>
             <select
               onChange={(e) => {
                 {
-                  setarticle(JSON.parse(e.target.value));
+                  setarticle(JSON.parse(e.target.value).arId);
                 }
               }}
               className="myregselect"
               name="dosage"
               required
             >
-              <option value="">select Magasin:</option>
+              <option value="">select article:</option>
               {props.articleList ? (
                 props.articleList.map((e) => {
                   if (e.cat === catname) {
@@ -296,7 +301,7 @@ function Catarefill(props) {
           </tr>
           {props.articleList ? (
             props.articleList
-              .filter((e) => e.id == article.arId)
+              .filter((e) => e.id == article)
               .map((e) => (
                 <tr key={e.id}>
                   <td
