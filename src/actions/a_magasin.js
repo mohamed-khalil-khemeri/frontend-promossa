@@ -15,7 +15,7 @@ export const getMagasin2 = (payload) => {
 
 export function getMagasin() {
 
-    return ((dispatch) => Axios.get("http://localhost:3001/magasin", {
+    return ((dispatch) => Axios.get("/magasin", {
         headers: {
             "Content-Type": "application/json"
         }
@@ -26,7 +26,7 @@ export function getMagasin() {
 /***********************  ADD_MAGASIN  *********************************** */
 export function addMagasin(payload) {
     
-    return ((dispatch) => Axios.post("http://localhost:3001/magasin", payload, {
+    return ((dispatch) => Axios.post("/magasin", payload, {
         headers: {
             "Content-Type": "application/json"
         }

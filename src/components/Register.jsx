@@ -8,6 +8,7 @@ import logo from "../bou9.webp";
 import { connect } from "react-redux";
 
 function Register(props) {
+  let logInputs = {};
   // useEffect(() => {
   //   props.getDishes();
   // }, []);
@@ -399,6 +400,41 @@ function Register(props) {
     },
   ];
 
+    /*--------------------------------control Email with regex------------------------------------------- */
+
+    function controlM(x) {
+      const patt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (patt.test(x.value) == false) {
+        x.style.color = "red";
+        x.value = "please enter a valid Email adress !";
+        setTimeout(() => {
+          x.value = "";
+          x.style.color = "black";
+          x.placeholder = "please enter a valid Email adress !";
+        }, 1000);
+      }
+      return patt.test(x.value);
+    }
+  
+    function controlP(z) {
+      const pattx = /^\w{8}$/;
+      if (pattx.test(z.value) == false) {
+        z.value = "";
+        z.type = "email";
+        z.style.color = "red";
+        z.value = "password must be 8 characters !";
+        setTimeout(() => {
+          z.value = "";
+          z.type = "password";
+          z.style.color = "black";
+          z.placeholder = "password must be 8 characters !";
+        }, 1000);
+      }
+      return pattx.test(z.value);
+    }
+
+
+
   return (
     <>
       <div className="regContainer">
@@ -409,6 +445,7 @@ function Register(props) {
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
+            ref={(e) => (logInputs.email = e)}
               onChange={(e) => {
                 setemail(e.target.value);
               }}
@@ -416,7 +453,7 @@ function Register(props) {
               className=""
               name="email"
               id="email"
-              placeholder="Adresse e-mail ou numéro de tél."
+              placeholder="Adresse e-mail."
               autofocus="1"
               aria-label="Adresse e-mail ou numéro de tél."
               required
@@ -425,6 +462,7 @@ function Register(props) {
 
           <div>
             <input
+            ref={(e) => (logInputs.password = e)}
               onChange={(e) => {
                 setpassword(e.target.value);
               }}
@@ -442,6 +480,7 @@ function Register(props) {
               onChange={(e) => {
                 setbirthday(e.target.value);
               }}
+              max="2014-01-01"
               type="date"
               className=""
               name="birthday"
@@ -515,8 +554,8 @@ function Register(props) {
             <button
               onClick={() => {
                 if (
-                  email !== "" &&
-                  password !== "" &&
+                  controlM(logInputs.email) == true &&
+                  controlP(logInputs.password) == true &&
                   birthday !== "" &&
                   adress !== "" &&
                   gov !== "" &&

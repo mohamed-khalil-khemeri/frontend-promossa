@@ -15,7 +15,7 @@ export const getCatalogue2 = (payload) => {
 
 export function getCatalogue() {
 
-    return ((dispatch) => Axios.get("http://localhost:3001/catalogue", {
+    return ((dispatch) => Axios.get("/catalogue", {
         headers: {
             "Content-Type": "application/json"
         }
@@ -26,7 +26,7 @@ export function getCatalogue() {
 /***********************  addCatalogue  *********************************** */
 export function addCatalogue(payload) {
     
-    return ((dispatch) => Axios.post("http://localhost:3001/catalogue", payload, {
+    return ((dispatch) => Axios.post("/catalogue", payload, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -42,7 +42,7 @@ export function addArticleToCatalogue(payload) {
     let updated_catalogue = {...payload.catalogue};
     updated_catalogue.promoList = [...updated_catalogue.promoList,{"article" : {...payload.article},"promo" : {...payload.promo}, "pricing" : {...payload.pricing}}]
 
-    return ((dispatch) => Axios.put("http://localhost:3001/catalogue/"+payload.cataid, updated_catalogue, {
+    return ((dispatch) => Axios.put("/catalogue/"+payload.cataid, updated_catalogue, {
         headers: {
             "Content-Type": "application/json"
         }

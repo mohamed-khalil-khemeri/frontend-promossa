@@ -53,7 +53,7 @@ export function sendOrder(order, user) {
     console.log("send order called", valid_order);
 
     let y;
-    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5f0475685d4af74b012801aa", {
+    return ((dispatch) => Axios.get("/b/5f0475685d4af74b012801aa", {
         headers: {
             "secret-key": "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou"
         }
@@ -67,7 +67,7 @@ export function sendOrder(order, user) {
         valid_order = { id: oid, ...valid_order };
         y = [...res.data, valid_order];
         /********************update database with new one*********************** */
-        Axios.put("https://api.jsonbin.io/b/5f0475685d4af74b012801aa",
+        Axios.put("/b/5f0475685d4af74b012801aa",
             y,
             {
                 headers: {

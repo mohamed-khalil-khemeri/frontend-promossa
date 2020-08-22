@@ -37,7 +37,7 @@ function Catalogue(props) {
     const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
     let p = ((utc2 - utc1) / _MS_PER_DAY);
-    console.log("p : ",p);
+    
     if (p < 0) {
       return "expired";
     } else if (p == 0) {

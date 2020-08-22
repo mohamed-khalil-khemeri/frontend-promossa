@@ -18,7 +18,7 @@ export const loginUser2 = (user) => {
 export function loginUser(el) {
 
   return (dispatch) =>
-    Axios.post("http://localhost:3001/users/log", {
+    Axios.post("/users/log", {
       userName: el.userName,
       passWord: el.passWord
     }, {

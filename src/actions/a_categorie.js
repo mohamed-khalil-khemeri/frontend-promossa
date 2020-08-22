@@ -15,7 +15,7 @@ export const getCategorie2 = (payload) => {
 
 export function getCategorie() {
 
-    return ((dispatch) => Axios.get("http://localhost:3001/categorie", {
+    return ((dispatch) => Axios.get("/categorie", {
         headers: {
             "Content-Type": "application/json"
         }
@@ -26,7 +26,7 @@ export function getCategorie() {
 /***********************  addCategorie  *********************************** */
 export function addCategorie(payload) {
     
-    return ((dispatch) => Axios.post("http://localhost:3001/categorie", payload, {
+    return ((dispatch) => Axios.post("/categorie", payload, {
         headers: {
             "Content-Type": "application/json"
         }
