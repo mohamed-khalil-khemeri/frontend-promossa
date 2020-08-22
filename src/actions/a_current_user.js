@@ -1,40 +1,53 @@
-import * as types from "../types";
+import * as types from "./types";
 import Axios from "axios";
 import JwtDecode from "jwt-decode";
 
 
 /***********************login user action package*********************************** */
 
-export const loginUser2 = (user) => {
-  console.log("user : ",user);
+export const loginUser3 = (payload) => {
+  console.log("user : ", payload);
   const action = {
     type: types.LOGIN_USER,
-    user,
+    payload,
   };
   return action;
 };
 
 
-export function loginUser(el) {
+export function loginUser2(payload) {
 
   return (dispatch) =>
-    Axios.post("/users/log", {
-      userName: el.userName,
-      passWord: el.passWord
-    }, {
+    Axios.post("/users/log", payload, {
       headers: {
         "content-type": "application/json",
       }
     })
       .then((res) => {
+        console.log("res : ",res)
         const token = res.headers["x-auth-token"];
         localStorage.setItem("token", token);
         Axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
         const payload = JwtDecode(token);
 
-        dispatch(loginUser2(payload));
+        dispatch(loginUser3(payload));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {console.log("c err : ",err.response.data);dispatch(sendNotification({ type: "error", block: false, payload:  err.response.data}));});
+}
+
+
+export const sendNotification = (payload) => ({
+  type: types.GET_LOG_STATUS,
+  payload,
+});
+
+
+export function loginUser(payload) {
+  return (dispatch) => {
+    dispatch(sendNotification({ type: "wait", block: true, payload: "wait" }));
+    dispatch(loginUser2(payload))
+  }
+
 }
 
 /***********************logout user action package*********************************** */
@@ -44,7 +57,7 @@ export const logoutUser = () => {
 
   const action = {
     type: types.LOGOUT_USER,
-    user: "none",
+    payload: "none",
   };
   return action;
 };

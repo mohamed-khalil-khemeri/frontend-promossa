@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
-//import { getDishes } from "../actions/a_dishes";
+import { loginUser } from "../actions/a_current_user";
 //import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 import logo from "../bou9.webp";
@@ -52,6 +52,8 @@ function Login(props) {
           <h1>PROMOSSA</h1>
           <img src={logo} alt="logo" />
         </div>
+        <div className={props.notification.type == "error" ? "register_notification": ""} >{props.notification.type == "error" ? props.notification.payload : ""}</div>
+
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
@@ -90,17 +92,20 @@ function Login(props) {
                   controlM(logInputs.email) == true &&
                   controlP(logInputs.password) == true
                 ) {
-                  props.coca_cola({
+                  props.loginUser({
                     email: email,
                     password: password,
                   });
                 }
               }}
-              className=""
+              disabled={props.notification.block}
+              className="submitbtn"
               name="login"
               type="submit"
             >
-              Connexion
+              Connexion  <div
+                className={props.notification.block == true ? "loader" : ""}
+              ></div>
             </button>
           </div>
         </form>
@@ -114,8 +119,8 @@ function Login(props) {
 
 export default connect((state) => {
   return {
-    dishesList: state.r_dishes,
+    notification: state.r_login_notification,
     carted: state.r_cart,
     user: state.r_users,
   };
-}, {})(Login);
+}, {loginUser})(Login);

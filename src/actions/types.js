@@ -9,9 +9,14 @@ export const SET_ACTIVE_ARICLE_LIST = "SET_ACTIVE_ARICLE_LIST";
 export const ADD_USER = "ADD_USER";
 
 
-export const GET_STATUS = "GET_STATUS";
+export const GET_REG_STATUS = "GET_REG_STATUS";
 export const RESET_STATUS = "RESET_STATUS";
 
+// current user types
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+
+export const GET_LOG_STATUS = "GET_LOG_STATUS";
 
 
 

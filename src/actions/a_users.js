@@ -1,4 +1,4 @@
-import { ADD_USER, GET_STATUS, RESET_STATUS } from "./types";
+import { ADD_USER, GET_REG_STATUS, RESET_STATUS } from "./types";
 import Axios from "axios";
 import { json } from "body-parser";
 
@@ -30,10 +30,10 @@ import { json } from "body-parser";
 
 /* add  user */
 
-export const addUser = (payload) => ({
-    type: ADD_USER,
-    payload,
-});
+// export const addUser = (payload) => ({
+//     type: ADD_USER,
+//     payload,
+// });
 
 export function register_user2(payload) {
     console.log("add user");
@@ -61,7 +61,7 @@ export function register_user2(payload) {
 
 
 export const sendNotification = (payload) => ({
-    type: GET_STATUS,
+    type: GET_REG_STATUS,
     payload,
 });
 
