@@ -37,7 +37,7 @@ function App(props) {
   const period_timout = (x) => {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-    
+
     const a = new Date();
     const b = new Date(x);
 
@@ -54,18 +54,18 @@ function App(props) {
     }
   };
 
-  const active_catalogues=()=>{
-    return props.cataList.filter(e=> period_timout(e.period.fin) !== "expired")
+  const active_catalogues = () => {
+    return props.cataList.filter(e => period_timout(e.period.fin) !== "expired")
   }
 
-  const active_article_list=()=>{
+  const active_article_list = () => {
     let Vactive_catalogues = active_catalogues();
     let active_article_list = [];
     Vactive_catalogues.forEach(e => {
-      active_article_list = [...active_article_list,...e.promoList];
+      active_article_list = [...active_article_list, ...e.promoList];
     });
     return active_article_list;
-    
+
 
   }
 
@@ -79,10 +79,18 @@ function App(props) {
           <Route exact path="/" render={() => (
             <div className="app-container">
               <div>
-              <NavLink exact to="/admin" className="normal-sidebar" activeClassName="active-sidebar" >ADMIN</NavLink>
-              <NavLink exact to="/login" className="normal-sidebar" activeClassName="active-sidebar" >Login</NavLink>
-              <NavLink exact to="/shop/0" className="normal-sidebar" activeClassName="active-sidebar" >Client Front !</NavLink>
+                <NavLink exact to="/admin" className="normal-sidebar" activeClassName="active-sidebar" >ADMIN</NavLink>
+                <NavLink exact to="/login" className="normal-sidebar" activeClassName="active-sidebar" >Login</NavLink>
+                <NavLink exact to="/shop/0" className="normal-sidebar" activeClassName="active-sidebar" >Client Front !</NavLink>
 
+              </div>
+            </div>
+          )} />
+
+          <Route exact path="/verifyEmail" render={() => (
+            <div className="vContainer">
+              <div className="verifyEmail">
+                first step is done ,Second step : please go to your email inbox or spam folder then click on the link
               </div>
             </div>
           )} />
@@ -201,5 +209,5 @@ export default connect(
       cataList: state.r_catalogue,
     }
   }),
-  {getCategorie, getCatalogue, set_active_article_list})
+  { getCategorie, getCatalogue, set_active_article_list })
   (App);

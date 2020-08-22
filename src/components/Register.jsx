@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./Register.css";
-import { register_user, sendNotification, resetNotification } from "../actions/a_users";
+import {
+  register_user,
+  sendNotification,
+  resetNotification,
+} from "../actions/a_users";
 //import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 import logo from "../bou9.webp";
+
+import Notification from "./Notification";
 
 import { connect } from "react-redux";
 
 function Register(props) {
   let logInputs = {};
+
   // useEffect(() => {
   //   props.getDishes();
   // }, []);
-// console.log("notification : ", props.notification);
+  // console.log("notification : ", props.notification);
   //const [able, setable] = useState(false);
 
   // if (props.notification.type == "error") { setable(false); console.log(" error payloads : ",props.notification.payload); }
   // if (props.notification.type == "success") { setable(false); console.log(" success payloads : ",props.notification.payload); }
-  
-  
+
   // const [filter_key, set_filter_key] = useState("active");
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -449,6 +455,9 @@ function Register(props) {
           <h1>PROMOSSA</h1>
           <img src={logo} alt="logo" />
         </div>
+        <div className={props.notification.type == "error" ? "register_notification": ""} >{props.notification.type == "error" ? "used email, try other one !": ""}</div>
+        <div> {props.notification.type == "success" ? window.location = "/verifyEmail": null}</div>
+        {/* <Notification  status = {props.notification.type} >{()=>{ if(props.notification.payload[0] == email) {return  "Email Invalid, il y a un compte existant avec l'email fournit"} }}</Notification> */}
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
@@ -460,7 +469,7 @@ function Register(props) {
               name="nom"
               id="nom"
               placeholder="Nom et Prenom"
-              autofocus="1"
+              autoFocus="1"
               aria-label="Nom et Prenom"
               required
             />
@@ -477,7 +486,6 @@ function Register(props) {
               name="email"
               id="email"
               placeholder="Adresse e-mail."
-              autofocus="1"
               aria-label="Adresse e-mail ou numéro de tél."
               required
             />
@@ -602,9 +610,8 @@ function Register(props) {
                   adress !== "" &&
                   gov !== "" &&
                   deleg !== "" &&
-                  genre !== "" 
+                  genre !== ""
                 ) {
-                  
                   props.register_user({
                     name: name,
                     email: email,
@@ -615,16 +622,17 @@ function Register(props) {
                     genre: genre,
                     role: "client",
                   });
-                  
                 }
               }}
-              
-              disabled = {props.notification.block}
+              disabled={props.notification.block}
               className="submitbtn"
               name="login"
               type="submit"
             >
-              S’inscrire <div className={ props.notification.block == true ? "loader" :"" }></div>
+              S’inscrire{" "}
+              <div
+                className={props.notification.block == true ? "loader" : ""}
+              ></div>
             </button>
           </div>
         </form>
@@ -644,5 +652,5 @@ export default connect(
       notification: state.r_register_notification,
     };
   },
-  { register_user , sendNotification,resetNotification }
+  { register_user, sendNotification, resetNotification }
 )(Register);

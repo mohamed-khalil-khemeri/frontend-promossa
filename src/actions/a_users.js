@@ -48,13 +48,13 @@ export function register_user2(payload) {
                 if (res.data.keyValue) {
                     if (Array.isArray(Object.keys(res.data.keyValue))) {
                         dispatch(sendNotification({ type: "error",block :false , payload: Object.keys(res.data.keyValue) }));
-                        console.log("error ! ")
+                        console.log("error ! ",Object.keys(res.data.keyValue)[0])
 
                     }
                 } else {
                     dispatch(sendNotification({ type: "success",block : false, payload: "success" }));
+                    console.log("success ! ")
                 }
-                console.log("success ! ")
             })
             .catch((err) => console.log("error received : ", err));
 }
