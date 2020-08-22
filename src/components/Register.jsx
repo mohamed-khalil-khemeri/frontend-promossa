@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Register.css";
-//import { getDishes } from "../actions/a_dishes";
+import { register_user } from "../actions/a_users";
 //import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 import logo from "../bou9.webp";
@@ -14,10 +14,13 @@ function Register(props) {
   // }, []);
 
   // const [filter_key, set_filter_key] = useState("active");
+  const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [birthday, setbirthday] = useState("");
   const [adress, setadress] = useState("");
+
+  const [phone, setphone] = useState("");
 
   const [gov, setgov] = useState("");
   const [deleg, setdeleg] = useState("");
@@ -400,40 +403,38 @@ function Register(props) {
     },
   ];
 
-    /*--------------------------------control Email with regex------------------------------------------- */
+  /*--------------------------------control Email with regex------------------------------------------- */
 
-    function controlM(x) {
-      const patt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (patt.test(x.value) == false) {
-        x.style.color = "red";
-        x.value = "please enter a valid Email adress !";
-        setTimeout(() => {
-          x.value = "";
-          x.style.color = "black";
-          x.placeholder = "please enter a valid Email adress !";
-        }, 1000);
-      }
-      return patt.test(x.value);
+  function controlM(x) {
+    const patt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (patt.test(x.value) == false) {
+      x.style.color = "red";
+      x.value = "please enter a valid Email adress !";
+      setTimeout(() => {
+        x.value = "";
+        x.style.color = "black";
+        x.placeholder = "please enter a valid Email adress !";
+      }, 1000);
     }
-  
-    function controlP(z) {
-      const pattx = /^\w{8}$/;
-      if (pattx.test(z.value) == false) {
+    return patt.test(x.value);
+  }
+
+  function controlP(z) {
+    const pattx = /^\w{8}$/;
+    if (pattx.test(z.value) == false) {
+      z.value = "";
+      z.type = "email";
+      z.style.color = "red";
+      z.value = "password must be 8 characters !";
+      setTimeout(() => {
         z.value = "";
-        z.type = "email";
-        z.style.color = "red";
-        z.value = "password must be 8 characters !";
-        setTimeout(() => {
-          z.value = "";
-          z.type = "password";
-          z.style.color = "black";
-          z.placeholder = "password must be 8 characters !";
-        }, 1000);
-      }
-      return pattx.test(z.value);
+        z.type = "password";
+        z.style.color = "black";
+        z.placeholder = "password must be 8 characters !";
+      }, 1000);
     }
-
-
+    return pattx.test(z.value);
+  }
 
   return (
     <>
@@ -445,7 +446,23 @@ function Register(props) {
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
-            ref={(e) => (logInputs.email = e)}
+              onChange={(e) => {
+                setname(e.target.value);
+              }}
+              type="text"
+              className=""
+              name="nom"
+              id="nom"
+              placeholder="Nom et Prenom"
+              autofocus="1"
+              aria-label="Nom et Prenom"
+              required
+            />
+          </div>
+
+          <div>
+            <input
+              ref={(e) => (logInputs.email = e)}
               onChange={(e) => {
                 setemail(e.target.value);
               }}
@@ -462,7 +479,7 @@ function Register(props) {
 
           <div>
             <input
-            ref={(e) => (logInputs.password = e)}
+              ref={(e) => (logInputs.password = e)}
               onChange={(e) => {
                 setpassword(e.target.value);
               }}
@@ -475,6 +492,23 @@ function Register(props) {
               required
             />
           </div>
+
+          <div>
+            <input
+              onChange={(e) => {
+                setphone(e.target.value);
+              }}
+              type="tel"
+              pattern="[0-9]{8}"
+              className=""
+              name="phone"
+              id="phone"
+              placeholder="Numero Tel (exp : 24145229) (pas d'espace)"
+              aria-label="Numero Tel"
+              required
+            />
+          </div>
+
           <div>
             <input
               onChange={(e) => {
@@ -554,20 +588,25 @@ function Register(props) {
             <button
               onClick={() => {
                 if (
+                  name !== "" &&
                   controlM(logInputs.email) == true &&
                   controlP(logInputs.password) == true &&
+                  phone !== "" &&
                   birthday !== "" &&
                   adress !== "" &&
                   gov !== "" &&
                   deleg !== "" &&
                   genre !== ""
                 ) {
-                  props.coca_cola({
+                  props.register_user({
+                    name : name,
                     email: email,
                     password: password,
+                    phone: phone,
                     birthday: birthday,
-                    adress: {street : adress, gov : gov, deleg : deleg },
+                    adress: { street: adress, gov: gov, deleg: deleg },
                     genre: genre,
+                    role: "client",
                   });
                 }
               }}
@@ -593,4 +632,4 @@ export default connect((state) => {
     carted: state.r_cart,
     user: state.r_users,
   };
-}, {})(Register);
+}, {register_user})(Register);

@@ -6,6 +6,7 @@ export const GET_CATALOGUE = "GET_CATALOGUE";
 
 
 export const SET_ACTIVE_ARICLE_LIST = "SET_ACTIVE_ARICLE_LIST";
+export const ADD_USER = "ADD_USER";
 
 
 
