@@ -6,6 +6,7 @@ import r_catalogue from "./r_catalogue";
 import r_cart from "./r_cart";
 import r_current_user from "./r_current_user";
 import r_active_article_list from "./r_active_article_list";
+import r_register_notification from "./r_register_notification";
 
 
 const main_r = combineReducers({
@@ -15,7 +16,8 @@ const main_r = combineReducers({
     r_catalogue,
     r_cart,
     r_current_user,
-    r_active_article_list
+    r_active_article_list,
+    r_register_notification
 
 
 });

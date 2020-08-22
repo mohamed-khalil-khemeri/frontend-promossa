@@ -1,4 +1,4 @@
-import { ADD_USER } from "./types";
+import { ADD_USER, GET_STATUS, RESET_STATUS } from "./types";
 import Axios from "axios";
 import { json } from "body-parser";
 
@@ -35,7 +35,7 @@ export const addUser = (payload) => ({
     payload,
 });
 
-export function register_user(payload) {
+export function register_user2(payload) {
     console.log("add user");
 
     return (dispatch) =>
@@ -44,8 +44,37 @@ export function register_user(payload) {
         })
             //   .then((res) => dispatch(getUsersFromApi()))
             // .then((res) => (res.data.keyValue ? ))
-            .then((res) => console.log("response : ",Object.keys(res.data.keyValue) !== undefined ? Object.keys(res.data.keyValue) : res ))
+            .then((res) => {
+                if (res.data.keyValue) {
+                    if (Array.isArray(Object.keys(res.data.keyValue))) {
+                        dispatch(sendNotification({ type: "error",block :false , payload: Object.keys(res.data.keyValue) }));
+                        console.log("error ! ")
+
+                    }
+                } else {
+                    dispatch(sendNotification({ type: "success",block : false, payload: "success" }));
+                }
+                console.log("success ! ")
+            })
             .catch((err) => console.log("error received : ", err));
+}
+
+
+export const sendNotification = (payload) => ({
+    type: GET_STATUS,
+    payload,
+});
+
+export const resetNotification = () => ({
+    type: RESET_STATUS,
+    payload :{ type: "success",block : false, payload: "success" }
+});
+export function register_user(payload) {
+  return (dispatch) =>
+
+  {dispatch(sendNotification({ type: "wait",block : true, payload: "wait" }));
+  dispatch(register_user2(payload))}
+    
 }
 
 // /* delete user */

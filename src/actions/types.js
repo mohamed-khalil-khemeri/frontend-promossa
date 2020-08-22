@@ -9,6 +9,10 @@ export const SET_ACTIVE_ARICLE_LIST = "SET_ACTIVE_ARICLE_LIST";
 export const ADD_USER = "ADD_USER";
 
 
+export const GET_STATUS = "GET_STATUS";
+export const RESET_STATUS = "RESET_STATUS";
+
+
 
 
 export const ADD_TO_CART = "ADD_TO_CART";

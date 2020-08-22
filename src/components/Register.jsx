@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Register.css";
-import { register_user } from "../actions/a_users";
+import { register_user, sendNotification, resetNotification } from "../actions/a_users";
 //import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 import logo from "../bou9.webp";
@@ -12,7 +12,13 @@ function Register(props) {
   // useEffect(() => {
   //   props.getDishes();
   // }, []);
+// console.log("notification : ", props.notification);
+  //const [able, setable] = useState(false);
 
+  // if (props.notification.type == "error") { setable(false); console.log(" error payloads : ",props.notification.payload); }
+  // if (props.notification.type == "success") { setable(false); console.log(" success payloads : ",props.notification.payload); }
+  
+  
   // const [filter_key, set_filter_key] = useState("active");
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -596,10 +602,11 @@ function Register(props) {
                   adress !== "" &&
                   gov !== "" &&
                   deleg !== "" &&
-                  genre !== ""
+                  genre !== "" 
                 ) {
+                  
                   props.register_user({
-                    name : name,
+                    name: name,
                     email: email,
                     password: password,
                     phone: phone,
@@ -608,13 +615,16 @@ function Register(props) {
                     genre: genre,
                     role: "client",
                   });
+                  
                 }
               }}
-              className=""
+              
+              disabled = {props.notification.block}
+              className="submitbtn"
               name="login"
               type="submit"
             >
-              S’inscrire
+              S’inscrire <div className={ props.notification.block == true ? "loader" :"" }></div>
             </button>
           </div>
         </form>
@@ -626,10 +636,13 @@ function Register(props) {
   );
 }
 
-export default connect((state) => {
-  return {
-    dishesList: state.r_dishes,
-    carted: state.r_cart,
-    user: state.r_users,
-  };
-}, {register_user})(Register);
+export default connect(
+  (state) => {
+    return {
+      dishesList: state.r_dishes,
+      carted: state.r_cart,
+      notification: state.r_register_notification,
+    };
+  },
+  { register_user , sendNotification,resetNotification }
+)(Register);
