@@ -7,6 +7,7 @@ import Admin from "./components/Admin";
 import Register from "./components/Register";
 import Sidebar from "./components/Sidebar";
 import Client from "./components/Client";
+import ConfirmEmail from "./components/ConfirmEmail";
 // import NavBar from "./components/Navbar";
 // import Sidebar from './components/Sidebar';
 // import Testimonials from './components/Testimonials';
@@ -97,6 +98,9 @@ function App(props) {
 
 
 
+
+
+          <Route exact path="/confirmEmail/:id" component={ConfirmEmail} />
           <Route exact path="/shop/:categorieId" component={Client} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />

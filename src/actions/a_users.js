@@ -105,3 +105,12 @@ export function register_user(payload) {
 //       dispatch(getUsersFromApi())
 //     );
 // }
+
+export function confirmEmails(id) {
+    console.log("email confirmation called ! ")
+  return (dispatch) =>
+    Axios.post("http://localhost:3001/users/confirmEmail/" + id)
+    .then((res) =>
+      console.log("email confirmed res : ", res)
+    );
+}

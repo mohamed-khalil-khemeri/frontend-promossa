@@ -53,6 +53,7 @@ function Login(props) {
           <img src={logo} alt="logo" />
         </div>
         <div className={props.notification.type == "error" ? "register_notification": ""} >{props.notification.type == "error" ? props.notification.payload : ""}</div>
+        <div className={props.notification.type == "success" ? "verifyEmail": ""} >{props.notification.type == "success" ? "Congratulations ! you are logged in  !" : ""}</div>
 
         <form onSubmit={(e) => e.preventDefault()}>
           <div>

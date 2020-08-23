@@ -29,7 +29,7 @@ export function loginUser2(payload) {
         localStorage.setItem("token", token);
         Axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
         const payload = JwtDecode(token);
-
+        dispatch(sendNotification({ type: "success", block: false, payload:  "success"}));
         dispatch(loginUser3(payload));
       })
       .catch((err) => {console.log("c err : ",err.response.data);dispatch(sendNotification({ type: "error", block: false, payload:  err.response.data}));});
