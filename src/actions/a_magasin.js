@@ -15,7 +15,7 @@ export const getMagasin2 = (payload) => {
 
 export function getMagasin() {
 
-    return ((dispatch) => Axios.get("/magasin", {
+    return ((dispatch) => Axios.get("/magasins/", {
         headers: {
             "Content-Type": "application/json"
         }
@@ -25,13 +25,20 @@ export function getMagasin() {
 }
 /***********************  ADD_MAGASIN  *********************************** */
 export function addMagasin(payload) {
+    console.log("action dispatched ! magasin", payload);
+    return (dispatch) => {
+        const formData = new FormData();
+        formData.append("logo", payload.logo);
+        formData.set("name", payload.name);
     
-    return ((dispatch) => Axios.post("/magasin", payload, {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(res => {
-        dispatch(getMagasin());
-    }))
-}
+    
+        Axios
+          .post("/magasins/", formData, {
+            headers: {
+              "content-type": "multipart/form-data",
+            }
+          })
+          .then(res => {dispatch(getMagasin());})
+          
+}}
 

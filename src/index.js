@@ -11,7 +11,7 @@ import thunk from 'redux-thunk';
 import Axios from 'axios';
 
 
-Axios.defaults.baseURL = 'http://localhost:3001';
+Axios.defaults.baseURL = 'http://localhost:3002';
 
 const store = createStore(main_r,  applyMiddleware(thunk))
 

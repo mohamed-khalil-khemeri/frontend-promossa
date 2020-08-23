@@ -14,8 +14,8 @@ function Magasin(props) {
     <>
       Magasin
       <div className="categorieContainer">
-      {/* onSubmit={(e) => e.preventDefault()} */}
-        <form >
+        
+        <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <input
               type="txt"
@@ -30,18 +30,22 @@ function Magasin(props) {
           </div>
           <div>
             <input
-              type="txt"
-              className=""
+              className="fileInput"
+              type="file"
               name="logo"
               id="logo"
-              placeholder="lien du logo."
-              onChange={(e) => setlogo(e.target.value)}
+              placeholder="upload logo."
+              onChange={(e) => {console.log("files : ",e.target.files[0]);;setlogo(e.target.files[0])}}
               required
             />
           </div>
           <div>
             <button
-              onClick={() => {if((magname !== "")&&(logo !== "")) { props.addMagasin({ nom: magname, logo: logo })}}}
+              onClick={() => {
+                if (magname !== "" && logo !== "") {
+                  props.addMagasin({ name: magname, logo: logo });
+                }
+              }}
               className=""
               name="Inserer"
               type="submit"
@@ -54,17 +58,15 @@ function Magasin(props) {
           <tr>
             <th>logo</th>
             <th>nom</th>
-            
           </tr>
           {props.magList ? (
             props.magList.map((e) => (
               <tr key={e.id}>
                 <td
                   className="carted-img"
-                  style={{ backgroundImage: `url( ${e.logo} )` }}
-                  ></td>
-                  <td>{e.nom}</td>
-                  
+                  style={{ backgroundImage: `url( http://localhost:3002/${e.logo} )` }}
+                ></td>
+                <td>{e.name}</td>
               </tr>
             ))
           ) : (
