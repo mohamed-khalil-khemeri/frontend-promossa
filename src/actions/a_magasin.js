@@ -25,7 +25,7 @@ export function getMagasin() {
 }
 /***********************  ADD_MAGASIN  *********************************** */
 export function addMagasin(payload) {
-    console.log("action dispatched ! magasin", payload);
+
     return (dispatch) => {
         const formData = new FormData();
         formData.append("logo", payload.logo);

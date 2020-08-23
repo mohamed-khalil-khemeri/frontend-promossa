@@ -62,12 +62,12 @@ function Article(props) {
           </div>
           <div>
             <input
-              onChange={(e) => setlogo(e.target.value)}
-              type="txt"
+              onChange={(e) => setlogo(e.target.files[0])}
+              type="file"
               className=""
               name="image"
               id="image"
-              placeholder="lien du l'image."
+              placeholder="upload image."
               required
             />
           </div>
@@ -82,8 +82,8 @@ function Article(props) {
               <option value="">select Categorie:</option>
               {props.catList ? (
                 props.catList.map((e) => (
-                  <option key={e.id} value={e.id}>
-                    {e.nom}
+                  <option key={e._id} value={e._id}>
+                    {e.name}
                   </option>
                 ))
               ) : (
@@ -96,11 +96,11 @@ function Article(props) {
               onClick={() => {
                 if (articlename !== "" && logo !== "" && dosage !=="" && volume !== "" && cat !== "") {
                   props.addArticle({
-                    nom: articlename,
+                    name: articlename,
                     logo: logo,
                     dosage: dosage,
-                    cat:cat,
-                    quantite : volume
+                    parent_id:cat,
+                    quantity : volume
                   });
                 }
               }}
@@ -116,8 +116,8 @@ function Article(props) {
         <table key="id" className="order-table">
           <tr>
             <th>logo</th>
-            <th>nom</th>
-            <th>volume</th>
+            <th>name</th>
+            <th>quantity</th>
             <th>categorie</th>
             
           </tr>
@@ -126,11 +126,11 @@ function Article(props) {
               <tr key={e.id}>
                 <td
                   className="carted-img"
-                  style={{ backgroundImage: `url( ${e.logo} )` }}
+                  style={{ backgroundImage: `url( http://localhost:3002/${e.logo} )` }}
                 ></td>
-                <td>{e.nom}</td>
-                <td>{e.quantite}</td>
-                <td>{e.cat}</td>
+                <td>{e.name}</td>
+                <td>{e.quantity}</td>
+                <td>{e.parent_id}</td>
                 
               </tr>
             ))

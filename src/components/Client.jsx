@@ -32,7 +32,7 @@ function Client(props) {
             props.removeFromCart(e.id);
           }}
         >
-          إحذف من السلة
+        enlever du cart
         </button>
       );
     } else {
@@ -44,7 +44,7 @@ function Client(props) {
           }}
         >
           {" "}
-          أضف إلى سلة المشتريات{" "}
+         ajouter au cart  {" "}
         </button>
       );
     }
@@ -54,33 +54,33 @@ function Client(props) {
     <div className="card-container">
 
         {props.categorie
-        .filter((e) => e.parent === categorieId)//categorie by parent
+        .filter((e) => e.parent_id === categorieId)//categorie by parent
         .map((e) => (
-          <div key={e.id} className="card">
-              <NavLink exact to={"/shop/"+e.id}  >
+          <div key={e._id} className="card">
+              <NavLink exact to={"/shop/"+e._id}  >
             <div
               className="image"
-              style={{ backgroundImage: `url( ${e.logo} )` }}
+              style={{ backgroundImage: `url( http://localhost:3002/${e.logo} )` }}
             ></div></NavLink>
             <div className="card-text">
-              <h4>{e.nom}</h4>
-              <h4>{` ${e.parent} دينار`}</h4>
+              <h4>{e.name}</h4>
+              
             </div>
             
           </div>
         ))}
         
       {active_article_list
-        .filter((e) => e.article.cat == categorieId)//article by parent
+        .filter((e) => e.article.parent_id == categorieId)//article by parent
         .map((e) => (
-          <div key={e.id} className="card">
+          <div key={e._id} className="card">
             <div
               className="image"
-              style={{ backgroundImage: `url( ${e.article.logo} )` }}
+              style={{ backgroundImage: `url( http://localhost:3002/${e.article.logo} )` }}
             ></div>
             <div className="card-text">
-              <h4>{e.article.nom}</h4>
-              <h4>{` ${e.pricing.newprice} دينار`}</h4>
+              <h4>{e.article.name}</h4>
+              <h4>{` ${e.pricing.newprice} tnd`}</h4>
             </div>
             {cartAddBtn(e)}
           </div>

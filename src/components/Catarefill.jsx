@@ -95,13 +95,13 @@ function Catarefill(props) {
 
   const get_article = () => {
     if (props.articleList && article) {
-      return props.articleList.filter((e) => e.id == article)[0];
+      return props.articleList.filter((e) => e._id == article)[0];
     }
   };
 
   const get_catalogue = () => {
     if (props.cataList && cataid) {
-      return props.cataList.filter((e) => e.id == cataid)[0];
+      return props.cataList.filter((e) => e._id == cataid)[0];
     }
   };
 
@@ -109,10 +109,12 @@ function Catarefill(props) {
     <>
       Insertion articles
       <div className="categorieContainer">
-        <form autocomplete="off">
+        <form autocomplete="off" onSubmit={e=>e.preventDefault()}>
           <div>
             <select
-              onChange={(e) => {setcatname(JSON.parse(e.target.value).arId)}}
+              onChange={(e) => {
+                setcatname(JSON.parse(e.target.value).arId);
+              }}
               name="catalist"
               id="catalist"
               className="myregselect"
@@ -120,17 +122,17 @@ function Catarefill(props) {
               required
             >
               <option value="">select categorie :</option>
-            
+
               {props.catList ? (
                 props.catList.map((e) => (
                   <option
                     key={e.id}
                     value={JSON.stringify({
-                      arId: `${e.id}`,
-                      nom: `${e.nom}`,
+                      arId: `${e._id}`,
+                      name: `${e.name}`,
                     })}
                   >
-                    {e.nom}
+                    {e.name}
                   </option>
                 ))
               ) : (
@@ -153,16 +155,16 @@ function Catarefill(props) {
               <option value="">select article:</option>
               {props.articleList ? (
                 props.articleList.map((e) => {
-                  if (e.cat === catname) {
+                  if (e.parent_id === catname) {
                     return (
                       <option
-                        key={e.id}
+                        key={e._id}
                         value={JSON.stringify({
-                          arId: `${e.id}`,
-                          nom: `${e.nom}`,
+                          arId: `${e._id}`,
+                          name: `${e.name}`,
                         })}
                       >
-                        {e.nom}
+                        {e.name}
                       </option>
                     );
                   }
@@ -274,9 +276,7 @@ function Catarefill(props) {
                   ancientprice !== "" &&
                   newprice !== ""
                 ) {
-                  props.addArticleToCatalogue({
-                    catalogue: get_catalogue(),
-                    cataid: cataid,
+                  props.addArticleToCatalogue(cataid, {
                     article: get_article(),
                     promo: get_promo(),
                     pricing: { ancientprice: ancientprice, newprice: newprice },
@@ -301,17 +301,19 @@ function Catarefill(props) {
           </tr>
           {props.articleList ? (
             props.articleList
-              .filter((e) => e.id == article)
+              .filter((e) => e._id == article)
               .map((e) => (
-                <tr key={e.id}>
+                <tr key={e._id}>
                   <td
                     className="carted-img"
-                    style={{ backgroundImage: `url( ${e.logo} )` }}
+                    style={{
+                      backgroundImage: `url( http://localhost:3002/${e.logo} )`,
+                    }}
                   ></td>
-                  <td>{e.nom}</td>
-                  <td>{e.cat}</td>
+                  <td>{e.name}</td>
+                  <td>{e.parent_id}</td>
                   <td>
-                    {e.volume} {e.dosage}
+                    {e.quantity} {e.dosage}
                   </td>
                 </tr>
               ))

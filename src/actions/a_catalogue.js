@@ -5,7 +5,7 @@ import Axios from 'axios';
 /***********************  getCatalogue  *********************************** */
 export const getCatalogue2 = (payload) => {
     console.log("GET_CATALOGUE called ", payload);
-    
+
     const action = {
         type: types.GET_CATALOGUE,
         payload,
@@ -15,7 +15,7 @@ export const getCatalogue2 = (payload) => {
 
 export function getCatalogue() {
 
-    return ((dispatch) => Axios.get("/catalogue", {
+    return ((dispatch) => Axios.get("/catalogues", {
         headers: {
             "Content-Type": "application/json"
         }
@@ -25,8 +25,9 @@ export function getCatalogue() {
 }
 /***********************  addCatalogue  *********************************** */
 export function addCatalogue(payload) {
-    
-    return ((dispatch) => Axios.post("/catalogue", payload, {
+    console.log("adddddddddd       called ! ", payload);
+
+    return ((dispatch) => Axios.post("/catalogues", payload, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -36,18 +37,21 @@ export function addCatalogue(payload) {
 }
 
 /***********************  addArticleToCatalogue  *********************************** */
-export function addArticleToCatalogue(payload) {
-    console.log("addArticleToCatalogue   called ! ",payload);
+export function addArticleToCatalogue(_id, payload) {
+    console.log("payload   called ! ", payload);
+    console.log("_id   called ! ", _id);
 
-    let updated_catalogue = {...payload.catalogue};
-    updated_catalogue.promoList = [...updated_catalogue.promoList,{"article" : {...payload.article},"promo" : {...payload.promo}, "pricing" : {...payload.pricing}}]
-
-    return ((dispatch) => Axios.put("/catalogue/"+payload.cataid, updated_catalogue, {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(res => {
-        dispatch(getCatalogue());
-    }))
+    return ((dispatch) =>
+        Axios
+            .post("/catalogues/promolist/" + _id, payload, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(res => {
+                dispatch(getCatalogue());
+            })
+            .catch(err => console.log("error : ", err))
+    )
 }
 

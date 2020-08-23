@@ -35,7 +35,7 @@ function Magasin(props) {
               name="logo"
               id="logo"
               placeholder="upload logo."
-              onChange={(e) => {console.log("files : ",e.target.files[0]);;setlogo(e.target.files[0])}}
+              onChange={(e) => {setlogo(e.target.files[0])}}
               required
             />
           </div>

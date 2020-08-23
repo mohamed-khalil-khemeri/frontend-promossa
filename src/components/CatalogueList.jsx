@@ -13,10 +13,10 @@ function CatalogueList(props) {
   let products = "";
 
   if (props.cataList) {
-    if (props.cataList.filter((el) => el.id == cataid)[0]) {
+    if (props.cataList.filter((el) => el._id == cataid)[0]) {
       console.log("catalist : ", props.cataList);
         console.log("cataid : ", cataid);
-        products = props.cataList.filter((el) => el.id == cataid)[0]
+        products = props.cataList.filter((el) => el._id == cataid)[0]
           .promoList;
         console.log("products : ", products);
     }
@@ -41,11 +41,11 @@ function CatalogueList(props) {
               <td
                 className="carted-img"
                 style={{
-                  backgroundImage: `url( ${e.article.logo} )`,
+                  backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
                 }}
               ></td>
-              <td>{e.article.nom}</td>
-              <td>{e.article.quantite}</td>
+              <td>{e.article.name}</td>
+              <td>{e.article.quantity}</td>
               <td>{e.promo.type}</td>
               <td>{JSON.stringify(e.promo)}</td>
               <td>{e.pricing.ancientprice}</td>

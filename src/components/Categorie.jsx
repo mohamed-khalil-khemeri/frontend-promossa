@@ -10,6 +10,7 @@ function Categorie(props) {
     props.getCategorie();
   }, []);
   const [catname, setcatname] = useState("");
+  const [dosage, setdosage] = useState("");
   const [parent, setparent] = useState("");
   const [logo, setlogo] = useState("");
   return (
@@ -31,6 +32,20 @@ function Categorie(props) {
           </div>
           <div>
             <select
+              onChange={(e) => setdosage(e.target.value)}
+              className="myregselect"
+              name="dosage"
+              id="dosage"
+              required
+            >
+              <option value="">Dosage:</option>
+              <option value="gramme">Gramme</option>
+              <option value="litre">Litre</option>
+              <option value="piece">piece</option>
+            </select>
+          </div>
+          <div>
+            <select
               onChange={(e) => setparent(e.target.value)}
               className="myregselect"
               name="dosage"
@@ -41,8 +56,8 @@ function Categorie(props) {
               <option value="0">niveau 0</option>
               {props.catList ? (
                 props.catList.map((e) => (
-                  <option key={e.id} value={e.nom}>
-                    {e.nom}
+                  <option key={e._id} value={e._id}>
+                    {e.name}
                   </option>
                 ))
               ) : (
@@ -53,22 +68,23 @@ function Categorie(props) {
 
           <div>
             <input
-              onChange={(e) => setlogo(e.target.value)}
-              type="txt"
+              onChange={(e) => setlogo(e.target.files[0])}
+              type="file"
               className=""
               name="image"
               id="image"
-              placeholder="lien du l'image."
+              placeholder="upload image."
               required
             />
           </div>
           <div>
             <button
               onClick={() => {
-                if (catname !== "" && parent !== "" && logo !== "") {
+                if (catname !== "" && dosage !== "" && parent !== "" && logo !== "") {
                   props.addCategorie({
-                    nom: catname,
-                    parent: parent,
+                    name: catname,
+                    dosage: dosage,
+                    parent_id: parent,
                     logo: logo,
                   });
                 }
@@ -94,10 +110,10 @@ function Categorie(props) {
               <tr key={e.id}>
                 <td
                   className="carted-img"
-                  style={{ backgroundImage: `url( ${e.logo} )` }}
+                  style={{ backgroundImage: `url( http://localhost:3002/${e.logo} )` }}
                 ></td>
-                <td>{e.nom}</td>
-                <td>{e.parent}</td>
+                <td>{e.name}</td>
+                <td>{e.parent_id}</td>
                 {/* <td>{e.logo}</td> */}
               </tr>
             ))

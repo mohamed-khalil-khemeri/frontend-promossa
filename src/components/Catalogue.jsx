@@ -29,15 +29,14 @@ function Catalogue(props) {
   const period_timout = (x) => {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-    
     const a = new Date();
     const b = new Date(x);
 
     const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
     const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
-    let p = ((utc2 - utc1) / _MS_PER_DAY);
-    
+    let p = (utc2 - utc1) / _MS_PER_DAY;
+
     if (p < 0) {
       return "expired";
     } else if (p == 0) {
@@ -54,7 +53,9 @@ function Catalogue(props) {
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <select
-              onChange={(e) => setmagname(e.target.value)}
+              onChange={(e) => {
+                setmagname(JSON.parse(e.target.value))
+              }}
               className="myregselect"
               name="dosage"
               id="dosage"
@@ -63,8 +64,13 @@ function Catalogue(props) {
               <option value="">select Magasin:</option>
               {props.magList ? (
                 props.magList.map((e) => (
-                  <option key={e.id} value={e.id}>
-                    {e.nom}
+                  <option
+                    key={e._id}
+                    value={JSON.stringify({
+                      e,
+                    })}
+                  >
+                    {e.name}
                   </option>
                 ))
               ) : (
@@ -117,31 +123,11 @@ function Catalogue(props) {
                   fin !== ""
                 ) {
                   props.addCatalogue({
-                    nom: cataname,
+                    name: cataname,
                     magasin: {
-                      nom: `${
-                        props.magList
-                          ? props.magList.filter(
-                              (el) => el.id === magname * 1
-                            )[0]
-                            ? props.magList.filter(
-                                (el) => el.id === magname * 1
-                              )[0].nom
-                            : null
-                          : null
-                      }`,
-                      logo: `${
-                        props.magList
-                          ? props.magList.filter(
-                              (el) => el.id === magname * 1
-                            )[0]
-                            ? props.magList.filter(
-                                (el) => el.id === magname * 1
-                              )[0].logo
-                            : null
-                          : null
-                      }`,
-                      id: magname,
+                      name: magname.e.name,
+                      logo: magname.e.logo,
+                      _id: magname.e._id,
                     },
                     period: { debut: debut, fin: fin },
                     promoList: [],
@@ -171,35 +157,20 @@ function Catalogue(props) {
           </tr>
           {props.cataList ? (
             props.cataList.map((e) => (
-              <tr key={e.id}>
-                <td
-                  className="carted-img"
-                  style={{
-                    backgroundImage: `url( ${
-                      props.magList
-                        ? props.magList.filter(
-                            (el) => el.id === e.magasin.id * 1
-                          )[0]
-                          ? props.magList.filter(
-                              (el) => el.id === e.magasin.id * 1
-                            )[0].logo
-                          : null
-                        : null
-                    } )`,
-                  }}
-                ></td>
-                <td>
-                  {props.magList
-                    ? props.magList.filter(
-                        (el) => el.id === e.magasin.id * 1
-                      )[0]
-                      ? props.magList.filter(
-                          (el) => el.id === e.magasin.id * 1
-                        )[0].nom
-                      : null
-                    : null}
-                </td>
-                <td>{e.nom}</td>
+              <tr key={e._id}>
+                {e.magasin ? (
+                  <>
+                    {" "}
+                    <td
+                      className="carted-img"
+                      style={{
+                        backgroundImage: `url(http://localhost:3002/${e.magasin.logo} )`,
+                      }}
+                    ></td>
+                    <td>{e.magasin.name}</td>
+                  </>
+                ) : null}
+                <td>{e.name}</td>
                 <td>{e.period.debut}</td>
                 <td>{e.period.fin}</td>
                 <td>{period(e.period.debut, e.period.fin)} jours</td>
@@ -207,7 +178,7 @@ function Catalogue(props) {
                 <td>
                   <NavLink
                     exact
-                    to={{ pathname: `/catarefill/${e.id}` }}
+                    to={{ pathname: `/catarefill/${e._id}` }}
                     className="normal-sidebar"
                     activeClassName="active-sidebar"
                   >
@@ -217,7 +188,7 @@ function Catalogue(props) {
                 <td>
                   <NavLink
                     exact
-                    to={{ pathname: `/CatalogueList/${e.id}` }}
+                    to={{ pathname: `/CatalogueList/${e._id}` }}
                     className="normal-sidebar"
                     activeClassName="active-sidebar"
                   >
