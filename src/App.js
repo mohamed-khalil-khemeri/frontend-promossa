@@ -26,6 +26,7 @@ import Catalogue from "./components/Catalogue"
 import { getCategorie } from "./actions/a_categorie";
 import { getCatalogue } from "./actions/a_catalogue";
 import { set_active_article_list } from "./actions/a_active_article_list";
+import { get_current_user } from './actions/a_current_user'
 
 
 function App(props) {
@@ -33,6 +34,7 @@ function App(props) {
   useEffect(() => {
     props.getCategorie();
     props.getCatalogue();
+    props.get_current_user();
   }, []);
 
   const period_timout = (x) => {
@@ -211,7 +213,8 @@ export default connect(
   (state => {
     return {
       cataList: state.r_catalogue,
+      user: state.r_current_user,
     }
   }),
-  { getCategorie, getCatalogue, set_active_article_list })
+  { getCategorie, getCatalogue, set_active_article_list, get_current_user })
   (App);

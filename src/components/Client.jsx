@@ -12,12 +12,11 @@ function Client(props) {
   }, []);
 
   let { categorieId } = useParams();
-  console.log("categorieId : ",categorieId);
+  console.log("categorieId : ", categorieId);
 
-//   const getCategorieName = () => {
-//     return props.categorie.filter(e=> e.id == categorieId).nom  
-//   }
-
+  //   const getCategorieName = () => {
+  //     return props.categorie.filter(e=> e.id == categorieId).nom
+  //   }
 
   //const [filter_key, set_filter_key] = useState("active");
 
@@ -32,7 +31,7 @@ function Client(props) {
             props.removeFromCart(e.id);
           }}
         >
-        enlever du cart
+          enlever du cart
         </button>
       );
     } else {
@@ -44,7 +43,7 @@ function Client(props) {
           }}
         >
           {" "}
-         ajouter au cart  {" "}
+          ajouter au cart{" "}
         </button>
       );
     }
@@ -52,31 +51,40 @@ function Client(props) {
 
   return (
     <div className="card-container">
-
-        {props.categorie
-        .filter((e) => e.parent_id === categorieId)//categorie by parent
+      {props.categorie
+        .filter((e) => e.parent_id === categorieId) //categorie by parent
         .map((e) => (
           <div key={e._id} className="card">
-              <NavLink exact to={"/shop/"+e._id}  >
-            <div
-              className="image"
-              style={{ backgroundImage: `url( http://localhost:3002/${e.logo} )` }}
-            ></div></NavLink>
+            <NavLink exact to={"/shop/" + e._id}>
+              <div
+                className="image"
+                style={{
+                  backgroundImage: `url( http://localhost:3002/${e.logo} )`,
+                }}
+              ></div>
+            </NavLink>
             <div className="card-text">
               <h4>{e.name}</h4>
-              
             </div>
-            
           </div>
         ))}
-        
-      {active_article_list
-        .filter((e) => e.article.parent_id == categorieId)//article by parent
+
+      {/* {active_article_list
+        .filter((e) => e.article.parent_id == categorieId) //article by parent
+        .map((e) => {
+          e.article.unity = (e.pricing.newprice * 1) / (e.article.quantity * 1);
+          return e;
+        })
+        .sort(function (a, b) {
+          return a.article.unity - b.article.unity;
+        })
         .map((e) => (
           <div key={e._id} className="card">
             <div
               className="image"
-              style={{ backgroundImage: `url( http://localhost:3002/${e.article.logo} )` }}
+              style={{
+                backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
+              }}
             ></div>
             <div className="card-text">
               <h4>{e.article.name}</h4>
@@ -84,7 +92,42 @@ function Client(props) {
             </div>
             {cartAddBtn(e)}
           </div>
-        ))}
+        ))} */}
+{active_article_list
+        .filter((e) => e.article.parent_id == categorieId).length !== 0 ?
+<table className="order-table">
+          <tr>
+            <th>prix du 1 g</th>
+            <th>article</th>
+          </tr>
+          {active_article_list
+        .filter((e) => e.article.parent_id == categorieId) //article by parent
+        .map((e) => {
+          e.article.unity = (e.pricing.newprice * 1) / (e.article.quantity * 1);
+          return e;
+        })
+        .sort(function (a, b) {
+          return a.article.unity - b.article.unity;
+        }).map((e) => (
+          <tr>
+            <td>{e.article.unity}</td>
+            <td>
+          <div key={e._id} className="card special">
+            <div
+              className="image"
+              style={{
+                backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
+              }}
+            ></div>
+            <div className="card-text">
+              <h4>{e.article.name}</h4>
+              <h4>{` ${e.pricing.newprice} tnd`}</h4>
+            </div>
+            {cartAddBtn(e)}
+          </div></td></tr>
+          ))}
+        </table>
+        : null}
     </div>
   );
 }
@@ -97,7 +140,6 @@ export default connect(
 
       carted: state.r_cart,
       user: state.r_users,
-
     };
   },
   { getCategorie, addToCart, removeFromCart }

@@ -136,3 +136,12 @@
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   font-size: 20px;
 }
+
+/*ordered_cards*/
+/* .special {
+  display: table-cell;
+} */
+
+.order-table div {
+  display: table-cell !important;
+}
