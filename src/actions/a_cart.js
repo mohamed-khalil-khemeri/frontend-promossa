@@ -79,3 +79,6 @@ export function sendOrder(order, user) {
         dispatch(sendOrder2(valid_order));
     }))
 }
+
+
+

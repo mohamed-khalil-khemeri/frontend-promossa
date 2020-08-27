@@ -1,4 +1,4 @@
-body {
+/* body {
   height: 100vh;
   background: radial-gradient(
     circle at 30% 107%,
@@ -8,6 +8,11 @@ body {
     #d6249f 60%,
     #285aeb 90%
   );
+  background-attachment: fixed;
+} */
+body {
+  height: 100vh;
+  background: white;
   background-attachment: fixed;
 }
 input,

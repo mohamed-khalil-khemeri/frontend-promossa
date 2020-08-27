@@ -121,7 +121,16 @@ function Client(props) {
             ></div>
             <div className="card-text">
               <h4>{e.article.name}</h4>
-              <h4>{` ${e.pricing.newprice} tnd`}</h4>
+              <h4>{`Prix : ${e.pricing.newprice} tnd`}</h4>
+              <h4>{`Magasin : ${e.magasin.name}`}</h4>
+              <div
+              className="image"
+              style={{
+                backgroundImage: `url( http://localhost:3002/${e.magasin.logo} )`,
+              }}
+            ></div>
+              <h4>{`fin promo : ${e.period.fin}`}</h4>
+
             </div>
             {cartAddBtn(e)}
           </div></td></tr>

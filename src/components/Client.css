@@ -138,9 +138,9 @@
 }
 
 /*ordered_cards*/
-/* .special {
-  display: table-cell;
-} */
+.special {
+ width: 500px;
+}
 
 .order-table div {
   display: table-cell !important;

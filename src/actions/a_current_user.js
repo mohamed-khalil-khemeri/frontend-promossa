@@ -69,7 +69,7 @@ export function get_current_user() {
     const token = await localStorage.getItem("token");
     if (token) {
       const payload = await JwtDecode(token);
-      dispatch(loginUser2(payload))
+      dispatch(loginUser3(payload))
     }
 
   }

@@ -8,7 +8,7 @@ import Register from "./components/Register";
 import Sidebar from "./components/Sidebar";
 import Client from "./components/Client";
 import ConfirmEmail from "./components/ConfirmEmail";
-// import NavBar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 // import Sidebar from './components/Sidebar';
 // import Testimonials from './components/Testimonials';
 // import Footer from './components/Footer';
@@ -65,7 +65,8 @@ function App(props) {
     let Vactive_catalogues = active_catalogues();
     let active_article_list = [];
     Vactive_catalogues.forEach(e => {
-      active_article_list = [...active_article_list, ...e.promoList];
+      let new_promolist = e.promoList.map(el=> {return {...el,magasin : e.magasin, period : e.period}})
+      active_article_list = [...active_article_list, ...new_promolist];
     });
     return active_article_list;
 
@@ -78,6 +79,7 @@ function App(props) {
   return (
     <>
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/" render={() => (
             <div className="app-container">
