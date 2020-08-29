@@ -109,6 +109,8 @@
 .modal{
     direction: rtl;
     position: fixed;
+    justify-content: center;
+    align-items: center;
     top: 0;
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -184,11 +186,13 @@
 .carted-m{
   /* width: 70%;
   height: 600px; */
+  overflow: auto;
   border-radius: 10px;
   position: absolute;
-  top: 50%;
+  max-height: 90%;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   padding: 20px;
   background-color: white;
 }

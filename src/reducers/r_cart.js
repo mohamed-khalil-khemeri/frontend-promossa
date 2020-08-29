@@ -10,17 +10,14 @@ const r_cart = (state = [], action) => {
         return [...state, action.el]
 
     } else if (action.type === types.REMOVE_FROM_CART) {
-        return state.filter(e => e.id !== action.id)
+        return state.filter(e => e._id !== action._id)
 
     } else if (action.type === types.SET_QUANTITY) {
         return state.map(e => {
-            if (e.id === action.id) {
+            if (e._id === action._id) {
                 e.quantity = action.quantity; return e
             } else { return e }
         });
-    } else if (action.type === types.REMOVE_FROM_CART) {
-        return state.filter(e => e.id !== action.id)
-
     } else if (action.type === types.SEND_ORDER) {
         return []
     } else {

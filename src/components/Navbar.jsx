@@ -99,7 +99,7 @@ function Navbar(props) {
   };
   let total = (x) => {
     if (x.length != 0) {
-      return x.map((e) => e.price * e.quantity).reduce((t, e) => t + e);
+      return x.map((e) => e.pricing.newprice * e.quantity).reduce((t, e) => t + e);
     } else {
       return 0;
     }
@@ -144,7 +144,7 @@ function Navbar(props) {
               className="cart"
               onClick={() => {
                 console.log("Open carted");
-                setmDisplay3("block");
+                setmDisplay3("flex");
               }}
             >
               <i className="fa fa-shopping-cart" aria-hidden="true">
@@ -249,29 +249,29 @@ function Navbar(props) {
                   <th>حذف الطبق</th>
                 </tr>
                 {props.carted.map((e) => (
-                  <tr key={e.id}>
+                  <tr key={e._id}>
                     <td
                       className="carted-img"
-                      style={{ backgroundImage: `url( ${e.img} )` }}
+                      style={{ backgroundImage: `url( http://localhost:3002/${e.article.logo} )` }}
                     ></td>
-                    <td>{e.title}</td>
-                    <td>{e.price}</td>
+                    <td>{e.article.name}</td>
+                    <td>{e.pricing.newprice}</td>
                     <td>
                       {" "}
                       <input
                         className="order-dish-quantity"
                         min="1"
                         onChange={(a) => {
-                          props.setQuantity(e.id, a.target.value * 1);
+                          props.setQuantity(e._id, a.target.value * 1);
                         }}
                         defaultValue={e.quantity}
                         type="number"
                       ></input>
                     </td>
-                    <td>{e.quantity * e.price}</td>
+                    <td>{e.quantity * e.pricing.newprice}</td>
                     <td>
                       <button
-                        onClick={(a) => props.removeFromCart(e.id)}
+                        onClick={(a) => props.removeFromCart(e._id)}
                         className="remove-item"
                       >
                         إحذف من السلة

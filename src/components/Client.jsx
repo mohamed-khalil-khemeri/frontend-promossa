@@ -23,12 +23,12 @@ function Client(props) {
   let active_article_list = [...props.active_article_list];
 
   const cartAddBtn = (e) => {
-    if (props.carted.map((a) => a.id).includes(e.id) === true) {
+    if (props.carted.map((a) => a._id).includes(e._id) === true) {
       return (
         <button
           className="carted"
           onClick={(a) => {
-            props.removeFromCart(e.id);
+            props.removeFromCart(e._id);
           }}
         >
           enlever du cart
@@ -40,6 +40,7 @@ function Client(props) {
           className="notCarted"
           onClick={(a) => {
             props.addToCart(e);
+            console.log("e : ",e);
           }}
         >
           {" "}

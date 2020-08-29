@@ -16,20 +16,20 @@ export const addToCart = (element) => {
 }
 /***********************remove from cart action package*********************************** */
 
-export const removeFromCart = (id) => {
+export const removeFromCart = (_id) => {
     const action = {
         type: types.REMOVE_FROM_CART,
-        id
+        _id
     }
     console.log("action REMOVE_FROM_CART called : ", action);
     return action;
 }
 /***********************set quantity action package*********************************** */
 
-export const setQuantity = (id, quantity) => {
+export const setQuantity = (_id, quantity) => {
     const action = {
         type: types.SET_QUANTITY,
-        id,
+        _id,
         quantity
     }
     console.log("action SET_QUANTITY called : ", action);
