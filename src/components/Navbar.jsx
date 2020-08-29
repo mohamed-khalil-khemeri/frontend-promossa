@@ -25,8 +25,12 @@ function Navbar(props) {
   const [displayLogin, setDisplayLogin] = useState("none");
   const [displayLogout, setDisplayLogout] = useState("block");
   //const [quantity, setQuantity] = useState(1);
+  const digit_display = (e) => {
+    return (e + "").replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
+  };
+
   const displaylogreg = () => {
-      console.log("props.user : ",props.user);
+    console.log("props.user : ", props.user);
     if (props.user !== "none") {
       setDisplayLogin("none");
       setDisplayLogout("block");
@@ -99,7 +103,9 @@ function Navbar(props) {
   };
   let total = (x) => {
     if (x.length != 0) {
-      return x.map((e) => e.pricing.newprice * e.quantity).reduce((t, e) => t + e);
+      return x
+        .map((e) => e.pricing.newprice * e.quantity)
+        .reduce((t, e) => t + e);
     } else {
       return 0;
     }
@@ -129,13 +135,17 @@ function Navbar(props) {
               <div>{MrClient}</div>
               {/* <div style={{display:displayLogin}} className="auth-login" onClick={Ologin}>دخول</div> */}
               <div style={{ display: displayLogin }} className="auth-login">
-                <NavLink style={{ textDecoration: 'none' }} exact to={"/login"}>
+                <NavLink style={{ textDecoration: "none" }} exact to={"/login"}>
                   دخول
                 </NavLink>
               </div>
               {/* <div style={{display:displayLogin}} className="auth-register" onClick={Oregister}>تسجيل</div> */}
               <div style={{ display: displayLogin }} className="auth-register">
-                <NavLink style={{ textDecoration: 'none' }} exact to={"/register"}>
+                <NavLink
+                  style={{ textDecoration: "none" }}
+                  exact
+                  to={"/register"}
+                >
                   تسجيل
                 </NavLink>
               </div>
@@ -223,7 +233,7 @@ function Navbar(props) {
         onClick={(e) => cancel(e)}
         style={{ display: mDisplay3 }}
       >
-        <div className="carted-m">
+        <div className="carted-m ofx">
           {props.carted.length === 0 ? (
             <div className="empty-cart">
               <p>سلة المشتريات فارغة</p>
@@ -251,11 +261,30 @@ function Navbar(props) {
                 {props.carted.map((e) => (
                   <tr key={e._id}>
                     <td
-                      className="carted-img"
-                      style={{ backgroundImage: `url( http://localhost:3002/${e.article.logo} )` }}
-                    ></td>
+                      className="carted-img white-back"
+                      style={{
+                        backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
+                      }}
+                    >
+                      <span className="promo-span">
+                        {e.promo.type == "SIMPLE_PERCENTAGE"
+                          ? e.promo.pourcentage + "%"
+                          : e.promo.type == "BUY_X_GET_Y_FREE"
+                          ? e.promo.buy_x + "+" + e.promo.y_free + "gratuit"
+                          : e.promo.type == "EXTRA_QUANTITY"
+                          ? "extra " + e.promo.extra
+                          : null}
+                      </span>
+                      <img
+                        className="magasin-img"
+                        src={`http://localhost:3002/${e.magasin.logo}`}
+                        alt="magasin"
+                      />
+                    </td>
                     <td>{e.article.name}</td>
-                    <td>{e.pricing.newprice}</td>
+                    <td>
+                      {e.pricing.newprice.replace(/(\d)(?=(\d{3})+$)/g, "$1 ")}
+                    </td>
                     <td>
                       {" "}
                       <input
@@ -268,7 +297,7 @@ function Navbar(props) {
                         type="number"
                       ></input>
                     </td>
-                    <td>{e.quantity * e.pricing.newprice}</td>
+                    <td>{digit_display(e.quantity * e.pricing.newprice)}</td>
                     <td>
                       <button
                         onClick={(a) => props.removeFromCart(e._id)}
@@ -282,7 +311,7 @@ function Navbar(props) {
               </table>
               <div className="total">
                 <h4>الثمن الجملي :</h4>
-                <p>{total(props.carted)}</p>
+                <p>{digit_display(total(props.carted))}</p>
                 <p>دينار </p>
               </div>
               {props.user === "none" ? (
@@ -331,9 +360,7 @@ function Navbar(props) {
                         cancel(e);
                       }}
                       className="confirm-o"
-                    >
-                      تأكيد الطلب
-                    </button>
+                    >sauvegarder votre liste</button>
                     <button
                       ref={(e) => (cancelButton3 = e)}
                       onClick={(e) => cancel(e)}
