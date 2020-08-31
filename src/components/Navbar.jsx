@@ -116,8 +116,11 @@ function Navbar(props) {
       <div className="navbar-container">
         <div className="navbar-inner-container">
           <div className="logo">
-            <i className="fa fa-rebel" aria-hidden="true"></i> مطعم السلطان{" "}
-            <i className="fa fa-rebel" aria-hidden="true"></i>
+            {" "}
+            <NavLink style={{ textDecoration: "none" }} to="/shop/0">
+              <i className="fa fa-rebel" aria-hidden="true"></i> مطعم السلطان{" "}
+              <i className="fa fa-rebel" aria-hidden="true"></i>
+            </NavLink>
           </div>
           <div className="right-side">
             <div className="menu">
@@ -321,7 +324,7 @@ function Navbar(props) {
                     واحدا !{" "}
                   </p>
                   <div className="carted-btns">
-                    <button
+                    {/* <button
                       ref={(e) => (cancelButton4 = e)}
                       onClick={(e) => {
                         cancel(e);
@@ -330,17 +333,30 @@ function Navbar(props) {
                       className="confirm-o"
                     >
                       تسجيل حساب جديد
-                    </button>
-                    <button
+                    </button> */}
+
+                    <NavLink
+                    ref={(e) => (cancelButton4 = e)}
+                      onClick={(e) => {
+                        cancel(e);
+                      }}
+                      className="confirm-o"
+                      to="/register"
+                    >
+                      enregistrer
+                    </NavLink>
+
+                    <NavLink
+                    to="/login"
                       ref={(e) => (submitButton3 = e)}
                       onClick={(e) => {
                         cancel(e);
-                        Ologin();
+                        
                       }}
                       className="confirm-o"
                     >
                       الدخول إلى حسابك
-                    </button>
+                    </NavLink>
                     <button
                       ref={(e) => (cancelButton3 = e)}
                       onClick={(e) => cancel(e)}
@@ -360,7 +376,9 @@ function Navbar(props) {
                         cancel(e);
                       }}
                       className="confirm-o"
-                    >sauvegarder votre liste</button>
+                    >
+                      sauvegarder votre liste
+                    </button>
                     <button
                       ref={(e) => (cancelButton3 = e)}
                       onClick={(e) => cancel(e)}

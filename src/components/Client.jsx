@@ -56,17 +56,17 @@ function Client(props) {
         .filter((e) => e.parent_id === categorieId) //categorie by parent
         .map((e) => (
           <div key={e._id} className="card">
-            <NavLink exact to={"/shop/" + e._id}>
+            <NavLink  style={{ textDecoration: "none",color:"black"}} exact to={"/shop/" + e._id}>
               <div
                 className="image"
                 style={{
                   backgroundImage: `url( http://localhost:3002/${e.logo} )`,
                 }}
               ></div>
-            </NavLink>
             <div className="card-text">
               <h4>{e.name}</h4>
             </div>
+            </NavLink>
           </div>
         ))}
 
@@ -171,7 +171,6 @@ function Client(props) {
             <th>صورة الطبق</th>
             <th>الطبق</th>
             <th>سعر الطبق الواحد</th>
-            <th> كمية الأطباق</th>
             <th>ثمن أطباق</th>
             <th>حذف الطبق</th>
           </tr>

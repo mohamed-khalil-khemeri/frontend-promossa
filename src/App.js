@@ -27,6 +27,7 @@ import { getCategorie } from "./actions/a_categorie";
 import { getCatalogue } from "./actions/a_catalogue";
 import { set_active_article_list } from "./actions/a_active_article_list";
 import { get_current_user } from './actions/a_current_user'
+import Home from './components/Home';
 
 
 function App(props) {
@@ -65,7 +66,7 @@ function App(props) {
     let Vactive_catalogues = active_catalogues();
     let active_article_list = [];
     Vactive_catalogues.forEach(e => {
-      let new_promolist = e.promoList.map(el=> {return {...el,magasin : e.magasin, period : e.period}})
+      let new_promolist = e.promoList.map(el => { return { ...el, magasin: e.magasin, period: e.period } })
       active_article_list = [...active_article_list, ...new_promolist];
     });
     return active_article_list;
@@ -80,37 +81,55 @@ function App(props) {
     <>
       <Router>
         <Navbar />
-        <Switch>
-          <Route exact path="/" render={() => (
-            <div className="app-container">
-              <div>
-                <NavLink exact to="/admin" className="normal-sidebar" activeClassName="active-sidebar" >ADMIN</NavLink>
-                <NavLink exact to="/login" className="normal-sidebar" activeClassName="active-sidebar" >Login</NavLink>
-                <NavLink exact to="/shop/0" className="normal-sidebar" activeClassName="active-sidebar" >Client Front !</NavLink>
+        {console.log("userjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj : ", props.user)}
+        {props.user ?
+          props.user == "none" ?
+            <Switch>
+              <Route exact path="/" component={Home} />
 
+              {/* <Route exact path="/" render={() => (
+                <div className="app-container">
+                  <div>
+                    <NavLink exact to="/admin" className="normal-sidebar" activeClassName="active-sidebar" >ADMIN</NavLink>
+                    <NavLink exact to="/login" className="normal-sidebar" activeClassName="active-sidebar" >Login</NavLink>
+                    <NavLink exact to="/shop/0" className="normal-sidebar" activeClassName="active-sidebar" >Client Front !</NavLink>
+
+                  </div>
+                </div>
+              )} /> */}
+
+              <Route exact path="/verifyEmail" render={() => (
+                <div className="vContainer">
+                  <div className="verifyEmail">
+                    first step is done ,Second step : please go to your email inbox or spam folder then click on the link
               </div>
-            </div>
-          )} />
-
-          <Route exact path="/verifyEmail" render={() => (
-            <div className="vContainer">
-              <div className="verifyEmail">
-                first step is done ,Second step : please go to your email inbox or spam folder then click on the link
-              </div>
-            </div>
-          )} />
+                </div>
+              )} />
 
 
 
 
 
-          <Route exact path="/confirmEmail/:id" component={ConfirmEmail} />
-          <Route exact path="/shop/:categorieId" component={Client} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route component={Admin} />
-        </Switch>
+              <Route exact path="/confirmEmail/:id" component={ConfirmEmail} />
+              <Route exact path="/shop/:categorieId" component={Client} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Redirect to="/" />
+            </Switch>
+            : props.user.role == "client" ?
+              <Switch>
+                <Route exact path="/:categorieId" component={Client} />
+                <Redirect to="/" />
+              </Switch>
+              : props.user.role == "admin" ?
+                <Switch>
 
+                  <Route exact path="/shop/:categorieId" component={Client} />
+                  <Route component={Admin} />
+                </Switch>
+                : null : null
+
+        }
       </Router>
     </>
   )
