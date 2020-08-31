@@ -81,7 +81,7 @@ function App(props) {
     <>
       <Router>
         <Navbar />
-        {console.log("userjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj : ", props.user)}
+        {console.log("userj : ", props.user)}
         {props.user ?
           props.user == "none" ?
             <Switch>
@@ -118,14 +118,15 @@ function App(props) {
             </Switch>
             : props.user.role == "client" ?
               <Switch>
+                <Route exact path="/" component={Home} />
                 <Route exact path="/:categorieId" component={Client} />
                 <Redirect to="/" />
               </Switch>
               : props.user.role == "admin" ?
                 <Switch>
-
+                  {/* <Route exact path="/" component={Home} /> */}
                   <Route exact path="/shop/:categorieId" component={Client} />
-                  <Route component={Admin} />
+                  <Route path="/" component={Admin} />
                 </Switch>
                 : null : null
 

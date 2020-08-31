@@ -51,26 +51,45 @@ function Client(props) {
   };
 
   return (
-    <div className="card-container">
-      {props.categorie
-        .filter((e) => e.parent_id === categorieId) //categorie by parent
-        .map((e) => (
-          <div key={e._id} className="card">
-            <NavLink  style={{ textDecoration: "none",color:"black"}} exact to={"/shop/" + e._id}>
-              <div
-                className="image"
-                style={{
-                  backgroundImage: `url( http://localhost:3002/${e.logo} )`,
-                }}
-              ></div>
-            <div className="card-text">
-              <h4>{e.name}</h4>
+    <>
+    {/* {console.log("logo",props.categorie?props.categorie.filter(e=>e._id == categorieId) : "jjj")} */}
+      <div className="hero-categorie">
+        <div className="hero-categorie-inner"
+          style=
+          {{
+            backgroundImage: `url( http://localhost:3002/${
+              props.categorie?
+              props.categorie.filter(e=>e._id == categorieId)?
+              props.categorie.filter(e=>e._id == categorieId)[0]?
+              props.categorie.filter(e=>e._id == categorieId)[0].logo
+              :"null":"null":"null"} )`,
+          }} >
+        </div>
+      </div>
+      <div className="card-container">
+        {props.categorie
+          .filter((e) => e.parent_id === categorieId) //categorie by parent
+          .map((e) => (
+            <div key={e._id} className="card">
+              <NavLink
+                style={{ textDecoration: "none", color: "black" }}
+                exact
+                to={"/shop/" + e._id}
+              >
+                <div
+                  className="image"
+                  style={{
+                    backgroundImage: `url( http://localhost:3002/${e.logo} )`,
+                  }}
+                ></div>
+                <div className="card-text">
+                  <h4>{e.name}</h4>
+                </div>
+              </NavLink>
             </div>
-            </NavLink>
-          </div>
-        ))}
+          ))}
 
-      {/* {active_article_list
+        {/* {active_article_list
         .filter((e) => e.article.parent_id == categorieId) //article by parent
         .map((e) => {
           e.article.unity = (e.pricing.newprice * 1) / (e.article.quantity * 1);
@@ -95,8 +114,8 @@ function Client(props) {
           </div>
         ))} */}
 
-      {/* ancien article affichage */}
-      {/* {active_article_list.filter((e) => e.article.parent_id == categorieId)
+        {/* ancien article affichage */}
+        {/* {active_article_list.filter((e) => e.article.parent_id == categorieId)
         .length !== 0 ? (
         <table className="order-table">
           <tr>
@@ -162,59 +181,66 @@ function Client(props) {
         </table>
       ) : null} */}
 
-      {/* new table from carted section */}
-      {active_article_list.filter((e) => e.article.parent_id == categorieId)
-        .length !== 0 ? (
-        <table className="carted-table">
-          <tr>
-            <th>prix du 1 g</th>
-            <th>صورة الطبق</th>
-            <th>الطبق</th>
-            <th>سعر الطبق الواحد</th>
-            <th>ثمن أطباق</th>
-            <th>حذف الطبق</th>
-          </tr>
-          {active_article_list
-            .filter((e) => e.article.parent_id == categorieId) //article by parent
-            .map((e) => {
-              e.article.unity =
-                (e.pricing.newprice * 1) / (e.article.quantity * 1);
-              return e;
-            })
-            .sort(function (a, b) {
-              return a.article.unity - b.article.unity;
-            })
-            .map((e) => (
-              <tr key={e._id}>
-                <td>{e.article.unity.toFixed(2)}</td>
-                <td className="white-back"> 
-                  <div className="carted-img"
-                  style={{
-                    backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
-                  }}>
-                  <span className="promo-span">{e.promo.type == "SIMPLE_PERCENTAGE" ?
-                  e.promo.pourcentage + "%" : e.promo.type == "BUY_X_GET_Y_FREE" ?
-                   e.promo.buy_x + "+" + e.promo.y_free + "gratuit":e.promo.type == "EXTRA_QUANTITY" ?
-                  "extra " + e.promo.extra : null }</span>
-                  <img
-                    className="magasin-img"
-                    src= {`http://localhost:3002/${e.magasin.logo}`}
-                    alt="magasin"
-                  />
-                  </div>
-                   
-                </td>
-                <td>{e.article.name}</td>
-                <td>
-                  {e.pricing.newprice.replace(/(\d)(?=(\d{3})+$)/g, "$1 ")}
-                </td>
-                <td>{e.period.fin}</td>
-                <td>{cartAddBtn(e)}</td>
-              </tr>
-            ))}
-        </table>
-      ) : null}
-    </div>
+        {/* new table from carted section */}
+        {active_article_list.filter((e) => e.article.parent_id == categorieId)
+          .length !== 0 ? (
+          <table className="carted-table">
+            <tr>
+              <th>ratio prix/quantité</th>
+              <th>article</th>
+              <th>Nom</th>
+              <th>Prix unitaire</th>
+              <th>Fin promotion</th>
+              <th>Ajout à votre liste</th>
+            </tr>
+            {active_article_list
+              .filter((e) => e.article.parent_id == categorieId) //article by parent
+              .map((e) => {
+                e.article.unity =
+                  (e.pricing.newprice * 1) / (e.article.quantity * 1);
+                return e;
+              })
+              .sort(function (a, b) {
+                return a.article.unity - b.article.unity;
+              })
+              .map((e) => (
+                <tr key={e._id}>
+                  <td>{e.article.unity.toFixed(2)}</td>
+                  <td className="white-back">
+                    <div
+                      className="carted-img"
+                      style={{
+                        backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
+                      }}
+                    >
+                      <span className="promo-span">
+                        {e.promo.type == "SIMPLE_PERCENTAGE"
+                          ? e.promo.pourcentage + "%"
+                          : e.promo.type == "BUY_X_GET_Y_FREE"
+                          ? e.promo.buy_x + "+" + e.promo.y_free + "gratuit"
+                          : e.promo.type == "EXTRA_QUANTITY"
+                          ? "extra " + e.promo.extra
+                          : null}
+                      </span>
+                      <img
+                        className="magasin-img"
+                        src={`http://localhost:3002/${e.magasin.logo}`}
+                        alt="magasin"
+                      />
+                    </div>
+                  </td>
+                  <td>{e.article.name}</td>
+                  <td>
+                    {e.pricing.newprice.replace(/(\d)(?=(\d{3})+$)/g, "$1 ")}
+                  </td>
+                  <td>{e.period.fin}</td>
+                  <td>{cartAddBtn(e)}</td>
+                </tr>
+              ))}
+          </table>
+        ) : null}
+      </div>
+    </>
   );
 }
 

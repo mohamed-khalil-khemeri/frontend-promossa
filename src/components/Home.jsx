@@ -12,7 +12,7 @@ function Article(props) {
     props.getArticle();
   }, []);
 
-  const favHome = ["0"];
+  const favHome = ["5f42ce5118c5ea5b19c9c181"];
 
   const [searchcat, setsearchcat] = useState("");
   const [logo, setlogo] = useState("");
@@ -37,22 +37,21 @@ function Article(props) {
               onChange={(e) => 
                 {setsearchcat(e.target.value)}}
               type="text"
-              placeholder="search in different categories"
+              placeholder="trouver la categorie du votre article exp : thon , hrissa"
             />
             <ul>
               {searchcat !== ""
                 ? props.catList
                     .filter((e) => (e.name).toLocaleLowerCase() == (searchcat).toLocaleLowerCase())
-                    .map((e) => <li key={e._id}>{e.name}</li>)
+                    .map((e) => <NavLink to={"/shop/"+e._id}><li key={e._id}>{e.name}</li></NavLink>    )
                 : null}
             </ul>
           </div>
-          <button type="submit">Search</button>
         </div>
         <div className="home-page-featured-categories">
           {props.catList
             ? props.catList
-                .filter((el) => favHome.includes(el.parent_id))
+                .filter((el) => favHome.includes(el._id))
                 .map((el) => (
                   <div>
                     <NavLink

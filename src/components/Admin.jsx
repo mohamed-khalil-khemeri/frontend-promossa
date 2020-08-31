@@ -15,6 +15,7 @@ import Magasin from "./Magasin";
 import Article from "./Article";
 import Catarefill from "./Catarefill";
 import CatalogueList from "./CatalogueList";
+import Home from "./Home";
 
 function Admin(props) {
   return (
@@ -23,6 +24,7 @@ function Admin(props) {
         <div className="app-inner-container">
           <div className="app-inner-inner-container">
             <Switch>
+            <Route exact path="/" component={Home} />
               <Route
                 exact
                 path="/admin"

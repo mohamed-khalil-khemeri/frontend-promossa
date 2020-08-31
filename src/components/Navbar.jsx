@@ -118,14 +118,14 @@ function Navbar(props) {
           <div className="logo">
             {" "}
             <NavLink style={{ textDecoration: "none" }} to="/shop/0">
-              <i className="fa fa-rebel" aria-hidden="true"></i> مطعم السلطان{" "}
+              <i className="fa fa-rebel" aria-hidden="true"></i> PROMOSSA
               <i className="fa fa-rebel" aria-hidden="true"></i>
             </NavLink>
           </div>
           <div className="right-side">
             <div className="menu">
-              <div>إتصل بنا</div>
-              <div>من نحن</div>
+              <div><NavLink to="/">Acceuil</NavLink></div>
+              <div>contact</div>
             </div>
             <div className="auth">
               <div
@@ -133,13 +133,13 @@ function Navbar(props) {
                 className="auth-logout"
                 onClick={logout}
               >
-                خروج
+                Logout
               </div>
               <div>{MrClient}</div>
               {/* <div style={{display:displayLogin}} className="auth-login" onClick={Ologin}>دخول</div> */}
               <div style={{ display: displayLogin }} className="auth-login">
                 <NavLink style={{ textDecoration: "none" }} exact to={"/login"}>
-                  دخول
+                  Login
                 </NavLink>
               </div>
               {/* <div style={{display:displayLogin}} className="auth-register" onClick={Oregister}>تسجيل</div> */}
@@ -149,7 +149,7 @@ function Navbar(props) {
                   exact
                   to={"/register"}
                 >
-                  تسجيل
+                  Register
                 </NavLink>
               </div>
             </div>
@@ -251,15 +251,15 @@ function Navbar(props) {
             </div>
           ) : (
             <div className="carted-item">
-              <h3 className="title">سلة المشتريات</h3>
+              <h3 className="title">Votre Panier par Magasin</h3>
               <table className="carted-table">
                 <tr>
-                  <th>صورة الطبق</th>
-                  <th>الطبق</th>
-                  <th>سعر الطبق الواحد</th>
-                  <th> كمية الأطباق</th>
-                  <th>ثمن أطباق</th>
-                  <th>حذف الطبق</th>
+                  <th>logo</th>
+                  <th>Nom</th>
+                  <th>Prix unitaire</th>
+                  <th>Quantité</th>
+                  <th>Prix total per article</th>
+                  <th>Suppression</th>
                 </tr>
                 {props.carted.map((e) => (
                   <tr key={e._id}>
@@ -306,16 +306,16 @@ function Navbar(props) {
                         onClick={(a) => props.removeFromCart(e._id)}
                         className="remove-item"
                       >
-                        إحذف من السلة
+                         Supprimer de la liste 
                       </button>
                     </td>
                   </tr>
                 ))}
               </table>
               <div className="total">
-                <h4>الثمن الجملي :</h4>
-                <p>{digit_display(total(props.carted))}</p>
-                <p>دينار </p>
+                <h4>Prix total :</h4>
+                <p>{digit_display(total(props.carted)/1000)}</p>
+                <p>TND</p>
               </div>
               {props.user === "none" ? (
                 <div>

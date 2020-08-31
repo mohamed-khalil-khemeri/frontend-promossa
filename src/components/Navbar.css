@@ -21,7 +21,7 @@
 }
 
 .navbar-inner-container {
-  direction: rtl;
+  direction: ltr;
 
   width: 1180px;
   /*background-color: thistle;*/
