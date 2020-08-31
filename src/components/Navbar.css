@@ -5,6 +5,11 @@
 }
 .nav {
   width: 100%;
+  position: sticky;
+  position: -webkit-sticky;
+  background-color: white;
+  top: 0%;
+  z-index: 3;
 }
 .navbar-container {
   width: 100%;
@@ -210,8 +215,8 @@
   background-color: rgb(255, 255, 255);
   border: 2px solid black;
 }
-.ofx{
-  overflow-x:auto;
+.ofx {
+  overflow-x: auto;
   /* min-width: 600px; */
 }
 .carted-table td,
@@ -254,6 +259,7 @@
 .white-back {
   position: relative;
   background-color: white !important;
+  z-index: 1;
 }
 .white-back:hover {
   background-color: white !important;
@@ -263,14 +269,15 @@
   border-radius: 50%;
   width: 30%;
   left: 0;
+  bottom: 0;
 }
-.promo-span{
+.promo-span {
   position: absolute;
   border-radius: 50%;
   /* width: 30%; */
   top: 0;
 
-  background-color:red;
+  background-color: red;
   border: 2px solid red;
   top: -7px;
   right: -10px;

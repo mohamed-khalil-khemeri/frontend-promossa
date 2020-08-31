@@ -187,12 +187,11 @@ function Client(props) {
             .map((e) => (
               <tr key={e._id}>
                 <td>{e.article.unity.toFixed(2)}</td>
-                <td
-                  className="carted-img  white-back"
+                <td className="white-back"> 
+                  <div className="carted-img"
                   style={{
                     backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
-                  }}
-                >
+                  }}>
                   <span className="promo-span">{e.promo.type == "SIMPLE_PERCENTAGE" ?
                   e.promo.pourcentage + "%" : e.promo.type == "BUY_X_GET_Y_FREE" ?
                    e.promo.buy_x + "+" + e.promo.y_free + "gratuit":e.promo.type == "EXTRA_QUANTITY" ?
@@ -202,6 +201,7 @@ function Client(props) {
                     src= {`http://localhost:3002/${e.magasin.logo}`}
                     alt="magasin"
                   />
+                  </div>
                    
                 </td>
                 <td>{e.article.name}</td>

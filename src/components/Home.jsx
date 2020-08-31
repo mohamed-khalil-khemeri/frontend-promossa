@@ -12,7 +12,9 @@ function Article(props) {
     props.getArticle();
   }, []);
 
-  const [articlename, setarticlename] = useState("");
+  const favHome = ["0"];
+
+  const [searchcat, setsearchcat] = useState("");
   const [logo, setlogo] = useState("");
   const [dosage, setdosage] = useState("");
   const [cat, setcat] = useState("");
@@ -31,22 +33,61 @@ function Article(props) {
         </div>
         <div className="home-page-search">
           <div className="search-inputs">
-            <input type="text" placeholder="search in different categorie" />
+            <input
+              onChange={(e) => 
+                {setsearchcat(e.target.value)}}
+              type="text"
+              placeholder="search in different categories"
+            />
             <ul>
-              <li>result 1</li>
-              <li>result 2</li>
-              <li>result 2</li>
+              {searchcat !== ""
+                ? props.catList
+                    .filter((e) => (e.name).toLocaleLowerCase() == (searchcat).toLocaleLowerCase())
+                    .map((e) => <li key={e._id}>{e.name}</li>)
+                : null}
             </ul>
           </div>
           <button type="submit">Search</button>
         </div>
         <div className="home-page-featured-categories">
-            {props.catList ? props.catList.filter(e=>e.parent_id == "0").map(e=>
-          <div>
-            <h3>{e.name}</h3>
-  <div>{props.catList.filter(el=>el.parent_id == e._id).map(el=>el.name)}</div>
-          </div>
-          ) : null}
+          {props.catList
+            ? props.catList
+                .filter((el) => favHome.includes(el.parent_id))
+                .map((el) => (
+                  <div>
+                    <NavLink
+                      style={{ textDecoration: "none", color: "black" }}
+                      exact
+                      to={"/shop/" + el._id}
+                    >
+                      <h3>{el.name}</h3>
+                    </NavLink>
+                    <div className="cards-carousel">
+                      {props.catList
+                        .filter((ell) => ell.parent_id == el._id)
+                        .map((e) => (
+                          <div key={e._id} className="card">
+                            <NavLink
+                              style={{ textDecoration: "none", color: "black" }}
+                              exact
+                              to={"/shop/" + e._id}
+                            >
+                              <div
+                                className="image"
+                                style={{
+                                  backgroundImage: `url( http://localhost:3002/${e.logo} )`,
+                                }}
+                              ></div>
+                              <div className="card-text">
+                                <h4>{e.name}</h4>
+                              </div>
+                            </NavLink>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                ))
+            : null}
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@
   padding: 10px;
 }
 .home-page-search ul {
-    display: none;
+    /* display: none; */
   position: absolute;
   max-height: 265px;
   overflow-y: auto;
@@ -73,6 +73,14 @@
   /* display: inline-block;  */
   border: none;
 }
+.home-page-search li {
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    padding: 7px 15px;
+    font-size: 13px;
+    display: block;
+    color: gray;
+}
 
 
 
@@ -80,4 +88,15 @@
 
 .home-page-featured-categories{
     margin-top: 30px;
+}
+
+.cards-carousel{
+    overflow-x: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    border-bottom: 1px double black;
+
 }
