@@ -117,8 +117,8 @@ function Navbar(props) {
         <div className="navbar-inner-container">
           <div className="logo">
             {" "}
-            <NavLink style={{ textDecoration: "none" }} to="/shop/0">
-              <i className="fa fa-rebel" aria-hidden="true"></i> PROMOSSA
+            <NavLink style={{ textDecoration: "none" }} to="/">
+              <i className="fa fa-rebel" aria-hidden="true"></i> KOFFITNA
               <i className="fa fa-rebel" aria-hidden="true"></i>
             </NavLink>
           </div>

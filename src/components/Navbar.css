@@ -49,6 +49,7 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  padding-right: 30px;
 }
 .menu div {
   padding: 5px;
