@@ -42,7 +42,8 @@ function Article(props) {
             <ul>
               {searchcat !== ""
                 ? props.catList
-                    .filter((e) => (e.name).toLocaleLowerCase() == (searchcat).toLocaleLowerCase())
+                    .filter((e) => {let patt = new RegExp(searchcat, 'gi'); return e.name.match(patt)})
+                    // .filter((e) => (e.name).toLocaleLowerCase() == (searchcat).toLocaleLowerCase())
                     .map((e) => <NavLink to={"/shop/"+e._id}><li key={e._id}>{e.name}</li></NavLink>    )
                 : null}
             </ul>

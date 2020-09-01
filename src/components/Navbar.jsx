@@ -239,14 +239,14 @@ function Navbar(props) {
         <div className="carted-m ofx">
           {props.carted.length === 0 ? (
             <div className="empty-cart">
-              <p>سلة المشتريات فارغة</p>
-              <p>الرجاء إضافة الأطباق المرغوب بها</p>
+              <p>votre panier est vide</p>
+              <p>svp ajouter des articles</p>
               <p
                 className="link"
                 ref={(e) => (cancelButton3Bis = e)}
                 onClick={(e) => cancel(e)}
               >
-                رجوع إلى صفحة عرض الأطباق
+                retour
               </p>
             </div>
           ) : (
@@ -320,8 +320,7 @@ function Navbar(props) {
               {props.user === "none" ? (
                 <div>
                   <p className="notification">
-                    عليك بالدخول إلى حسابك أو تسجيل حساب جديد إذا كنت لاتملك
-                    واحدا !{" "}
+                  vous devez être connecté à votre compte d'abord !
                   </p>
                   <div className="carted-btns">
                     {/* <button
@@ -343,7 +342,7 @@ function Navbar(props) {
                       className="confirm-o"
                       to="/register"
                     >
-                      enregistrer
+                      Créer un compte
                     </NavLink>
 
                     <NavLink
@@ -355,14 +354,14 @@ function Navbar(props) {
                       }}
                       className="confirm-o"
                     >
-                      الدخول إلى حسابك
+                        Connexion
                     </NavLink>
                     <button
                       ref={(e) => (cancelButton3 = e)}
                       onClick={(e) => cancel(e)}
                       className="cancel-o"
                     >
-                      إخفاء
+                      Annuler
                     </button>
                   </div>
                 </div>
@@ -377,7 +376,7 @@ function Navbar(props) {
                       }}
                       className="confirm-o"
                     >
-                      sauvegarder votre liste
+                      Sauvegarder votre liste
                     </button>
                     <button
                       ref={(e) => (cancelButton3 = e)}
