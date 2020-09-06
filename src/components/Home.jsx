@@ -25,9 +25,9 @@ function Article(props) {
         <div className="home-page-section ">
           <div className="home-logo">
             <img
-              src="https://cdn.worldvectorlogo.com/logos/netto-marken-discount-2018.svg"
+              src="http://localhost:3002/public_img/promossanew.png"
               alt="logo"
-              width="200px"
+              width="350px"
             />
           </div>
         </div>

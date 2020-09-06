@@ -63,7 +63,7 @@ function Admin(props) {
             </Switch>
           </div>
           <Sidebar />
-        </div>{" "}
+        </div>
       </div>
     </>
   );

@@ -13,9 +13,33 @@ function Navbar(props) {
     displaylogreg();
   }, [props.user]);
 
+  // const [magasins, setmagasins] = useState([]);
+  // const setmag = () => {
+  //   setmagasins([]);
+  //   props.carted.forEach((e) =>
+  //     magasins.includes(e.magasin.name) == false
+  //       ? setmagasins([...magasins, e.magasin.name])
+  //       : null
+  //   );
+  // };
+
+  // nodemailer mags
+  let mags = [];
+  //magasin
+  const setmag = () => {
+    let magasins = [];
+    props.carted.map((e) =>
+      magasins.includes(e.magasin.name) == false
+        ? (magasins = [...magasins, e.magasin.name])
+        : null
+    );
+    mags = magasins;
+    return magasins;
+  };
+
   const xxx = () => {
     if (props.user !== "none") {
-      return `مرحبا ${props.user.name} !`;
+      return ` ${props.user.name} !`;
     }
   };
   let MrClient = xxx();
@@ -118,15 +142,18 @@ function Navbar(props) {
           <div className="logo">
             {" "}
             <NavLink style={{ textDecoration: "none" }} to="/">
-              <i className="fa fa-rebel" aria-hidden="true"></i> KOFFITNA
-              <i className="fa fa-rebel" aria-hidden="true"></i>
+              <img
+                src="http://localhost:3002/public_img/promossanew.png"
+                alt="logo"
+                width="100px"
+              />
             </NavLink>
           </div>
           <div className="right-side">
-            <div className="menu">
+            {/* <div className="menu">
               <div><NavLink to="/">Acceuil</NavLink></div>
               <div>contact</div>
-            </div>
+            </div> */}
             <div className="auth">
               <div
                 style={{ display: displayLogout }}
@@ -135,6 +162,7 @@ function Navbar(props) {
               >
                 Logout
               </div>
+
               <div>{MrClient}</div>
               {/* <div style={{display:displayLogin}} className="auth-login" onClick={Ologin}>دخول</div> */}
               <div style={{ display: displayLogin }} className="auth-login">
@@ -261,66 +289,84 @@ function Navbar(props) {
                   <th>Prix total per article</th>
                   <th>Suppression</th>
                 </tr>
-                {props.carted.map((e) => (
-                  <tr key={e._id}>
-                    <td
-                      className="carted-img white-back"
-                      style={{
-                        backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
-                      }}
-                    >
-                      <span className="promo-span">
-                        {e.promo.type == "SIMPLE_PERCENTAGE"
-                          ? e.promo.pourcentage + "%"
-                          : e.promo.type == "BUY_X_GET_Y_FREE"
-                          ? e.promo.buy_x + "+" + e.promo.y_free + "gratuit"
-                          : e.promo.type == "EXTRA_QUANTITY"
-                          ? "extra " + e.promo.extra
-                          : null}
-                      </span>
-                      <img
-                        className="magasin-img"
-                        src={`http://localhost:3002/${e.magasin.logo}`}
-                        alt="magasin"
-                      />
-                    </td>
-                    <td>{e.article.name}</td>
-                    <td>
-                      {e.pricing.newprice.replace(/(\d)(?=(\d{3})+$)/g, "$1 ")}
-                    </td>
-                    <td>
-                      {" "}
-                      <input
-                        className="order-dish-quantity"
-                        min="1"
-                        onChange={(a) => {
-                          props.setQuantity(e._id, a.target.value * 1);
-                        }}
-                        defaultValue={e.quantity}
-                        type="number"
-                      ></input>
-                    </td>
-                    <td>{digit_display(e.quantity * e.pricing.newprice)}</td>
-                    <td>
-                      <button
-                        onClick={(a) => props.removeFromCart(e._id)}
-                        className="remove-item"
-                      >
-                         Supprimer de la liste 
-                      </button>
-                    </td>
-                  </tr>
+                {setmag().map((x) => (
+                  <>
+                    <tr>
+                      <td colSpan="6">{x}</td>
+                    </tr>
+
+                    {props.carted.map((e) =>
+                      e.magasin.name == x ? (
+                        <tr key={e._id}>
+                          <td
+                            className="carted-img white-back"
+                            style={{
+                              backgroundImage: `url( http://localhost:3002/${e.article.logo} )`,
+                            }}
+                          >
+                            <span className="promo-span">
+                              {e.promo.type == "SIMPLE_PERCENTAGE"
+                                ? e.promo.pourcentage + "%"
+                                : e.promo.type == "BUY_X_GET_Y_FREE"
+                                ? e.promo.buy_x +
+                                  "+" +
+                                  e.promo.y_free +
+                                  "gratuit"
+                                : e.promo.type == "EXTRA_QUANTITY"
+                                ? "extra " + e.promo.extra
+                                : null}
+                            </span>
+                            <img
+                              className="magasin-img"
+                              src={`http://localhost:3002/${e.magasin.logo}`}
+                              alt="magasin"
+                            />
+                          </td>
+                          <td>{e.article.name}</td>
+                          <td>
+                            {e.pricing.newprice.replace(
+                              /(\d)(?=(\d{3})+$)/g,
+                              "$1 "
+                            )}
+                          </td>
+                          <td>
+                            {" "}
+                            <input
+                              className="order-dish-quantity"
+                              min="1"
+                              onChange={(a) => {
+                                props.setQuantity(e._id, a.target.value * 1);
+                              }}
+                              defaultValue={e.quantity}
+                              type="number"
+                            ></input>
+                          </td>
+                          <td>
+                            {digit_display(e.quantity * e.pricing.newprice)}
+                          </td>
+                          <td>
+                            <button
+                              onClick={(a) => props.removeFromCart(e._id)}
+                              className="remove-item"
+                            >
+                              Supprimer de la liste
+                            </button>
+                          </td>
+                        </tr>
+                      ) : null
+                    )}
+                  </>
                 ))}
               </table>
               <div className="total">
                 <h4>Prix total :</h4>
-                <p>{digit_display(total(props.carted)/1000)}</p>
+                <p>{digit_display(total(props.carted) / 1000)}</p>
                 <p>TND</p>
               </div>
               {props.user === "none" ? (
                 <div>
                   <p className="notification">
-                  vous devez être connecté à votre compte d'abord !
+                    vous devez être connecté à votre compte d'abord !
                   </p>
                   <div className="carted-btns">
                     {/* <button
@@ -335,7 +381,7 @@ function Navbar(props) {
                     </button> */}
 
                     <NavLink
-                    ref={(e) => (cancelButton4 = e)}
+                      ref={(e) => (cancelButton4 = e)}
                       onClick={(e) => {
                         cancel(e);
                       }}
@@ -346,15 +392,14 @@ function Navbar(props) {
                     </NavLink>
 
                     <NavLink
-                    to="/login"
+                      to="/login"
                       ref={(e) => (submitButton3 = e)}
                       onClick={(e) => {
                         cancel(e);
-                        
                       }}
                       className="confirm-o"
                     >
-                        Connexion
+                      Connexion
                     </NavLink>
                     <button
                       ref={(e) => (cancelButton3 = e)}
@@ -371,19 +416,20 @@ function Navbar(props) {
                     <button
                       ref={(e) => (submitButton3 = e)}
                       onClick={(e) => {
-                        props.sendOrder(props.carted, props.user);
+                        props.sendOrder(mags,props.carted, props.user);
+                        // props.sendOrder(props.carted, props.user);
                         cancel(e);
                       }}
                       className="confirm-o"
                     >
-                      Sauvegarder votre liste
+                      Envoyer la liste à mon Email
                     </button>
                     <button
                       ref={(e) => (cancelButton3 = e)}
                       onClick={(e) => cancel(e)}
                       className="cancel-o"
                     >
-                      إخفاء
+                      Retour
                     </button>
                   </div>
                 </div>

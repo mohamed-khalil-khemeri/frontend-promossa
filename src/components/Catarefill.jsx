@@ -230,7 +230,7 @@ function Catarefill(props) {
                       onChange={(e) => {
                         handleChange(e.target.value, k);
                       }}
-                      type="number"
+                      type="text"
                       className=""
                       name={k}
                       id={k}

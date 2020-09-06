@@ -106,10 +106,6 @@ function App(props) {
                 </div>
               )} />
 
-
-
-
-
               <Route exact path="/confirmEmail/:id" component={ConfirmEmail} />
               <Route exact path="/shop/:categorieId" component={Client} />
               <Route exact path="/register" component={Register} />
@@ -119,7 +115,7 @@ function App(props) {
             : props.user.role == "client" ?
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/:categorieId" component={Client} />
+                <Route exact path="/shop/:categorieId" component={Client} />
                 <Redirect to="/" />
               </Switch>
               : props.user.role == "admin" ?
