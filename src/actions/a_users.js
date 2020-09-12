@@ -47,12 +47,12 @@ export function register_user2(payload) {
             .then((res) => {
                 if (res.data.keyValue) {
                     if (Array.isArray(Object.keys(res.data.keyValue))) {
-                        dispatch(sendNotification({ type: "error",block :false , payload: Object.keys(res.data.keyValue) }));
-                        console.log("error ! ",Object.keys(res.data.keyValue)[0])
+                        dispatch(sendNotification({ type: "error", block: false, payload: Object.keys(res.data.keyValue) }));
+                        console.log("error ! ", Object.keys(res.data.keyValue)[0])
 
                     }
                 } else {
-                    dispatch(sendNotification({ type: "success",block : false, payload: "success" }));
+                    dispatch(sendNotification({ type: "success", block: false, payload: "success" }));
                     console.log("success ! ")
                 }
             })
@@ -67,14 +67,14 @@ export const sendNotification = (payload) => ({
 
 export const resetNotification = () => ({
     type: RESET_STATUS,
-    payload :{ type: "success",block : false, payload: "success" }
+    payload: { type: "success", block: false, payload: "success" }
 });
 export function register_user(payload) {
-  return (dispatch) =>
+    return (dispatch) => {
+        dispatch(sendNotification({ type: "wait", block: true, payload: "wait" }));
+        dispatch(register_user2(payload))
+    }
 
-  {dispatch(sendNotification({ type: "wait",block : true, payload: "wait" }));
-  dispatch(register_user2(payload))}
-    
 }
 
 // /* delete user */
@@ -108,9 +108,40 @@ export function register_user(payload) {
 
 export function confirmEmails(id) {
     console.log("email confirmation called ! ")
-  return (dispatch) =>
-    Axios.post("http://localhost:3001/users/confirmEmail/" + id)
-    .then((res) =>
-      console.log("email confirmed res : ", res)
-    );
+    return (dispatch) =>
+        Axios.post("/users/confirmEmail/" + id, {
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then((res) =>
+                console.log("email confirmed res : ", res)
+            );
+}
+
+
+
+export function passReset1(email) {
+    console.log("pass reset called ! ")
+    return (dispatch) =>
+        Axios.post("/users/passreset1/" + email, {
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then((res) =>
+                console.log("pass reset email sent : ", res)
+            );
+}
+
+// not finished yet
+export function passReset2(password, token, _id) {
+    console.log("p",password);
+    return (dispatch) =>
+        Axios.post("/users/passreset2/"+_id, {password : password}, {
+            headers: {
+                'x-auth-token' : token,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) =>
+                {console.log("pass reset email sent : ", res);
+                window.location = "/";}
+            );
 }

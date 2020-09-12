@@ -455,8 +455,21 @@ function Register(props) {
           <h1>PROMOSSA</h1>
           <img src={logo} alt="logo" />
         </div>
-        <div className={props.notification.type == "error" ? "register_notification": ""} >{props.notification.type == "error" ? "used email, try other one !": ""}</div>
-        <div> {props.notification.type == "success" ? window.location = "/verifyEmail": null}</div>
+        <div
+          className={
+            props.notification.type == "error" ? "register_notification" : ""
+          }
+        >
+          {props.notification.type == "error"
+            ? "used email, try other one !"
+            : ""}
+        </div>
+        <div>
+          {" "}
+          {props.notification.type == "success"
+            ? (window.location = "/verifyEmail")
+            : null}
+        </div>
         {/* <Notification  status = {props.notification.type} >{()=>{ if(props.notification.payload[0] == email) {return  "Email Invalid, il y a un compte existant avec l'email fournit"} }}</Notification> */}
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
@@ -639,6 +652,8 @@ function Register(props) {
         <div>
           <NavLink to="/login">Login ici</NavLink>
         </div>
+        <br></br>
+        <br></br>
       </div>
     </>
   );

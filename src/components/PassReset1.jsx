@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
-import { loginUser } from "../actions/a_current_user";
+import { passReset1 } from "../actions/a_users";
 //import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 import logo from "../bou9.webp";
 
 import { connect } from "react-redux";
 
-function Login(props) {
+function PassReset1(props) {
   let logInputs = {};
   const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
 
   /*--------------------------------control Email with regex------------------------------------------- */
 
@@ -28,22 +27,7 @@ function Login(props) {
     return patt.test(x.value);
   }
 
-  function controlP(z) {
-    const pattx = /^\w{8}$/;
-    if (pattx.test(z.value) == false) {
-      z.value = "";
-      z.type = "email";
-      z.style.color = "red";
-      z.value = "password must be 8 characters !";
-      setTimeout(() => {
-        z.value = "";
-        z.type = "password";
-        z.style.color = "black";
-        z.placeholder = "password must be 8 characters !";
-      }, 1000);
-    }
-    return pattx.test(z.value);
-  }
+
 
   return (
     <>
@@ -52,13 +36,7 @@ function Login(props) {
           <h1>PROMOSSA</h1>
           <img src={logo} alt="logo" />
         </div>
-        <div
-          className={
-            props.notification.type == "error" ? "register_notification" : ""
-          }
-        >
-          {props.notification.type == "error" ? props.notification.payload : ""}
-        </div>
+
         {/* <div className={props.notification.type == "success" ? "verifyEmail": ""} >{props.notification.type == "success" ? "Congratulations ! you are logged in  !" : ""}</div> */}
 
         <form onSubmit={(e) => e.preventDefault()}>
@@ -77,53 +55,26 @@ function Login(props) {
             />
           </div>
 
-          <div>
-            <input
-              ref={(e) => (logInputs.password = e)}
-              onChange={(e) => setpassword(e.target.value)}
-              type="password"
-              className=""
-              name="pass"
-              id="pass"
-              placeholder="Mot de passe"
-              aria-label="Mot de passe"
-              required
-            />
-          </div>
+
           <div>
             <button
               onClick={() => {
                 if (
-                  // email !== "" &&
-                  // password !== "" &&
-                  controlM(logInputs.email) == true &&
-                  controlP(logInputs.password) == true
+                  controlM(logInputs.email) == true
+                  
                 ) {
-                  props.loginUser({
-                    email: email,
-                    password: password,
-                  });
+                  props.passReset1(email);
+                  window.location = "/";
                 }
               }}
-              disabled={props.notification.block}
               className="submitbtn"
               name="login"
               type="submit"
-            >
-              Connexion{" "}
-              <div
-                className={props.notification.block == true ? "loader" : ""}
-              ></div>
-            </button>
+            >Envoyer mon mot de passe</button>
           </div>
         </form>
         <div>
-          <NavLink to="/register">S’inscrire ici</NavLink>
-        </div>
-        <br></br>
-        <br></br>
-        <div>
-          <NavLink to="/passreset1">Mot de passe oublié</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </div>
       </div>
     </>
@@ -138,5 +89,5 @@ export default connect(
       user: state.r_users,
     };
   },
-  { loginUser }
-)(Login);
+  { passReset1 }
+)(PassReset1);

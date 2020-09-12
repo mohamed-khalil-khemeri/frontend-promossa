@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
-import { loginUser } from "../actions/a_current_user";
+import { passReset2 } from "../actions/a_users";
 //import { addToCart, removeFromCart } from "../actions/a_cart";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import logo from "../bou9.webp";
 
 import { connect } from "react-redux";
 
-function Login(props) {
+function PassReset2(props) {
   let logInputs = {};
-  const [email, setemail] = useState("");
+  let { token,_id } = useParams();
+
   const [password, setpassword] = useState("");
 
   /*--------------------------------control Email with regex------------------------------------------- */
 
-  function controlM(x) {
-    const patt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (patt.test(x.value) == false) {
-      x.style.color = "red";
-      x.value = "please enter a valid Email adress !";
-      setTimeout(() => {
-        x.value = "";
-        x.style.color = "black";
-        x.placeholder = "please enter a valid Email adress !";
-      }, 1000);
-    }
-    return patt.test(x.value);
-  }
 
   function controlP(z) {
     const pattx = /^\w{8}$/;
@@ -62,20 +50,6 @@ function Login(props) {
         {/* <div className={props.notification.type == "success" ? "verifyEmail": ""} >{props.notification.type == "success" ? "Congratulations ! you are logged in  !" : ""}</div> */}
 
         <form onSubmit={(e) => e.preventDefault()}>
-          <div>
-            <input
-              ref={(e) => (logInputs.email = e)}
-              onChange={(e) => setemail(e.target.value)}
-              type="email"
-              className=""
-              name="email"
-              id="email"
-              placeholder="Adresse e-mail."
-              autofocus="1"
-              aria-label="Adresse e-mail ou numéro de tél."
-              required
-            />
-          </div>
 
           <div>
             <input
@@ -94,15 +68,10 @@ function Login(props) {
             <button
               onClick={() => {
                 if (
-                  // email !== "" &&
-                  // password !== "" &&
-                  controlM(logInputs.email) == true &&
                   controlP(logInputs.password) == true
                 ) {
-                  props.loginUser({
-                    email: email,
-                    password: password,
-                  });
+             
+                  props.passReset2(password, token ,_id);
                 }
               }}
               disabled={props.notification.block}
@@ -117,14 +86,7 @@ function Login(props) {
             </button>
           </div>
         </form>
-        <div>
-          <NavLink to="/register">S’inscrire ici</NavLink>
-        </div>
-        <br></br>
-        <br></br>
-        <div>
-          <NavLink to="/passreset1">Mot de passe oublié</NavLink>
-        </div>
+
       </div>
     </>
   );
@@ -138,5 +100,5 @@ export default connect(
       user: state.r_users,
     };
   },
-  { loginUser }
-)(Login);
+  { passReset2 }
+)(PassReset2);

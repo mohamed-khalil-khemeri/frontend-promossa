@@ -150,13 +150,13 @@
 }
 
 .hero-categorie {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .hero-categorie-inner {
   height: 30vh;
-  background-size: cover ;
+  background-size: cover;
   width: 100%;
 }

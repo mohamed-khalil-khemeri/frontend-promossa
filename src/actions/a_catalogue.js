@@ -1,7 +1,7 @@
 import * as types from './types';
 import Axios from 'axios';
 
-
+Axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
 /***********************  getCatalogue  *********************************** */
 export const getCatalogue2 = (payload) => {
     console.log("GET_CATALOGUE called ", payload);

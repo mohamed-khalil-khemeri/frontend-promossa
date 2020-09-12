@@ -28,6 +28,8 @@ import { getCatalogue } from "./actions/a_catalogue";
 import { set_active_article_list } from "./actions/a_active_article_list";
 import { get_current_user } from './actions/a_current_user'
 import Home from './components/Home';
+import PassReset2 from './components/PassReset2';
+import PassReset1 from './components/PassReset1';
 
 
 function App(props) {
@@ -86,6 +88,8 @@ function App(props) {
           props.user == "none" ?
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/passreset1/" component={PassReset1} />
+              <Route exact path="/passreset2/:token/:_id" component={PassReset2} />
 
               {/* <Route exact path="/" render={() => (
                 <div className="app-container">

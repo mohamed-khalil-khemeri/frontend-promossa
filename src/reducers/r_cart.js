@@ -1,24 +1,39 @@
 import * as types from '../actions/types';
 
-const r_cart = (state = [], action) => {
+const readls=()=>{
+let x = "[]";
+    localStorage.getItem("cart")== null ?
+    localStorage.setItem("cart",x) :
+    x=  localStorage.getItem("cart") ;
+    return JSON.parse(x)
+}
+
+const r_cart = (state = readls(), action) => {
+    
 
     if (action.type === types.ADD_TO_CART) {
         action.el.quantity = 1;
         console.log("carted : ", [...state, action.el]);
 
-
+        localStorage.setItem("cart",JSON.stringify([...state, action.el])) ;
         return [...state, action.el]
 
     } else if (action.type === types.REMOVE_FROM_CART) {
-        return state.filter(e => e._id !== action._id)
+        let y = state.filter(e => e._id !== action._id) ;
+        localStorage.setItem("cart",JSON.stringify(y)) ;
+        return y ;
 
     } else if (action.type === types.SET_QUANTITY) {
-        return state.map(e => {
+        let z = state.map(e => {
             if (e._id === action._id) {
                 e.quantity = action.quantity; return e
             } else { return e }
         });
+        
+        localStorage.setItem("cart",JSON.stringify(z)) ;
+        return z
     } else if (action.type === types.SEND_ORDER) {
+        localStorage.setItem("cart",JSON.stringify([])) ;
         return []
     } else {
         return state
