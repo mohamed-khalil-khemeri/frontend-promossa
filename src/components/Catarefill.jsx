@@ -109,7 +109,7 @@ function Catarefill(props) {
     <>
       Insertion articles
       <div className="categorieContainer">
-        <form autocomplete="off" onSubmit={e=>e.preventDefault()}>
+        <form autocomplete="off">
           <div>
             <select
               onChange={(e) => {

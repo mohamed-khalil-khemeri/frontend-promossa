@@ -50,7 +50,7 @@ function Catalogue(props) {
     <>
       catalogue
       <div className="categorieContainer">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form>
           <div>
             <select
               onChange={(e) => {

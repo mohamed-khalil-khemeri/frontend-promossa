@@ -15,7 +15,7 @@ function Magasin(props) {
       Magasin
       <div className="categorieContainer">
         
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form>
           <div>
             <input
               type="txt"
